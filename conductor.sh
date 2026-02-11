@@ -34,6 +34,13 @@ show_menu() {
     echo -e "${CYAN}  MAIN MENU${NC}"
     echo -e "${CYAN}═══════════════════════════════════════════════════════${NC}"
     echo ""
+    echo -e "${YELLOW}3. Web Application Testing${NC}"
+    echo "   31. Nikto Scanner"
+    echo "   32. SSL/TLS Analyzer"
+    echo "   33. Web Exploitation Toolkit"
+    echo "   34. Directory Busting"
+    echo "   35. Web API Scanner"
+    echo ""
     echo -e "${YELLOW}4. Exploitation Helpers${NC}"
     echo "   41. Payload Generator"
     echo "   42. Reverse Shell Generator"
@@ -141,8 +148,41 @@ check_deps() {
 
 handle_selection() {
     local choice="$1"
-    
+
     case $choice in
+        # Web Application Testing
+        31)
+            run_tool "$SCRIPT_DIR/web/nikto.sh" --help
+            read -p "Press Enter to launch tool..."
+            run_tool "$SCRIPT_DIR/web/nikto.sh"
+            ;;
+        32)
+            run_tool "$SCRIPT_DIR/web/ssl.sh" --help
+            read -p "Press Enter to launch tool..."
+            run_tool "$SCRIPT_DIR/web/ssl.sh"
+            ;;
+        33)
+            run_tool "$SCRIPT_DIR/web/web-exploit.sh" --help
+            read -p "Press Enter to launch tool..."
+            run_tool "$SCRIPT_DIR/web/web-exploit.sh"
+            ;;
+        34)
+            echo "Directory Busting"
+            echo "Enter target URL (e.g., http://192.168.1.100): "
+            read -r target
+            if [[ -n "$target" ]]; then
+                gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u "$target" -t 250 -s 302,307,200,204,301,403 -x sh,pl,txt,php,asp,jsp,aspx,py,do,html
+            else
+                log_warn "No target specified"
+            fi
+            read -p "Press Enter to continue..."
+            ;;
+        35)
+            run_tool "$SCRIPT_DIR/web/dev-api-scanner.sh" --help
+            read -p "Press Enter to launch tool..."
+            run_tool "$SCRIPT_DIR/web/dev-api-scanner.sh"
+            ;;
+
         # Exploitation
         41)
             run_tool "$SCRIPT_DIR/exploitation/payloads.sh" --help
