@@ -125,49 +125,36 @@ handle_selection() {
     
     case "$choice" in
         R1|r1)
-            echo "Domain Information Gathering"
-            echo "Usage: $0 R1 <domain>"
-            echo ""
-            echo "Tools: whois, dig, nslookup, host"
+            log_info "Running Domain Information Gathering..."
+            run_recon_script "domain.sh" "$@"
             ;;
         R2|r2)
-            echo "DNS Enumeration"
-            echo "Usage: $0 R2 <domain>"
-            echo ""
-            echo "Tools: dig, nslookup, dnsrecon, dnsenum"
+            log_info "Running DNS Enumeration..."
+            run_recon_script "passive.sh" "$@"
             ;;
         R3|r3)
-            echo "Email Harvesting"
-            echo "Usage: $0 R3 <domain>"
-            echo ""
-            echo "Tools: theHarvester, metagoofil, hunter.io"
+            log_info "Running Email Harvesting..."
+            run_recon_script "person.sh" "$@"
             ;;
         R4|r4)
-            echo "Subdomain Discovery"
-            echo "Usage: $0 R4 <domain>"
-            echo ""
-            echo "Tools: sublist3r, assetfinder, findomain"
+            log_info "Running Subdomain Discovery..."
+            run_recon_script "generateTargets.sh" "$@"
             ;;
         R5|r5)
-            echo "Google Dorks"
-            echo "Usage: $0 R5 <target>"
-            echo ""
+            log_info "Running Google Dorks..."
+            log_warn "Google Dorks require manual research"
             echo "Common dorks:"
             echo "  site:example.com"
             echo "  filetype:xls site:example.com"
             echo "  intitle:\"index of\" site:example.com"
             ;;
         R7|r7)
-            echo "Network Discovery"
-            echo "Usage: $0 R7 <network>"
-            echo ""
-            echo "Tools: nmap, fping, nping"
+            log_info "Running Network Discovery (Ping Sweep)..."
+            run_recon_script "ping-sweep.sh" "$@"
             ;;
         R8|r8)
-            echo "Traceroute"
-            echo "Usage: $0 R8 <target>"
-            echo ""
-            echo "Tools: traceroute, tracepath, mtr"
+            log_info "Running Traceroute..."
+            run_recon_script "dns-forward.sh" "$@"
             ;;
         --menu)
             banner

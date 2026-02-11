@@ -146,6 +146,16 @@ handle_selection() {
         CB1|cb1)
             log_info "ELF Binary Analyzer"
             echo "Launching binary analysis tools..."
+            if [[ -x "$SCRIPT_DIR/elf/elf.sh" ]]; then
+                "$SCRIPT_DIR/elf/elf.sh"
+            fi
+            ;;
+        CB2|cb2)
+            log_info "Fuzzer"
+            echo "Launching fuzzer..."
+            if [[ -x "$SCRIPT_DIR/fuzz/fuzzer.sh" ]]; then
+                "$SCRIPT_DIR/fuzz/fuzzer.sh"
+            fi
             ;;
         --menu)
             banner
