@@ -1,11 +1,6 @@
-#!/bin/bash
-# Hash Identification & Cracking Tool
-# Version: 1.0 - VAPT Professional
-# Identifies hash types and automates cracking with multiple tools
 
 set -e
 
-# Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -18,7 +13,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 HASHES_DIR="${SCRIPT_DIR}/hashes"
 mkdir -p "$HASHES_DIR"
 
-# Banner
 banner() {
     echo -e "${CYAN}"
     cat << 'EOF'
@@ -30,13 +24,11 @@ EOF
     echo -e "${NC}"
 }
 
-# Logging
 log_info() { echo -e "${BLUE}[*]${NC} $1"; }
 log_good() { echo -e "${GREEN}[+]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[!]${NC} $1"; }
 log_critical() { echo -e "${RED}[CRITICAL]${NC} $1"; }
 
-# Hash identification patterns
 identify_hash() {
     local hash="$1"
     local length=${#hash}
@@ -150,7 +142,6 @@ identify_hash() {
     return 0
 }
 
-# Crack with hashcat
 crack_hashcat() {
     local hash="$1"
     local wordlist="${2:-/usr/share/wordlists/rockyou.txt}"
@@ -175,7 +166,6 @@ crack_hashcat() {
     rm -f "$tmpfile"
 }
 
-# Crack with John the Ripper
 crack_john() {
     local hash="$1"
     local wordlist="${2:-/usr/share/wordlists/rockyou.txt}"
@@ -202,7 +192,6 @@ crack_john() {
     rm -f "$tmpfile"
 }
 
-# Generate hash
 generate_hash() {
     local algorithm="$1"
     local input="$2"
@@ -236,7 +225,6 @@ generate_hash() {
     esac
 }
 
-# Compare two hashes
 compare_hashes() {
     local hash1="$1"
     local hash2="$2"
@@ -257,7 +245,6 @@ compare_hashes() {
     fi
 }
 
-# Rainbow table lookup (mock - would need actual tables)
 rainbow_lookup() {
     local hash="$1"
     log_warn "Rainbow table lookup not implemented"
@@ -267,7 +254,6 @@ rainbow_lookup() {
     echo "  - https://hashes.org"
 }
 
-# Batch processing
 batch_process() {
     local file="$1"
     
@@ -292,7 +278,6 @@ batch_process() {
     log_good "Processed $count hashes"
 }
 
-# Show usage
 usage() {
     cat << 'EOF'
 USAGE:
@@ -342,7 +327,6 @@ HASH TYPES (for hashcat -t option):
 EOF
 }
 
-# Interactive mode
 interactive_mode() {
     banner
     
@@ -404,7 +388,6 @@ interactive_mode() {
     done
 }
 
-# Main function
 main() {
     local operation=""
     local hash=""

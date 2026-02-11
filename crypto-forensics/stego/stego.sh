@@ -1,11 +1,6 @@
-#!/bin/bash
-# Steganography Detection Tool
-# Version: 1.0 - VAPT Professional
-# Detects hidden data in images, audio, and other files
 
 set -e
 
-# Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -18,7 +13,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 STEGO_DIR="${SCRIPT_DIR}/stego"
 mkdir -p "$STEGO_DIR"
 
-# Banner
 banner() {
     echo -e "${CYAN}"
     cat << 'EOF'
@@ -30,13 +24,11 @@ EOF
     echo -e "${NC}"
 }
 
-# Logging
 log_info() { echo -e "${BLUE}[*]${NC} $1"; }
 log_good() { echo -e "${GREEN}[+]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[!]${NC} $1"; }
 log_critical() { echo -e "${RED}[CRITICAL]${NC} $1"; }
 
-# Check for steganography tools
 check_tools() {
     local tools=("steghide" "stegseek" "zsteg" "binwalk" "exiftool" "strings" "xxd")
     
@@ -51,7 +43,6 @@ check_tools() {
     done
 }
 
-# Analyze image with exiftool
 analyze_metadata() {
     local file="$1"
     
@@ -72,7 +63,6 @@ analyze_metadata() {
     done
 }
 
-# Check for LSB steganography in images
 check_lsb() {
     local file="$1"
     
@@ -100,7 +90,6 @@ check_lsb() {
     done
 }
 
-# Check for steghide
 extract_steghide() {
     local file="$1"
     
@@ -130,7 +119,6 @@ extract_steghide() {
     fi
 }
 
-# Check for embedded files with binwalk
 extract_binwalk() {
     local file="$1"
     
@@ -154,7 +142,6 @@ extract_binwalk() {
     binwalk -e "$file" -C "$STEGO_DIR" 2>/dev/null && log_good "Files extracted to: $STEGO_DIR"
 }
 
-# Check for outguess
 extract_outguess() {
     local file="$1"
     
@@ -173,7 +160,6 @@ extract_outguess() {
     fi
 }
 
-# Check for audio steganography (spectrogram)
 analyze_audio() {
     local file="$1"
     
@@ -193,7 +179,6 @@ analyze_audio() {
     done
 }
 
-# Analyze file entropy (high entropy may indicate encryption/stego)
 check_entropy() {
     local file="$1"
     
@@ -230,7 +215,6 @@ PYEOF
     fi
 }
 
-# Check for whitespace steganography (snow)
 check_whitespace() {
     local file="$1"
     
@@ -243,7 +227,6 @@ check_whitespace() {
     fi
 }
 
-# Full analysis
 full_analysis() {
     local file="$1"
     
@@ -291,7 +274,6 @@ full_analysis() {
     log_info "Check $STEGO_DIR for extracted files"
 }
 
-# Show usage
 usage() {
     cat << 'EOF'
 USAGE:
@@ -335,7 +317,6 @@ INSTALLATION:
 EOF
 }
 
-# Main function
 main() {
     local file=""
     local mode="full"

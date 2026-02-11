@@ -1,11 +1,6 @@
-#!/bin/bash
-# Log Analysis & Forensics Tool
-# Version: 1.0 - VAPT Professional
-# Analyzes system logs for security events and suspicious activity
 
 set -e
 
-# Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -18,7 +13,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOGS_DIR="${SCRIPT_DIR}/logs"
 mkdir -p "$LOGS_DIR"
 
-# Banner
 banner() {
     echo -e "${CYAN}"
     cat << 'EOF'
@@ -30,13 +24,11 @@ EOF
     echo -e "${NC}"
 }
 
-# Logging
 log_info() { echo -e "${BLUE}[*]${NC} $1"; }
 log_good() { echo -e "${GREEN}[+]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[!]${NC} $1"; }
 log_critical() { echo -e "${RED}[CRITICAL]${NC} $1"; }
 
-# Section headers
 section() {
     echo ""
     echo -e "${MAGENTA}========================================${NC}"
@@ -45,7 +37,6 @@ section() {
     echo ""
 }
 
-# Analyze authentication logs
 analyze_auth_logs() {
     section "AUTHENTICATION ANALYSIS"
     
@@ -87,7 +78,6 @@ analyze_auth_logs() {
     done
 }
 
-# Analyze web server logs
 analyze_web_logs() {
     section "WEB SERVER LOG ANALYSIS"
     
@@ -135,7 +125,6 @@ analyze_web_logs() {
     grep " 404 " "$web_log" 2>/dev/null | awk '{print $7}' | sort | uniq -c | sort -rn | head -10
 }
 
-# Analyze system logs
 analyze_syslog() {
     section "SYSTEM LOG ANALYSIS"
     
@@ -169,7 +158,6 @@ analyze_syslog() {
     grep -i "warning" "$syslog" 2>/dev/null | tail -10
 }
 
-# Analyze failed services
 analyze_services() {
     section "SERVICE ANALYSIS"
     
@@ -179,7 +167,6 @@ analyze_services() {
     done || log_info "No failed services"
 }
 
-# Analyze user activity
 analyze_user_activity() {
     section "USER ACTIVITY ANALYSIS"
     
@@ -193,7 +180,6 @@ analyze_user_activity() {
     lastb | head -10 2>/dev/null || log_warn "lastb requires root or specific permissions"
 }
 
-# Analyze for persistence
 analyze_persistence() {
     section "PERSISTENCE MECHANISMS"
     
@@ -216,7 +202,6 @@ analyze_persistence() {
     done
 }
 
-# Generate timeline
 generate_timeline() {
     section "EVENT TIMELINE"
     
@@ -233,7 +218,6 @@ generate_timeline() {
     done
 }
 
-# Export results
 export_results() {
     local output_file="${1:-${LOGS_DIR}/log_analysis_$(date +%Y%m%d_%H%M%S).txt}"
     
@@ -268,7 +252,6 @@ export_results() {
     log_good "Report saved: $output_file"
 }
 
-# Show usage
 usage() {
     cat << 'EOF'
 USAGE:
@@ -302,7 +285,6 @@ EXAMPLES:
 EOF
 }
 
-# Main function
 main() {
     local auth_log=""
     local web_log=""

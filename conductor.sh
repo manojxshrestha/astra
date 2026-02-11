@@ -1,11 +1,6 @@
-#!/bin/bash
-# PwnTheBox - Penetration Testing Automation Framework
-# Version: 1.0 - Professional Grade
-# Central control script for all penetration testing tools
 
 set -e
 
-# Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -14,10 +9,8 @@ CYAN='\033[0;36m'
 MAGENTA='\033[0;35m'
 NC='\033[0m'
 
-# Script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Banner
 banner() {
     clear
     echo -e "${CYAN}"
@@ -35,7 +28,6 @@ EOF
     echo -e "${NC}"
 }
 
-# Show main menu
 show_menu() {
     echo ""
     echo -e "${CYAN}═══════════════════════════════════════════════════════${NC}"
@@ -71,12 +63,10 @@ show_menu() {
     echo -e "${CYAN}═══════════════════════════════════════════════════════${NC}"
 }
 
-# Logging
 log_info() { echo -e "${BLUE}[*]${NC} $1"; }
 log_good() { echo -e "${GREEN}[+]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[!]${NC} $1"; }
 
-# Run tool
 run_tool() {
     local tool="$1"
     shift
@@ -91,7 +81,6 @@ run_tool() {
     fi
 }
 
-# Show tool paths
 show_paths() {
     echo -e "${CYAN}═══════════════════════════════════════════════════════${NC}"
     echo -e "${CYAN}  TOOL LOCATIONS${NC}"
@@ -118,7 +107,6 @@ show_paths() {
     echo ""
 }
 
-# Check dependencies
 check_deps() {
     echo -e "${CYAN}═══════════════════════════════════════════════════════${NC}"
     echo -e "${CYAN}  DEPENDENCY CHECK${NC}"
@@ -151,7 +139,6 @@ check_deps() {
     echo ""
 }
 
-# Handle menu selection
 handle_selection() {
     local choice="$1"
     
@@ -262,7 +249,6 @@ handle_selection() {
     esac
 }
 
-# Main loop
 main() {
     while true; do
         banner
@@ -275,7 +261,6 @@ main() {
     done
 }
 
-# If run with arguments, execute specific tool
 if [[ $# -gt 0 ]]; then
     case "$1" in
         payload|41)

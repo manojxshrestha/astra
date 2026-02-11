@@ -1,11 +1,6 @@
-#!/bin/bash
-# Simple Fuzzing Script for VAPT
-# Version: 1.0 - Professional Grade
-# Basic fuzzer for command-line applications and network services
 
 set -e
 
-# Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -18,7 +13,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 FUZZ_DIR="${SCRIPT_DIR}/fuzz"
 mkdir -p "$FUZZ_DIR"
 
-# Banner
 banner() {
     echo -e "${CYAN}"
     cat << 'EOF'
@@ -30,13 +24,11 @@ EOF
     echo -e "${NC}"
 }
 
-# Logging
 log_info() { echo -e "${BLUE}[*]${NC} $1"; }
 log_good() { echo -e "${GREEN}[+]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[!]${NC} $1"; }
 log_critical() { echo -e "${RED}[CRITICAL]${NC} $1"; }
 
-# Generate fuzzing payload
 generate_payload() {
     local type="$1"
     local size="${2:-100}"
@@ -81,7 +73,6 @@ generate_payload() {
     esac
 }
 
-# Fuzz command-line application
 fuzz_cli() {
     local target="$1"
     local payload_type="${2:-string}"
@@ -120,7 +111,6 @@ fuzz_cli() {
     log_good "No crashes found with $payload_type payloads up to size $max_size"
 }
 
-# Fuzz network service
 fuzz_network() {
     local host="$1"
     local port="$2"
@@ -172,7 +162,6 @@ PYEOF
     log_good "Fuzzing complete"
 }
 
-# Fuzz with wordlist
 fuzz_wordlist() {
     local target="$1"
     local wordlist="$2"
@@ -202,7 +191,6 @@ fuzz_wordlist() {
     log_good "Fuzzed $count payloads from wordlist"
 }
 
-# Generate mutation-based payloads
 fuzz_mutation() {
     local seed="$1"
     local count="${2:-100}"
@@ -237,7 +225,6 @@ fuzz_mutation() {
     done
 }
 
-# Run comprehensive fuzzing suite
 comprehensive_fuzz() {
     local target="$1"
     
@@ -253,7 +240,6 @@ comprehensive_fuzz() {
     log_good "Comprehensive fuzzing complete"
 }
 
-# Show usage
 usage() {
     cat << 'EOF'
 USAGE:
@@ -309,7 +295,6 @@ EXAMPLES:
 EOF
 }
 
-# List payload types
 list_types() {
     echo "Available payload types:"
     echo "  string          - String of A's"
@@ -325,7 +310,6 @@ list_types() {
     echo "  xss             - XSS payloads"
 }
 
-# Main function
 main() {
     local mode=""
     local target=""
