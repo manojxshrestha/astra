@@ -34,31 +34,35 @@ show_menu() {
     echo -e "${CYAN}  MAIN MENU${NC}"
     echo -e "${CYAN}═══════════════════════════════════════════════════════${NC}"
     echo ""
-    echo -e "${YELLOW}3. Web Application Testing${NC}"
-    echo "   31. Nikto Scanner"
-    echo "   32. SSL/TLS Analyzer"
-    echo "   33. Web Exploitation Toolkit"
-    echo "   34. Directory Busting"
-    echo "   35. Web API Scanner"
+    echo -e "${YELLOW}1. Privilege Escalation${NC}"
+    echo "   11. Linux Privilege Escalation Suite"
+    echo "   12. Windows Privilege Escalation Suite"
+    echo "   13. Linux Quick Scan"
+    echo "   14. Windows Quick Scan"
     echo ""
-    echo -e "${YELLOW}4. Exploitation Helpers${NC}"
-    echo "   41. Payload Generator"
-    echo "   42. Reverse Shell Generator"
-    echo "   43. Encoding & Obfuscation Toolkit"
+    echo -e "${YELLOW}2. Web Application Testing${NC}"
+    echo "   21. Nikto Scanner"
+    echo "   22. SSL/TLS Analyzer"
+    echo "   23. Web Exploitation Toolkit"
+    echo "   24. Directory Busting"
+    echo "   25. Web API Scanner"
     echo ""
-    echo -e "${YELLOW}5. Post-Exploitation${NC}"
-    echo "   51. Linux Privilege Escalation Checker"
-    echo "   52. Windows Privilege Escalation Checker"
-    echo "   53. Credential Harvester"
+    echo -e "${YELLOW}3. Exploitation Helpers${NC}"
+    echo "   31. Payload Generator"
+    echo "   32. Reverse Shell Generator"
+    echo "   33. Encoding & Obfuscation Toolkit"
     echo ""
-    echo -e "${YELLOW}6. Cryptography & Forensics${NC}"
-    echo "   61. Hash Cracker (Identify & Crack)"
-    echo "   62. Log Analyzer"
-    echo "   63. Steganography Detector"
+    echo -e "${YELLOW}4. Post-Exploitation${NC}"
+    echo "   41. Credential Harvester"
     echo ""
-    echo -e "${YELLOW}8. Binary Exploitation${NC}"
-    echo "   81. ELF Binary Analyzer"
-    echo "   82. Simple Fuzzer"
+    echo -e "${YELLOW}5. Cryptography & Forensics${NC}"
+    echo "   51. Hash Cracker (Identify & Crack)"
+    echo "   52. Log Analyzer"
+    echo "   53. Steganography Detector"
+    echo ""
+    echo -e "${YELLOW}6. Binary Exploitation${NC}"
+    echo "   61. ELF Binary Analyzer"
+    echo "   62. Simple Fuzzer"
     echo ""
     echo -e "${GREEN}9. Utilities${NC}"
     echo "   91. Show Tool Paths"
@@ -93,14 +97,22 @@ show_paths() {
     echo -e "${CYAN}  TOOL LOCATIONS${NC}"
     echo -e "${CYAN}═══════════════════════════════════════════════════════${NC}"
     echo ""
+    echo "Privilege Escalation:"
+    echo "  $SCRIPT_DIR/privilege-escalation.sh"
+    echo "  $SCRIPT_DIR/privilege-escalation/linux/privesc.sh"
+    echo "  $SCRIPT_DIR/privilege-escalation/windows/privesc.ps1"
+    echo ""
+    echo "Privilege Escalation Modules:"
+    echo "  $SCRIPT_DIR/privilege-escalation/linux/utils/"
+    echo "  $SCRIPT_DIR/privilege-escalation/linux/checks/"
+    echo "  $SCRIPT_DIR/privilege-escalation/linux/exploits/"
+    echo ""
     echo "Exploitation:"
     echo "  $SCRIPT_DIR/exploitation/payloads.sh"
     echo "  $SCRIPT_DIR/exploitation/shells.sh"
     echo "  $SCRIPT_DIR/exploitation/encoder.sh"
     echo ""
     echo "Post-Exploitation:"
-    echo "  $SCRIPT_DIR/post-exploitation/linux/privesc.sh"
-    echo "  $SCRIPT_DIR/post-exploitation/windows/windows-privesc-check.ps1"
     echo "  $SCRIPT_DIR/post-exploitation/credentials/creds.sh"
     echo ""
     echo "Crypto & Forensics:"
@@ -150,23 +162,45 @@ handle_selection() {
     local choice="$1"
 
     case $choice in
+        # Privilege Escalation
+        11)
+            run_tool "$SCRIPT_DIR/privilege-escalation.sh"
+            ;;
+        12)
+            echo "Windows Privilege Escalation Suite"
+            echo "Run on Windows or via PowerShell:"
+            echo "  pwsh -ExecutionPolicy Bypass -File $SCRIPT_DIR/privilege-escalation/windows/privesc.ps1"
+            read -p "Press Enter to continue..."
+            ;;
+        13)
+            log_info "Running Linux quick privilege escalation scan..."
+            bash "$SCRIPT_DIR/privilege-escalation/linux/privesc.sh" --quick
+            read -p "Press Enter to continue..."
+            ;;
+        14)
+            echo "Windows Quick Privilege Escalation Scan"
+            echo "Run on Windows:"
+            echo "  pwsh -ExecutionPolicy Bypass -File $SCRIPT_DIR/privilege-escalation/windows/privesc.ps1 -Quick"
+            read -p "Press Enter to continue..."
+            ;;
+
         # Web Application Testing
-        31)
+        21)
             run_tool "$SCRIPT_DIR/web/nikto.sh" --help
             read -p "Press Enter to launch tool..."
             run_tool "$SCRIPT_DIR/web/nikto.sh"
             ;;
-        32)
+        22)
             run_tool "$SCRIPT_DIR/web/ssl.sh" --help
             read -p "Press Enter to launch tool..."
             run_tool "$SCRIPT_DIR/web/ssl.sh"
             ;;
-        33)
+        23)
             run_tool "$SCRIPT_DIR/web/web-exploit.sh" --help
             read -p "Press Enter to launch tool..."
             run_tool "$SCRIPT_DIR/web/web-exploit.sh"
             ;;
-        34)
+        24)
             echo "Directory Busting"
             echo "Enter target URL (e.g., http://192.168.1.100): "
             read -r target
@@ -177,60 +211,48 @@ handle_selection() {
             fi
             read -p "Press Enter to continue..."
             ;;
-        35)
+        25)
             run_tool "$SCRIPT_DIR/web/dev-api-scanner.sh" --help
             read -p "Press Enter to launch tool..."
             run_tool "$SCRIPT_DIR/web/dev-api-scanner.sh"
             ;;
 
         # Exploitation
-        41)
+        31)
             run_tool "$SCRIPT_DIR/exploitation/payloads.sh" --help
             read -p "Press Enter to launch tool..."
             run_tool "$SCRIPT_DIR/exploitation/payloads.sh" --interactive
             ;;
-        42)
+        32)
             run_tool "$SCRIPT_DIR/exploitation/shells.sh" --help
             read -p "Press Enter to launch interactive mode..."
             run_tool "$SCRIPT_DIR/exploitation/shells.sh" --interactive
             ;;
-        43)
+        33)
             run_tool "$SCRIPT_DIR/exploitation/encoder.sh" --help
             read -p "Press Enter to launch interactive mode..."
             run_tool "$SCRIPT_DIR/exploitation/encoder.sh" --interactive
             ;;
         
         # Post-Exploitation
-        51)
-            run_tool "$SCRIPT_DIR/post-exploitation/linux/privesc.sh" --help
-            read -p "Press Enter to run full scan..."
-            run_tool "$SCRIPT_DIR/post-exploitation/linux/privesc.sh" --all
-            ;;
-        52)
-            echo "Windows Privilege Escalation Checker (PowerShell)"
-            echo "Copy this script to target Windows machine and run:"
-            echo "  powershell -ExecutionPolicy Bypass -File windows-privesc-check.ps1"
-            read -p "Press Enter to view script..."
-            cat "$SCRIPT_DIR/post-exploitation/windows/windows-privesc-check.ps1" | head -50
-            ;;
-        53)
+        41)
             run_tool "$SCRIPT_DIR/post-exploitation/credentials/creds.sh" --help
             read -p "Press Enter to run quick scan..."
             run_tool "$SCRIPT_DIR/post-exploitation/credentials/creds.sh" --quick
             ;;
         
         # Crypto & Forensics
-        61)
+        51)
             run_tool "$SCRIPT_DIR/crypto-forensics/hashes/hashes.sh" --help
             read -p "Press Enter to launch tool..."
             run_tool "$SCRIPT_DIR/crypto-forensics/hashes/hashes.sh"
             ;;
-        62)
+        52)
             run_tool "$SCRIPT_DIR/crypto-forensics/logs/logs.sh" --help
             read -p "Press Enter to run full analysis..."
             run_tool "$SCRIPT_DIR/crypto-forensics/logs/logs.sh" --full
             ;;
-        63)
+        53)
             run_tool "$SCRIPT_DIR/crypto-forensics/stego/stego.sh" --help
             echo ""
             read -p "Enter image file path: " img_file
@@ -242,7 +264,7 @@ handle_selection() {
             ;;
         
         # Binary Exploitation
-        81)
+        61)
             run_tool "$SCRIPT_DIR/binary-pwn/elf/elf.sh" --help
             echo ""
             read -p "Enter binary path: " binary
@@ -252,7 +274,7 @@ handle_selection() {
                 log_warn "Binary not found: $binary"
             fi
             ;;
-        82)
+        62)
             run_tool "$SCRIPT_DIR/binary-pwn/fuzz/fuzzer.sh" --help
             echo ""
             read -p "Enter target command: " target
