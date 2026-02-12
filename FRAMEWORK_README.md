@@ -52,8 +52,7 @@ PwnTheBox/
 │   └── listener.sh                 # Reverse listeners
 │   └── README.md
 │
-├── Persistence/                     # Phase 5 & 8: PE & Maintaining Access
-│   ├── persistence-suite.sh        # Persistence menu wrapper
+├── Privilege-Escalation/           # Phase 5: Privilege Escalation
 │   ├── Linux/
 │   │   ├── privesc.sh               # Linux PE checker (v2.0)
 │   │   ├── utils/                   # Utility functions
@@ -71,6 +70,10 @@ PwnTheBox/
 │   │       └── exploit_suggestions.sh
 │   └── Windows/
 │       └── privesc.ps1              # Windows PE checker
+│
+├── Persistence/                     # Phase 8: Maintaining Access
+│   ├── persistence-suite.sh        # Persistence menu
+│   └── README.md
 │
 ├── Internal/                        # Phase 6: Post-Compromise Recon
 │   ├── internal-recon-suite.sh     # Internal recon menu
@@ -135,8 +138,8 @@ PwnTheBox/
 ./Enum/enum-suite.sh --menu
 ./Exploit/compromise-suite.sh --menu
 ./Foothold/foothold-suite.sh --menu
-./Persistence/Linux/privesc.sh --quick          # Linux PE
-./Persistence/Windows/privesc.ps1 -Quick         # Windows PE
+./Privilege-Escalation/Linux/privesc.sh --quick   # Linux PE
+./Privilege-Escalation/Windows/privesc.ps1 -Quick # Windows PE
 ./Internal/internal-recon-suite.sh --menu
 ./Lateral/lateral-suite.sh --menu
 ./Persistence/persistence-suite.sh --menu
@@ -175,12 +178,12 @@ PwnTheBox/
 ### PE - Privilege Escalation
 ```bash
 # Linux
-./Persistence/Linux/privesc.sh --quick          # Quick scan
-./Persistence/Linux/privesc.sh --json           # JSON output
-./Persistence/Linux/privesc.sh --stealth        # Stealth mode
+./Privilege-Escalation/Linux/privesc.sh --quick          # Quick scan
+./Privilege-Escalation/Linux/privesc.sh --json           # JSON output
+./Privilege-Escalation/Linux/privesc.sh --stealth        # Stealth mode
 
 # Windows
-powershell -ep bypass -f Persistence/Windows/privesc.ps1 -Quick
+powershell -ep bypass -f Privilege-Escalation/Windows/privesc.ps1 -Quick
 ```
 
 ### Internal - Post-Compromise Recon
