@@ -1,0 +1,49 @@
+connect connect
+sitecom sitecom
+admin 1234
+cisco cisco
+cisco sanfran
+private private
+wampp xampp
+newuser wampp
+xampp-dav-unsecure ppmax2011
+admin turnkey
+vagrant vagrant
+
+# Common and realistic additions
+admin admin
+admin password
+admin 123456
+admin 12345
+admin blank
+root root
+root admin
+root password
+root 123456
+ubnt ubnt
+support support
+guest guest
+user user
+admin 12345678
+admin admin123
+admin changeme
+admin default
+netgear password
+tomcat tomcat
+admin tomcat
+pi raspberry
+pi raspberrypi
+oracle oracle
+db2admin db2admin
+postgres postgres
+test test
+demo demo
+backup backup
+operator operator
+
+# Vendor-specific very common defaults
+admin ""          # blank password (many D-Link, TP-Link, etc.)
+admin @HuaweiHgw  # Huawei routers
+service service
+manager manager
+cisco class
