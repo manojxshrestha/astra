@@ -1,34 +1,61 @@
+#!/bin/bash
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+BLUE='\033[1;34m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+MEDIUM='=================================================================='
+
+f_banner() {
+    echo ""
+    echo -e "${YELLOW}Domain Reconnaissance${NC}"
+    echo ""
+}
+
+f_location() {
+    read -r -p "Enter file location: " LOCATION
+    if [[ ! -f "$LOCATION" ]]; then
+        echo "[!] File not found: $LOCATION"
+        exit 1
+    fi
+}
+
+f_error() {
+    echo "[!] Invalid choice"
+    sleep 2
+}
 
 clear
 f_banner
 
 echo -e "${BLUE}RECON${NC}"
-echo
+echo ""
 echo "1.  Passive"
 echo "2.  Find registered domains"
 echo "3.  Previous menu"
-echo
+echo ""
 echo -n "Choice: "
 read -r CHOICE
 
 case "$CHOICE" in
-    1) "$DISCOVER"/passive.sh && exit ;;
+    1) "$SCRIPT_DIR"/passive.sh && exit ;;
     2)
         clear
         f_banner
 
         echo -e "${BLUE}Find registered domains.${NC}"
-        echo
+        echo ""
         echo "Open a browser to https://www.reversewhois.io/"
         echo "Enter your domain and solve the captcha."
         echo "Select all > copy all of the text and paste into a new file."
 
         f_location
-        echo
+        echo ""
         grep '^[0-9]' "$LOCATION" | awk '{print $2}' | sort -u > tmp
         TOTAL=$(wc -l tmp | sed -e 's/^[ \t]*//' | cut -d ' ' -f1)
 
+        NUMBER=0
         while read -r REGDOMAIN; do
             IPADDR=$(dig +short "$REGDOMAIN" | grep -Eiv '(0.0.0.0|127.0.0.1|127.0.0.6)' | sed '/[a-z]/d')
             whois -H "$REGDOMAIN" | grep -Eiv '(#|please query|personal data|redacted|whois|you agree)' | sed '/^$/d' > tmp2
@@ -54,7 +81,7 @@ case "$CHOICE" in
 
             echo "$REGDOMAIN,$IPADDR,$REGEMAIL,$REGORG,$REGISTRAR" | grep -v ',,,,' >> tmp3
             ((NUMBER+1))
-            echo -ne "$NUMBER of $TOTAL domains"\\r
+            echo -ne "$NUMBER of $TOTAL domains\r"
             sleep 2
         done < tmp
 
@@ -62,15 +89,15 @@ case "$CHOICE" in
         cat tmp4 tmp3 | grep -Ev '^\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' | column -t -s ',' | sed 's/[ \t]*$//' > "$HOME"/data/registered-domains
         rm tmp*
 
-        echo
+        echo ""
         echo "$MEDIUM"
-        echo
+        echo ""
         echo "[*] Scan complete."
-        echo
+        echo ""
         echo -e "The report is located at ${YELLOW}$HOME/data/registered-domains${NC}"
-        echo
+        echo ""
         exit
         ;;
-    3) f_main ;;
+    3) exit ;;
     *) f_error ;;
 esac
