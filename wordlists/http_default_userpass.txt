@@ -1,0 +1,1 @@
+# Placeholder for http_default_userpass.txt

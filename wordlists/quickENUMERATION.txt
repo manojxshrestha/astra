@@ -1,3 +1,0 @@
- .git/config
- public/plugins/piechart/../../../../../../../../etc/passwd
- login.php
