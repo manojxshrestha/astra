@@ -1,6 +1,8 @@
 #!/bin/bash
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+FRAMEWORK_DIR="$(dirname "$SCRIPT_DIR")"
+OUTPUT_DIR="$FRAMEWORK_DIR/data"
 
 if [ $EUID -eq 0 ]; then
     echo
@@ -8,6 +10,9 @@ if [ $EUID -eq 0 ]; then
     echo
     exit 1
 fi
+
+# Create output directory if it doesn't exist
+mkdir -p "$OUTPUT_DIR"
 
 BLUE='\033[1;34m'
 YELLOW='\033[1;33m'
@@ -31,7 +36,7 @@ f_error() {
 }
 
 f_terminate(){
-    SAVE_DIR=$HOME/data/cancelled-$(date +%H:%M:%S)
+    SAVE_DIR=$OUTPUT_DIR/cancelled-$(date +%H:%M:%S)
     echo
     echo "[!] Terminating."
     echo
@@ -106,18 +111,18 @@ echo "[*] Starting passive reconnaissance for $DOMAIN..."
 echo "[*] This may take a while depending on available tools and API keys."
 echo
 
-mkdir -p "$HOME/data/$DOMAIN"
-mkdir -p "$HOME/data/$DOMAIN/data"
+mkdir -p "$OUTPUT_DIR/$DOMAIN"
+mkdir -p "$OUTPUT_DIR/$DOMAIN/data"
 
-echo "<html><body><h1>Passive Reconnaissance Report</h1>" > "$HOME/data/$DOMAIN/data/passive-recon.htm"
-echo "<p>Company: $COMPANY</p>" >> "$HOME/data/$DOMAIN/data/passive-recon.htm"
-echo "<p>Domain: $DOMAIN</p>" >> "$HOME/data/$DOMAIN/data/passive-recon.htm"
-echo "<p>Date: $RUNDATE</p>" >> "$HOME/data/$DOMAIN/data/passive-recon.htm"
-echo "<hr>" >> "$HOME/data/$DOMAIN/data/passive-recon.htm"
+echo "<html><body><h1>Passive Reconnaissance Report</h1>" > "$OUTPUT_DIR/$DOMAIN/data/passive-recon.htm"
+echo "<p>Company: $COMPANY</p>" >> "$OUTPUT_DIR/$DOMAIN/data/passive-recon.htm"
+echo "<p>Domain: $DOMAIN</p>" >> "$OUTPUT_DIR/$DOMAIN/data/passive-recon.htm"
+echo "<p>Date: $RUNDATE</p>" >> "$OUTPUT_DIR/$DOMAIN/data/passive-recon.htm"
+echo "<hr>" >> "$OUTPUT_DIR/$DOMAIN/data/passive-recon.htm"
 
 if command -v whois &> /dev/null; then
     echo "[*] Running Whois lookup..."
-    whois -H "$DOMAIN" 2>/dev/null | head -100 > "$HOME/data/$DOMAIN/data/whois.txt"
+    whois -H "$DOMAIN" 2>/dev/null | head -100 > "$OUTPUT_DIR/$DOMAIN/data/whois.txt"
     echo "[+] Whois data saved."
 else
     echo "[!] whois not installed."
@@ -125,9 +130,9 @@ fi
 
 if command -v dig &> /dev/null; then
     echo "[*] Running DNS enumeration..."
-    dig +short "$DOMAIN" > "$HOME/data/$DOMAIN/data/dns.txt"
-    dig +short MX "$DOMAIN" >> "$HOME/data/$DOMAIN/data/dns.txt"
-    dig +short NS "$DOMAIN" >> "$HOME/data/$DOMAIN/data/dns.txt"
+    dig +short "$DOMAIN" > "$OUTPUT_DIR/$DOMAIN/data/dns.txt"
+    dig +short MX "$DOMAIN" >> "$OUTPUT_DIR/$DOMAIN/data/dns.txt"
+    dig +short NS "$DOMAIN" >> "$OUTPUT_DIR/$DOMAIN/data/dns.txt"
     echo "[+] DNS data saved."
 else
     echo "[!] dig not installed."
@@ -138,7 +143,7 @@ echo "$MEDIUM"
 echo
 echo "[*] Scan complete."
 echo
-echo -e "The report is located at ${YELLOW}$HOME/data/$DOMAIN/data/${NC}"
+echo -e "The report is located at ${YELLOW}$OUTPUT_DIR/$DOMAIN/data/${NC}"
 echo
 echo "[*] Note: For full functionality, install dependencies:"
 echo "    - dnsrecon, dnstwist, subfinder, sublist3r, theHarvester, msfconsole"
