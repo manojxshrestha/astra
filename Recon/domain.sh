@@ -94,7 +94,7 @@ case "$CHOICE" in
         echo ""
         echo "[*] Scan complete."
         echo ""
-        echo -e "The report is located at ${YELLOW}$HOME/data/registered-domains${NC}"
+        echo -e "The report is located at ${YELLOW}$FRAMEWORK_DIR/data/registered-domains${NC}"
         echo ""
         exit
         ;;
