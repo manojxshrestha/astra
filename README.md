@@ -1,109 +1,73 @@
-# 🛡️ VAPT Automation Framework
+# 🛡️ PwnTheBox Framework
 
 **Professional Vulnerability Assessment & Penetration Testing Toolkit**
 
-[![Version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/manojxshrestha/vapt-framework)
+[![Version](https://img.shields.io/badge/version-2.0-blue.svg)](https://github.com/manojxshrestha/pwnthebox)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Kali%20Linux%20%7C%20WSL%20%7C%20Parrot%20OS-blue.svg)](https://github.com/manojxshrestha/pwnthebox)
 
 ---
 
 ## 📋 Overview
 
-A comprehensive collection of automation scripts designed for professional Vulnerability Assessment and Penetration Testing (VAPT). This framework provides tools for all phases of penetration testing from exploitation to forensics.
+PwnTheBox is a comprehensive penetration testing framework designed for professional security assessments. It covers the entire penetration testing lifecycle from reconnaissance to reporting, with smart automation and tool management.
 
-## 🎯 What's Included
+## 🎯 Key Features
 
-### 4. Exploitation Helpers
-- **Payload Generator** (`exploitation/payloads.sh`)
-  - Generate reverse shells, bind shells, and command execution payloads
-  - Multi-OS support (Linux, Windows, macOS)
-  - Encoding options (Base64, Hex, URL, ROT13)
-  
-- **Reverse Shell Generator** (`exploitation/shells.sh`)
-  - Interactive shell generation with listener
-  - Auto-detect network interfaces
-  - Multiple shell types (bash, python, perl, ruby, netcat, powershell)
-  
-- **Encoding & Obfuscation Toolkit** (`exploitation/encoder.sh`)
-  - URL, Base64, Hex, Binary encoding
-  - ROT13, Caesar cipher, Morse code
-  - JWT decoding, PowerShell encoding
-  - Multi-layer chaining
+### ✅ Smart Installation
+- Automatic dependency detection and installation
+- Skips already installed tools (no redundant installations)
+- Multi-OS support: Kali Linux, WSL, Parrot OS, Ubuntu, Debian, Arch, macOS
+- Progress tracking with detailed status reports
 
-### 5. Post-Exploitation
-- **Linux Privilege Escalation Checker** (`post-exploitation/linux/privesc.sh`)
-  - System enumeration
-  - SUID/SGID binary detection
-  - Kernel exploit checks
-  - Cron job analysis
-  - Container escape detection
-  
-- **Windows Privilege Escalation Checker** (`post-exploitation/windows/windows-privesc-check.ps1`)
-  - PowerShell-based enumeration
-  - Service permission checks
-  - Registry analysis
-  - Scheduled task enumeration
-  
-- **Credential Harvester** (`post-exploitation/credentials/creds.sh`)
-  - Search for passwords, API keys, tokens
-  - Memory analysis
-  - SSH key discovery
-  - Cloud credential detection
+### ✅ Comprehensive Tool Suite
+- **9-Phase Testing Lifecycle**: Recon → Enum → Exploit → Foothold → PrivEsc → Internal → Lateral → Persistence → Actions
+- **50+ Security Tools**: Recon, exploitation, web apps, binary pwn, steganography, pivoting
+- **Latest theHarvester**: Automatically installs v4.10.0 from GitHub (not outdated apt version)
+- **Python Virtual Environment**: Isolated dependencies for reliability
 
-### 6. Cryptography & Forensics
-- **Hash Cracker** (`crypto-forensics/hashes/hashes.sh`)
-  - Hash type identification
-  - Hashcat and John the Ripper integration
-  - Batch processing
-  - Hash generation
-  
-- **Log Analyzer** (`crypto-forensics/logs/logs.sh`)
-  - Authentication log analysis
-  - Web server log parsing
-  - Brute force detection
-  - Timeline generation
-  
-- **Steganography Detector** (`crypto-forensics/stego/stego.sh`)
-  - LSB analysis
-  - Steghide extraction
-  - Binwalk integration
-  - Metadata analysis
-
-### 8. Binary Exploitation
-- **ELF Analyzer** (`binary-pwn/elf/elf.sh`)
-  - Security feature checks (NX, PIE, Canary, RELRO)
-  - ROP gadget detection
-  - Symbol analysis
-  - Exploit template generation
-  
-- **Simple Fuzzer** (`binary-pwn/fuzz/fuzzer.sh`)
-  - CLI application fuzzing
-  - Network service fuzzing
-  - Multiple payload types
-  - Wordlist support
+### ✅ Framework Features
+- Interactive menu-driven interface (`./conductor.sh`)
+- CLI mode for automation (`./conductor.sh 1`)
+- Color-coded output for better visibility
+- Helper scripts: `activate.sh`, `pwnthebox` launcher, `update.sh`
 
 ---
 
 ## 🚀 Quick Start
 
-### Interactive Mode
+### One-Line Installation
 ```bash
+# Clone and install everything
+git clone https://github.com/manojxshrestha/pwnthebox.git
+cd pwnthebox
+./install.sh
+
+# Check what's installed
+./install.sh --check
+
+# Launch framework
 ./conductor.sh
 ```
 
-### Direct Tool Access
+### Installation Options
 ```bash
-# Payload generation
-./conductor.sh payload -t reverse-tcp -o linux -i 10.10.10.10 -p 4444
+./install.sh              # Install all tools (smart - skips already installed)
+./install.sh --check     # Check installation status of all tools
+./install.sh -h          # Show help
+./install.sh --help      # Show help
+```
 
-# Linux privilege escalation check
-./conductor.sh linpriv --all
+### Framework Usage
+```bash
+# Interactive menu
+./conductor.sh
 
-# Hash cracking
-./conductor.sh hash -i "5f4dcc3b5aa765d61d8327deb882cf99"
-
-# ELF analysis
-./conductor.sh elf -f ./target_binary
+# Direct commands
+./conductor.sh 1        # Run Reconnaissance phase
+./conductor.sh 5        # Run Privilege Escalation
+./conductor.sh --deps    # Check dependencies
+./conductor.sh --paths   # Show tool paths
 ```
 
 ---
@@ -111,108 +75,251 @@ A comprehensive collection of automation scripts designed for professional Vulne
 ## 📁 Directory Structure
 
 ```
-vapt/
-├── exploitation/
-│   ├── payload-generator.sh
-│   ├── reverse-shell-gen.sh
-│   └── encoder-toolkit.sh
-├── post-exploitation/
-│   ├── linux/
-│   │   └── linux-privesc-check.sh
-│   ├── windows/
-│   │   └── windows-privesc-check.ps1
-│   └── credentials/
-│       └── credential-harvester.sh
-├── crypto-forensics/
-│   ├── hashes/
-│   │   └── hash-cracker.sh
-│   ├── logs/
-│   │   └── log-analyzer.sh
-│   └── stego/
-│       └── stego-detector.sh
-├── binary-pwn/
-│   ├── elf/
-│   │   └── elf-analyzer.sh
-│   └── fuzz/
-│       └── simple-fuzzer.sh
-├── reports/
-├── wordlists/
-├── utils/
-└── conductor.sh
+PwnTheBox/
+├── conductor.sh              # Main framework launcher
+├── install.sh               # Smart installation script
+├── activate.sh              # Source to add framework to PATH
+├── pwnthebox                # Quick launcher
+├── update.sh                # Framework updater
+│
+├── Recon/                   # Phase 1: Information Gathering
+│   ├── recon-suite.sh      # Recon menu
+│   ├── domain.sh           # Domain reconnaissance
+│   ├── passive.sh          # Passive reconnaissance
+│   ├── person.sh           # Person/OSINT search
+│   ├── generateTargets.sh  # Target generation
+│   └── ...                 # More recon tools
+│
+├── Enum/                    # Phase 2: Scanning & Enumeration
+│   ├── enum-suite.sh       # Enum menu
+│   ├── nse.sh              # Nmap script engine
+│   ├── cve.sh              # CVE scanning
+│   ├── msf-aux.sh          # Metasploit aux modules
+│   └── ...                 # More enum tools
+│
+├── Exploit/                # Phase 3: Initial Access
+│   ├── compromise-suite.sh # Exploitation menu
+│   ├── payloads.sh         # Payload generation
+│   ├── shells.sh           # Reverse shells
+│   ├── encoder.sh          # Encoding/obfuscation
+│   ├── nikto.sh            # Web vulnerability scanner
+│   ├── web-exploit.sh      # Web exploitation
+│   ├── elf/                # ELF binary exploitation
+│   ├── fuzz/               # Fuzzing tools
+│   └── ...                 # More exploit tools
+│
+├── Foothold/                # Phase 4: Shell Stabilization
+│   ├── foothold-suite.sh   # Foothold menu
+│   └── listener.sh         # Reverse listeners
+│
+├── Privilege-Escalation/    # Phase 5: Privilege Escalation
+│   ├── Linux/
+│   │   ├── privesc.sh      # Linux PE checker v2.0
+│   │   ├── checks/          # PE check modules
+│   │   └── exploits/        # Exploit suggestions
+│   └── Windows/
+│       └── privesc.ps1     # Windows PE checker
+│
+├── Internal/                # Phase 6: Post-Compromise Recon
+│   ├── internal-recon-suite.sh
+│   └── credentials/         # Credential harvesting
+│
+├── Lateral/                 # Phase 7: Lateral Movement
+│   ├── lateral-suite.sh    # Lateral menu
+│   ├── ssh-pivot.sh        # SSH pivoting
+│   ├── chisel-pivot.sh     # Chisel pivoting
+│   └── socat-pivot.sh      # Socat pivoting
+│
+├── Persistence/             # Phase 8: Maintain Access
+│   ├── persistence-suite.sh
+│   └── Linux-persistence.sh
+│
+├── Misc/                    # Phase 9: Actions on Objectives
+│   ├── actions-suite.sh
+│   ├── hashes/             # Hash cracking
+│   ├── logs/               # Log analysis
+│   └── stego/              # Steganography
+│
+├── config/                  # Configuration files
+│   ├── tmux.conf
+│   ├── vimrc
+│   ├── zshrc
+│   └── deploy/             # Deployment configs
+│
+├── utils/                   # Utility scripts
+│   ├── parse-nmap.py       # Nmap parser
+│   ├── parse-nessus.py     # Nessus parser
+│   └── ...                 # More utilities
+│
+├── reports/                 # Generated reports
+├── wordlists/               # Wordlists and dictionaries
+└── venv/                   # Python virtual environment
 ```
 
 ---
 
-## 🔧 Installation
+## 🛠️ Installation & Setup
 
-### Prerequisites
+### Automated Installation
 ```bash
-# Core dependencies
-apt update
-apt install -y bash python3 file binutils
+# Clone repository
+git clone https://github.com/manojxshrestha/pwnthebox.git
+cd pwnthebox
 
-# Optional but recommended
-apt install -y steghide stegseek binwalk exiftool outguess
-pip install ropgadget ropper
+# Run smart installer
+./install.sh
+
+# Optional: Add to PATH
+source activate.sh
+
+# Or add permanently
+echo "source $PWD/activate.sh" >> ~/.bashrc
 ```
 
-### Clone and Setup
+### What Gets Installed
+
+**Core Dependencies:**
+- Bash, Python3, Git, Vim, Tmux, Netcat, Nmap, Wireshark, curl, wget, jq
+
+**Reconnaissance Tools:**
+- ✅ theHarvester v4.10.0 (latest from GitHub)
+- Subfinder, DNSTwist, DNSRecon, Recon-ng
+
+**Exploitation Tools:**
+- Metasploit Framework, Exploit-DB, SQLMap, Nikto, Hydra, Hashcat
+
+**Binary Exploitation:**
+- GDB, Pwndbg, Ropper, ROPGadget, OneGadget (all latest versions)
+
+**Web Application Tools:**
+- GoBuster, WFUZZ, FFUF, Dirsearch, OWASP ZAP
+
+**Post-Exploitation:**
+- Steghide, Binwalk, ExifTool, Foremost
+- Socat, Chisel, Proxychains
+
+**Python Packages:**
+- Requests, BeautifulSoup4, Scapy, Impacket, DNSPython, Jinja2, and more
+
+---
+
+## 📖 Usage Examples
+
+### Reconnaissance
 ```bash
-git clone https://github.com/manojxshrestha/vapt-framework.git
-cd vapt-framework
-chmod +x conductor.sh
-./conductor.sh
+# Launch recon menu
+./conductor.sh 1
+
+# Or run directly
+./Recon/recon-suite.sh
+./Recon/domain.sh
+./Recon/passive.sh target.com
+```
+
+### Enumeration
+```bash
+./conductor.sh 2
+./Enum/enum-suite.sh
+./Enum/nse.sh 192.168.1.0/24
+```
+
+### Privilege Escalation
+```bash
+# Linux
+./Privilege-Escalation/Linux/privesc.sh --all
+
+# Windows (PowerShell)
+powershell -ep bypass -f Privilege-Escalation/Windows/privesc.ps1
+```
+
+### Using theHarvester
+```bash
+# After installation, theHarvester is available
+theHarvester -d company.com -b all
+
+# Or via framework
+./conductor.sh 1  # Select passive recon
+```
+
+### Quick Launcher
+```bash
+# After sourcing activate.sh
+pwnthebox           # Launch framework
+recon              # Go to recon directory
+enum               # Go to enum directory
+exploit            # Go to exploit directory
+privesc            # Go to PE directory
 ```
 
 ---
 
-## 💡 Usage Examples
+## 🔧 Framework Options
 
-### Generate Reverse Shell
+### Conductor.sh
 ```bash
-./exploitation/shells.sh -i 10.10.10.10 -p 4444 --listen
+./conductor.sh              # Interactive menu
+./conductor.sh 1            # Run Recon
+./conductor.sh 2            # Run Enum
+./conductor.sh 5            # Run PrivEsc
+./conductor.sh --paths      # Show tool paths
+./conductor.sh --deps       # Check dependencies
+./conductor.sh --help       # Show help
 ```
 
-### Linux Privilege Escalation
+### Installation Script
 ```bash
-sudo ./post-exploitation/linux/privesc.sh --all -o report.txt
+./install.sh               # Install all tools (smart)
+./install.sh --check       # Check status
+./install.sh -h            # Help
 ```
 
-### Hash Identification & Cracking
-```bash
-./crypto-forensics/hashes/hashes.sh -i "5f4dcc3b5aa765d61d8327deb882cf99"
-```
+---
 
-### Steganography Analysis
-```bash
-./crypto-forensics/stego/stego.sh -f suspicious_image.jpg
-```
+## 🎓 Best Practices
 
-### Binary Analysis
-```bash
-./binary-pwn/elf/elf.sh -f ./challenge_binary --all
-```
+1. **Legal Authorization**: Always have written permission before testing
+2. **OPSEC**: Use stealth mode when needed
+3. **Documentation**: Document findings with timestamps
+4. **Scope**: Stay within agreed boundaries
+5. **Reporting**: Generate reports with `./Misc/report.sh`
+
+---
+
+## 📦 Requirements
+
+- **OS**: Kali Linux, WSL, Parrot OS, Ubuntu, Debian, Arch, macOS
+- **Shell**: Bash 5.0+
+- **Python**: 3.8+ (3.12 recommended)
+- **Permissions**: Sudo access for package installation
 
 ---
 
 ## 👨‍💻 Author
 
-**me**
+**Manoj Shrestha**
 
 - GitHub: [@manojxshrestha](https://github.com/manojxshrestha)
 - X: [@manojxshrestha](https://x.com/manojxshrestha)
-- Medium: [@manojxshrestha](https://medium.com/@manojxshrestha)
+- LinkedIn: [manojxshrestha](https://linkedin.com/in/manojxshrestha)
 
 ---
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License - see LICENSE file for details.
 
 ---
 
 ## ⚠️ Disclaimer
 
-These tools are for authorized security testing and educational purposes only. Always obtain proper authorization before testing any system you do not own.
+These tools are for **authorized security testing and educational purposes only**. Always obtain proper written authorization before testing any system you do not own.
 
 **Happy Hunting! 🐛🔒**
+
+---
+
+## 🙏 Acknowledgments
+
+- Offensive Security community
+- Open source security tool developers
+- Penetration testing community
