@@ -934,50 +934,6 @@ echo -e "${CYAN}  CREATING HELPER SCRIPTS${NC}"
 echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
 echo ""
 
-# Create activate script
-ACTIVATION_SCRIPT="$FRAMEWORK_DIR/activate.sh"
-cat > "$ACTIVATION_SCRIPT" << 'ACTIVATE_EOF'
-#!/bin/bash
-# PwnTheBox Framework Activation Script
-# Source this file to add the framework to your PATH
-
-FRAMEWORK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-export PWNTHEBOX="$FRAMEWORK_DIR"
-export PATH="$FRAMEWORK_DIR:$PATH"
-
-# Activate Python virtual environment
-if [[ -f "$FRAMEWORK_DIR/venv/bin/activate" ]]; then
-    source "$FRAMEWORK_DIR/venv/bin/activate"
-fi
-
-# Aliases
-alias pwnthebox='cd "$FRAMEWORK_DIR" && ./pwnthebox.sh'
-alias recon='cd "$FRAMEWORK_DIR/Recon" && ./recon-suite.sh'
-alias enum='cd "$FRAMEWORK_DIR/Enum" && ./enum-suite.sh'
-alias exploit='cd "$FRAMEWORK_DIR/Exploit" && ./compromise-suite.sh'
-alias privesc='cd "$FRAMEWORK_DIR/Privilege-Escalation/Linux" && ./privesc.sh'
-
-echo -e "\033[0;32m[*] PwnTheBox Framework activated!\033[0m"
-echo -e "\033[0;34m[*] Type 'pwnthebox' to launch the main menu.\033[0m"
-ACTIVATE_EOF
-
-chmod +x "$ACTIVATION_SCRIPT"
-echo -e "    ${GREEN}✓${NC} Created activate.sh"
-
-# Create quick launcher
-LAUNCHER_SCRIPT="$FRAMEWORK_DIR/pwnthebox"
-cat > "$LAUNCHER_SCRIPT" << 'LAUNCHER_EOF'
-#!/bin/bash
-# PwnTheBox Quick Launcher
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$SCRIPT_DIR"
-./pwnthebox.sh "$@"
-LAUNCHER_EOF
-
-chmod +x "$LAUNCHER_SCRIPT"
-echo -e "    ${GREEN}✓${NC} Created pwnthebox launcher"
-
 # Create update script
 UPDATE_SCRIPT="$FRAMEWORK_DIR/update.sh"
 cat > "$UPDATE_SCRIPT" << 'UPDATE_EOF'
@@ -1048,10 +1004,8 @@ echo ""
 echo -e "${BLUE}[*] Framework location: $FRAMEWORK_DIR${NC}"
 echo ""
 echo -e "${BLUE}[*] Quick Commands:${NC}"
-echo "    pwnthebox              - Launch main menu"
-echo "    ./pwnthebox.sh         - Launch from framework directory"
-echo "    source activate.sh     - Add to current shell"
-echo "    ./install.sh --check   - Check tool status"
+echo "    ./pwnthebox.sh            - Launch main menu"
+echo "    ./install.sh --check      - Check tool status"
 echo ""
 echo -e "${BLUE}[*] Phase Directories:${NC}"
 echo "    Recon/                 - Information Gathering"

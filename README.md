@@ -30,7 +30,6 @@ PwnTheBox is a comprehensive penetration testing framework designed for professi
 - Interactive menu-driven interface (`./pwnthebox.sh`)
 - CLI mode for automation (`./pwnthebox.sh 1`)
 - Color-coded output for better visibility
-- Helper scripts: `activate.sh`, `pwnthebox` launcher, `update.sh`
 
 ---
 
@@ -78,8 +77,6 @@ cd pwnthebox
 PwnTheBox/
 ├── pwnthebox.sh              # Main framework launcher
 ├── install.sh               # Smart installation script
-├── activate.sh              # Source to add framework to PATH
-├── pwnthebox                # Quick launcher
 ├── update.sh                # Framework updater
 │
 ├── Recon/                   # Phase 1: Information Gathering
@@ -169,11 +166,8 @@ cd pwnthebox
 # Run smart installer
 ./install.sh
 
-# Optional: Add to PATH
-source activate.sh
-
-# Or add permanently
-echo "source $PWD/activate.sh" >> ~/.bashrc
+# Launch framework
+./pwnthebox.sh
 ```
 
 ### What Gets Installed
@@ -243,12 +237,14 @@ theHarvester -d company.com -b all
 
 ### Quick Launcher
 ```bash
-# After sourcing activate.sh
-pwnthebox           # Launch framework
-recon              # Go to recon directory
-enum               # Go to enum directory
-exploit            # Go to exploit directory
-privesc            # Go to PE directory
+# Launch framework
+./pwnthebox.sh
+
+# Run recon
+./Recon/recon-suite.sh
+
+# Run enum
+./Enum/enum-suite.sh
 ```
 
 ---
