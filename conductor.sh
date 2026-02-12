@@ -46,7 +46,7 @@ show_menu() {
     echo -e "${YELLOW}4. Foothold${NC}                    Stabilize access"
     echo "       Shell stabilization, listeners, session management"
     echo ""
-    echo -e "${YELLOW}5. PE${NC}                          Escalate privileges"
+    echo -e "${YELLOW}5. Privilege-Escalation${NC}          Escalate privileges"
     echo "       Local exploits, misconfigurations, credential abuse"
     echo ""
     echo -e "${CYAN}───────────────────────────────────────────────────────────────────────────────${NC}"
