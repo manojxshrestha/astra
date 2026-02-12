@@ -696,6 +696,4 @@ USE AT YOUR OWN RISK
 [![GitHub forks](https://img.shields.io/github/forks/manojxshrestha/pwnthebox?style=flat-square)](https://github.com/manojxshrestha/pwnthebox/network)
 [![GitHub issues](https://img.shields.io/github/issues/manojxshrestha/pwnthebox?style=flat-square)](https://github.com/manojxshrestha/pwnthebox/issues)
 
-**Made with 🛡️ by security professionals, for security professionals**
-
 </div>

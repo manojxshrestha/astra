@@ -842,7 +842,7 @@ cat docs/USER_GUIDE.md
 
 ## Version History
 
-### v2.0 (Current)
+### v10 (Current)
 - Complete suite script redesign
 - Interactive command execution
 - Enhanced output organization
@@ -858,16 +858,10 @@ cat docs/USER_GUIDE.md
 
 ## Credits
 
-### Developers
-- Main Developer: manojxshrestha
-
-### Acknowledgments
-- Security tool developers
-- Open source community
-- Penetration testing community
+developed by me
 
 ---
 
-**Document Version**: 2.0  
+**Document Version**: v10  
 **Last Updated**: 2024  
 **Framework Version**: 2.0
