@@ -112,7 +112,7 @@ extract_steghide() {
     # Try common passwords if stegseek is available
     if command -v stegseek &> /dev/null; then
         log_info "Running stegseek with wordlist..."
-        if stegseek "$file" /home/pwn/wordlists/rockyou.txt -xf "${STEGO_DIR}/stegseek_extract.txt" 2>/dev/null; then
+        if stegseek "$file" /home/pwn/pwnthebox/wordlists/rockyou.txt -xf "${STEGO_DIR}/stegseek_extract.txt" 2>/dev/null; then
             log_critical "Password found and data extracted!"
             cat "${STEGO_DIR}/stegseek_extract.txt"
         fi

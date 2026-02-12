@@ -1,0 +1,3 @@
+ .git/path/../config
+ .git/path/..;/config
+ .git/path;/../config
