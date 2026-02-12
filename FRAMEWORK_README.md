@@ -2,47 +2,7 @@
 
 ## Overview
 
-PwnTheBox is a comprehensive penetration testing framework organized according to the standard industry penetration testing lifecycle. The framework is structured into 9 phases, each containing specialized tools and scripts for that specific stage of a penetration test.
-
-## Framework Lifecycle
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    PWNTHEBOX PENETRATION LIFECYCLE                      │
-└─────────────────────────────────────────────────────────────────────────┘
-
-  ┌──────────┐     ┌──────────────┐     ┌──────────────────┐
-  │    01    │ --> │      02      │ --> │        03        │
-  │ RECONNAIS│     │ ENUMERATION │     │ INITIAL COMPROMISE│
-  │  SANCE   │     │ & VULNERAB. │     │                  │
-  └──────────┘     └──────────────┘     └──────────────────┘
-       │                  │                      │
-       v                  v                      v
-  Information        Open Ports,            Gain Initial
-  Gathering           Services,               Access
-                     Vulnerabilities
-
-  ┌──────────┐     ┌──────────┐     ┌──────────────────┐
-  │    04    │ --> │    05    │ --> │        06        │
-  │ ESTABLISH │     │ PRIVILEGE│     │   INTERNAL RECON │
-  │  FOOTHOLD │     │ ESCALAT. │     │                  │
-  └──────────┘     └──────────┘     └──────────────────┘
-       │                │                    │
-       v                v                    v
-  Stabilize,        Obtain               Post-Exploitation
-  Listeners         Higher               Enumeration
-                    Privileges
-
-  ┌──────────┐     ┌──────────┐     ┌──────────────────┐
-  │    07    │ --> │    08    │ --> │        09        │
-  │  LATERAL │     │PERSISTENC│     │ACTIONS OBJECTIVES│
-  │  MOVEMENT│     │    E     │     │                  │
-  └──────────┘     └──────────┘     └──────────────────┘
-       │                │                    │
-       v                v                    v
-  Pivot Through    Maintain               Complete
-  Network          Access                  Mission
-```
+PwnTheBox is a comprehensive penetration testing framework with a creative, clean directory structure. The framework is organized into 9 core phases plus miscellaneous utilities, making it easy to navigate and use.
 
 ## Directory Structure
 
@@ -50,22 +10,26 @@ PwnTheBox is a comprehensive penetration testing framework organized according t
 PwnTheBox/
 ├── FRAMEWORK_README.md              # This file
 ├── conductor.sh                     # Main menu launcher
-├── 01-reconnaissance/               # Phase 1: Information gathering
-│   ├── recon-suite.sh               # Suite wrapper with menu
+│
+├── Recon/                           # Phase 1: Information Gathering
+│   ├── recon-suite.sh               # Recon menu wrapper
 │   ├── domain.sh                    # Domain information
 │   ├── passive.sh                   # Passive reconnaissance
-│   ├── person.sh                    # People/email harvesting
-│   ├── generateTargets.sh           # Target generation
-│   └── *.sh                         # Various recon tools
+│   ├── person.sh                    # Email/people harvesting
+│   ├── generateTargets.sh            # Target generation
+│   ├── ping-sweep.sh                # Network discovery
+│   ├── *.sh                         # Other recon tools
+│   └── README.md
 │
-├── 02-enumeration-vulnerability/    # Phase 2: Scanning & enumeration
-│   ├── enum-suite.sh                # Suite wrapper with menu
+├── Enum/                            # Phase 2: Scanning & Enumeration
+│   ├── enum-suite.sh                # Enum menu wrapper
 │   ├── nse.sh                       # Nmap script engine
-│   ├── cve.sh                       # CVE vulnerability scanning
-│   └── msf-aux.sh                   # Metasploit auxiliary modules
+│   ├── cve.sh                       # CVE scanning
+│   ├── msf-aux.sh                   # Metasploit aux modules
+│   └── README.md
 │
-├── 03-initial-compromise/            # Phase 3: Exploitation
-│   ├── compromise-suite.sh          # Suite wrapper with menu
+├── Exploit/                         # Phase 3: Exploitation
+│   ├── compromise-suite.sh          # Exploit menu wrapper
 │   ├── payloads.sh                  # Payload generation
 │   ├── shells.sh                    # Reverse shells
 │   ├── encoder.sh                   # Encoding/obfuscation
@@ -74,256 +38,235 @@ PwnTheBox/
 │   ├── web-exploit.sh               # Web exploitation toolkit
 │   ├── autopwn.sh                   # Automated exploitation
 │   ├── elf/                         # ELF binary exploitation
+│   │   └── elf.sh
 │   ├── fuzz/                        # Fuzzing tools
+│   │   └── fuzzer.sh
 │   ├── encoders/                    # Various encoders
-│   ├── exploitdb/                    # Exploit-DB scripts
+│   ├── exploitdb/                   # Exploit-DB scripts
 │   ├── payloads/                    # Payload templates
-│   └── shells/                      # Shell scripts
+│   ├── shells/                      # Shell scripts
+│   └── README.md
 │
-├── 04-establish-foothold/           # Phase 4: Shell stabilization
-│   └── foothold-suite.sh            # Suite wrapper with menu
-│       └── listener.sh              # Reverse listeners
+├── Foothold/                        # Phase 4: Shell Stabilization
+│   ├── foothold-suite.sh            # Foothold menu wrapper
+│   └── listener.sh                 # Reverse listeners
+│   └── README.md
 │
-├── 05-privilege-escalation/         # Phase 5: Local privilege escalation
-│   ├── linux/
+├── PE/                              # Phase 5: Privilege Escalation
+│   ├── Linux/
 │   │   ├── privesc.sh               # Linux PE checker (v2.0)
 │   │   ├── utils/                   # Utility functions
-│   │   │   ├── colors.sh            # Color output helpers
-│   │   │   └── helpers.sh           # Helper functions
+│   │   │   ├── colors.sh           # Color output
+│   │   │   └── helpers.sh          # Helpers
 │   │   ├── checks/                  # Enumeration checks
-│   │   │   ├── system_info.sh      # System information
-│   │   │   ├── suid_sgid.sh         # SUID/SGID binaries
-│   │   │   ├── capabilities.sh      # Linux capabilities
-│   │   │   ├── cron_jobs.sh        # Cron job exploitation
-│   │   │   ├── passwords.sh         # Password hunting
-│   │   │   ├── cloud_container.sh   # Cloud/container escapes
-│   │   │   └── network_process.sh   # Network processes
-│   │   └── exploits/                 # Exploit suggestions
+│   │   │   ├── system_info.sh      # System info
+│   │   │   ├── suid_sgid.sh        # SUID/SGID binaries
+│   │   │   ├── capabilities.sh     # Capabilities
+│   │   │   ├── cron_jobs.sh        # Cron jobs
+│   │   │   ├── passwords.sh        # Password hunting
+│   │   │   ├── cloud_container.sh  # Cloud/container escapes
+│   │   │   └── network_process.sh  # Network processes
+│   │   └── exploits/                # Exploit suggestions
 │   │       └── exploit_suggestions.sh
-│   ├── windows/
-│   │   └── privesc.ps1              # Windows PE checker (v2.0)
-│   └── privilege-escalation.sh      # Legacy wrapper
+│   └── Windows/
+│       └── privesc.ps1              # Windows PE checker
 │
-├── 06-internal-recon/               # Phase 6: Post-compromise enumeration
-│   ├── internal-recon-suite.sh      # Suite wrapper with menu
-│   └── credentials/
-│       └── creds.sh                  # Credential harvesting
+├── Internal/                        # Phase 6: Post-Compromise Recon
+│   ├── internal-recon-suite.sh     # Internal recon menu
+│   ├── credentials/
+│   │   └── creds.sh                 # Credential harvesting
+│   └── README.md
 │
-├── 07-lateral-movement/             # Phase 7: Pivoting & lateral movement
-│   └── lateral-suite.sh             # Suite wrapper with menu
-│       ├── psexec.py                # psexec-style exploitation
-│       ├── wmi_shell.py             # WMI-based shells
-│       └── smb-relay.py             # SMB relay attacks
+├── Lateral/                         # Phase 7: Pivoting & Lateral Movement
+│   ├── lateral-suite.sh             # Lateral menu wrapper
+│   └── README.md
 │
-├── 08-persistence/                   # Phase 8: Maintaining access
-│   └── persistence-suite.sh         # Suite wrapper with menu
+├── Persistence/                     # Phase 8: Maintaining Access
+│   ├── persistence-suite.sh        # Persistence menu
+│   └── README.md
 │
-├── 09-actions-objectives/           # Phase 9: Mission completion
-│   ├── actions-suite.sh             # Suite wrapper with menu
+├── Misc/                            # Phase 9: Actions on Objectives
+│   ├── actions-suite.sh             # Actions menu
 │   ├── hashes/                      # Hash extraction/cracking
-│   ├── logs/                        # Log analysis/clearing
-│   └── stego/                       # Steganography tools
+│   │   └── hashes.sh
+│   ├── logs/                        # Log analysis
+│   │   └── logs.sh
+│   ├── stego/                       # Steganography
+│   │   └── stego.sh
+│   └── README.md
 │
-└── utils/                           # Utility scripts
-    ├── parse.sh                     # Output parsing
-    ├── parse-nmap.py                 # Nmap output parser
-    ├── parse-nessus.py               # Nessus output parser
-    ├── parse-burp.py                 # Burp Suite output parser
-    └── *.py                          # Other utility parsers
+├── config/                          # Configuration files
+│   ├── install.sh
+│   ├── zshrc
+│   ├── vimrc
+│   ├── tmux.conf
+│   └── deploy/                      # Deployment configs
+│       ├── terraform/
+│       └── ansible/
+│
+├── utils/                           # Utility scripts
+│   ├── parse.sh                     # Output parsing
+│   ├── parse-nmap.py                 # Nmap parser
+│   ├── parse-nessus.py              # Nessus parser
+│   ├── parse-burp.py                # Burp parser
+│   └── *.py                         # Other utilities
+│
+├── post/                            # Post-exploitation utilities
+│   └── update.sh
+│
+├── resource/                        # Metasploit resource files
+│   ├── *.rc                         # Various RC files
+│   └── msf-auto.sh
+│
+├── wordlists/                       # Wordlists and dictionaries
+│
+├── report/                          # Reporting tools
+│   ├── report.sh
+│   └── multiTabs.sh
+│
+└── reports/                         # Generated reports
 ```
 
-## Usage
-
-### Quick Start
+## Quick Start
 
 ```bash
 # Launch main menu
 ./conductor.sh
 
-# Run a specific phase directly
-./01-reconnaissance/recon-suite.sh --menu
-./05-privilege-escalation/linux/privesc.sh --quick
-
-# Run individual scripts
-./03-initial-compromise/payloads.sh
-./03-initial-compromise/nikto.sh -h http://target.com
+# Run a specific phase
+./Recon/recon-suite.sh --menu
+./Enum/enum-suite.sh --menu
+./Exploit/compromise-suite.sh --menu
+./Foothold/foothold-suite.sh --menu
+./PE/Linux/privesc.sh --quick
+./Internal/internal-recon-suite.sh --menu
+./Lateral/lateral-suite.sh --menu
+./Persistence/persistence-suite.sh --menu
+./Misc/actions-suite.sh --menu
 ```
 
-### Phase 1: Reconnaissance
+## Phase Usage
 
-Gather information about the target organization and systems.
-
+### Recon - Information Gathering
 ```bash
-./01-reconnaissance/recon-suite.sh --menu
-# Options:
-#   R1 - Domain information (whois, dig, nslookup)
-#   R2 - DNS enumeration
-#   R3 - Email harvesting (theHarvester, etc.)
-#   R4 - Subdomain discovery
-#   R7 - Network discovery (ping sweep)
+./Recon/recon-suite.sh --menu
+# R1 - Domain info, R2 - DNS enum, R3 - Email harvest
+# R4 - Subdomains, R7 - Ping sweep, R8 - Traceroute
 ```
 
-### Phase 2: Enumeration & Vulnerability
-
-Identify open ports, services, and vulnerabilities.
-
+### Enum - Scanning & Enumeration
 ```bash
-./02-enumeration-vulnerability/enum-suite.sh --menu
-# Options:
-#   E1-E5 - Port scanning (quick, full, version detection, OS, UDP)
-#   EV1 - Nikto web scanner
-#   EV2 - SSL/TLS analysis
-#   EV3 - Directory busting
-#   EV4 - CVE vulnerability scanning
+./Enum/enum-suite.sh --menu
+# E1-E5 - Port scanning (quick, full, version, OS, UDP)
+# EV1 - Nikto, EV2 - SSL/TLS, EV3 - Directory busting
 ```
 
-### Phase 3: Initial Compromise
-
-Exploit vulnerabilities to gain initial access.
-
+### Exploit - Initial Access
 ```bash
-./03-initial-compromise/compromise-suite.sh --menu
-# Options:
-#   C1 - Payload generation (msfvenom)
-#   C2 - Reverse shell generator
-#   C4 - Encoding & obfuscation
-#   CW1 - Web exploitation toolkit
-#   CB1 - ELF binary analyzer
-#   CB2 - Fuzzer
+./Exploit/compromise-suite.sh --menu
+# C1 - Payloads, C2 - Reverse shells, C4 - Encoding
+# CW1 - Web exploitation, CB1 - ELF binary, CB2 - Fuzzer
 ```
 
-### Phase 4: Establish Foothold
-
-Stabilize shells and set up persistent listeners.
-
+### Foothold - Shell Stabilization
 ```bash
-./04-establish-foothold/foothold-suite.sh --menu
+./Foothold/foothold-suite.sh --menu
+# F1-F9 - Listener setup, shell stabilization
 ```
 
-### Phase 5: Privilege Escalation
-
-Escalate privileges on compromised systems.
-
-**Linux:**
+### PE - Privilege Escalation
 ```bash
-./05-privilege-escalation/linux/privesc.sh --quick          # Quick scan
-./05-privilege-escalation/linux/privesc.sh --json          # JSON output
-./05-privilege-escalation/linux/privesc.sh --stealth       # Stealth mode
-./05-privilege-escalation/linux/privesc.sh -s              # System info only
-./05-privilege-escalation/linux/privesc.sh -p              # Permissions only
+# Linux
+./PE/Linux/privesc.sh --quick          # Quick scan
+./PE/Linux/privesc.sh --json           # JSON output
+./PE/Linux/privesc.sh --stealth        # Stealth mode
+
+# Windows
+powershell -ep bypass -f PE/Windows/privesc.ps1 -Quick
 ```
 
-**Windows:**
+### Internal - Post-Compromise Recon
 ```bash
-./05-privilege-escalation/windows/privesc.ps1 -Quick        # Quick scan
-./05-privilege-escalation/windows/privesc.ps1 -Verbose     # Verbose output
-./05-privilege-escalation/windows/privesc.ps1 -Extended    # Extended checks
+./Internal/internal-recon-suite.sh --menu
+# I1-I13 - Internal network discovery, AD enum
 ```
 
-### Phase 6: Internal Recon
-
-Post-compromise enumeration of the internal network.
-
+### Lateral - Pivoting
 ```bash
-./06-internal-recon/internal-recon-suite.sh --menu
+./Lateral/lateral-suite.sh --menu
+# L1-L4 - psexec, WMI, SMB, RDP
+# LW1-LW4 - WinRM, Pass-the-Hash, Golden Ticket
 ```
 
-### Phase 7: Lateral Movement
-
-Pivot through the network to access other systems.
-
+### Persistence - Maintain Access
 ```bash
-./07-lateral-movement/lateral-suite.sh --menu
+./Persistence/persistence-suite.sh --menu
+# P1-P5 - Cron, SSH keys, Services, Web shells
+# PW1-PW5 - Registry, Winlogon, Browser extensions
 ```
 
-### Phase 8: Persistence
-
-Establish persistent access on compromised systems.
-
+### Misc - Actions on Objectives
 ```bash
-./08-persistence/persistence-suite.sh --menu
-```
-
-### Phase 9: Actions on Objectives
-
-Complete the penetration test mission.
-
-```bash
-./09-actions-objectives/actions-suite.sh --menu
-# Options:
-#   O1 - Data exfiltration simulation
-#   O2 - Hash dumping
-#   O3 - Evidence collection
+./Misc/actions-suite.sh --menu
+# O1-O5 - Data exfiltration, Hashes, Logs, Stego
 ```
 
 ## Key Features
 
-### Privilege Escalation Tools (v2.0)
+### Privilege Escalation Tools v2.0
 
-The framework includes comprehensive privilege escalation tools:
-
-**Linux privesc.sh Features:**
-- Modular architecture with 10+ check modules
-- Color-coded severity levels (Critical/High/Medium/Low)
-- JSON output support for automation (`--json`)
-- Stealth mode for OPSEC considerations (`--stealth`)
+**Linux privesc.sh:**
+- Modular with 10+ check modules
+- Color-coded severity (Critical/High/Medium/Low)
+- JSON output (`--json`)
+- Stealth mode (`--stealth`)
 - Cloud metadata detection (AWS/Azure/GCP)
-- Container escape techniques (Docker/Kubernetes)
+- Container escape (Docker/Kubernetes)
 - GTFOBins integration
-- Metasploit module suggestions
+- Metasploit suggestions
 
-**Windows privesc.ps1 Features:**
-- AlwaysInstallElevated exploitation
+**Windows privesc.ps1:**
+- AlwaysInstallElevated
 - Unquoted service paths
-- Stored credentials (cmdkey, vault)
+- Stored credentials
 - DLL hijacking
 - Print Spooler (PrintNightmare)
-- Windows Defender/AMSI status
-- WMI event subscriptions
-- GPP password detection
-- Browser credentials extraction
-- PowerShell history analysis
-- Interesting privileges (SeImpersonate, SeDebug, etc.)
+- Browser credentials
+- WMI subscriptions
+- GPP passwords
 
 ### Suite Wrapper Scripts
 
-Each phase includes a `*-suite.sh` wrapper script with:
+Each phase has a `*-suite.sh` wrapper with:
 - Interactive menu interface
-- Direct script execution options
+- Direct script execution
 - Help documentation
 - Colored output
 
-### Utility Scripts
-
-The `utils/` directory contains:
-- Output parsers for various tools (Nmap, Nessus, Burp, etc.)
-- Report generation helpers
-- Data conversion tools
-
 ## Best Practices
 
-1. **Legal Authorization**: Always ensure you have written authorization before testing
-2. **OPSEC**: Use `--stealth` mode when avoiding detection
-3. **Documentation**: Use `--json` output for automated documentation
-4. **Scope**: Stay within the agreed-upon scope
-5. **Reporting**: Document all findings with timestamps and evidence
+1. **Legal Authorization**: Always have written permission
+2. **OPSEC**: Use `--stealth` mode when needed
+3. **Documentation**: Use `--json` for automated reports
+4. **Scope**: Stay within agreed boundaries
+5. **Reporting**: Document findings with timestamps
 
 ## Requirements
 
-- Linux/macOS (most scripts)
-- Kali Linux or similar penetration testing distribution
-- Common tools: nmap, msfvenom, nikto, burp-suite, etc.
-- For Windows scripts: PowerShell 5.0+
+- Linux/macOS (Bash scripts)
+- Kali Linux or similar
+- Common tools: nmap, msfvenom, nikto, burp-suite
+- PowerShell 5.0+ for Windows scripts
 
 ## License
 
-This framework is provided for educational and authorized testing purposes only. Use responsibly.
+For educational and authorized testing purposes only. Use responsibly.
 
 ## Contributing
 
-When adding new scripts:
+When adding scripts:
 1. Place in appropriate phase directory
-2. Create a suite wrapper if adding multiple related scripts
-3. Update conductor.sh menu if needed
+2. Create suite wrapper if adding multiple scripts
+3. Update conductor.sh if needed
 4. Add documentation comments
 5. Test before committing

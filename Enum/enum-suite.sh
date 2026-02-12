@@ -26,13 +26,13 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 banner() {
     echo -e "${CYAN}"
     cat << 'EOF'
-╔═══════════════════════════════════════════════════════════════════════════╗
-║                                                                           ║
-║     ENUMERATION & VULNERABILITY ANALYSIS SUITE                            ║
-║     Phase 2: Identify open ports, services, and weaknesses                 ║
-║                                                                           ║
-╚═══════════════════════════════════════════════════════════════════════════╝
-EOF
+ ╔═══════════════════════════════════════════════════════════════════════════╗
+ ║                                                                           ║
+ ║                      ENUM SUITE                                          ║
+ ║                Phase 2: Identify Weaknesses                               ║
+ ║                                                                           ║
+ ╚═══════════════════════════════════════════════════════════════════════════╝
+ EOF
     echo -e "${NC}"
 }
 
@@ -146,12 +146,12 @@ handle_selection() {
             ;;
         EV1|ev1)
             log_info "Nikto Web Scanner"
-            log_info "Nikto is located in 03-initial-compromise/"
+            log_info "Nikto is located in Exploit/"
             echo "Usage: nikto -h <url>"
             ;;
         EV2|ev2)
             log_info "SSL/TLS Analysis"
-            run_enum_script "../03-initial-compromise/ssl.sh" "$@"
+            run_enum_script "../Exploit/ssl.sh" "$@"
             ;;
         EV3|ev3)
             log_info "Directory Busting"

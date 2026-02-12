@@ -30,42 +30,42 @@ EOF
 show_menu() {
     echo ""
     echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║  PENETRATION TESTING LIFECYCLE                                   ║${NC}"
+    echo -e "${CYAN}║  PENETRATION TESTING LIFECYCLE                                     ║${NC}"
     echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════╝${NC}"
     echo ""
     
-    echo -e "${YELLOW}1.  RECONNAISSANCE${NC}                    Information Gathering"
+    echo -e "${YELLOW}Recon${NC}                         Information Gathering"
     echo "       Passive & Active recon, OSINT, domain enumeration"
     echo ""
-    echo -e "${YELLOW}2.  ENUMERATION & VULNERABILITY${NC}      Identify weaknesses"
+    echo -e "${YELLOW}Enum${NC}                          Identify weaknesses"
     echo "       Port scanning, service detection, vulnerability scanning"
     echo ""
-    echo -e "${YELLOW}3.  INITIAL COMPROMISE${NC}                 Gain initial access"
+    echo -e "${YELLOW}Exploit${NC}                        Gain initial access"
     echo "       Exploitation, payload generation, web attacks"
     echo ""
-    echo -e "${YELLOW}4.  ESTABLISH FOOTHOLD${NC}                 Stabilize access"
+    echo -e "${YELLOW}Foothold${NC}                      Stabilize access"
     echo "       Shell stabilization, listeners, session management"
     echo ""
-    echo -e "${YELLOW}5.  PRIVILEGE ESCALATION${NC}              Escalate privileges"
+    echo -e "${YELLOW}PE (Privilege Escalation)${NC}    Escalate privileges"
     echo "       Local exploits, misconfigurations, credential abuse"
     echo ""
     echo -e "${CYAN}───────────────────────────────────────────────────────────────────────────────${NC}"
     echo ""
-    echo -e "${YELLOW}6.  INTERNAL RECON${NC}                    Post-compromise recon"
+    echo -e "${YELLOW}Internal${NC}                      Post-compromise recon"
     echo "       User enumeration, network discovery, domain info"
     echo ""
-    echo -e "${YELLOW}7.  LATERAL MOVEMENT${NC}                  Move through network"
+    echo -e "${YELLOW}Lateral${NC}                      Move through network"
     echo "       SSH pivoting, psexec, WMI, tunneling"
     echo ""
-    echo -e "${YELLOW}8.  PERSISTENCE${NC}                      Maintain access"
+    echo -e "${YELLOW}Persistence${NC}                   Maintain access"
     echo "       Backdoors, scheduled tasks, services, SSH keys"
     echo ""
-    echo -e "${YELLOW}9.  ACTIONS ON OBJECTIVES${NC}              Complete mission"
-    echo "       Credential harvesting, data exfiltration, cracking"
+    echo -e "${YELLOW}Misc${NC}                          Additional tools"
+    echo "       Actions on objectives, hash cracking, stego"
     echo ""
-    echo -e "${RED}0.  Exit${NC}"
+    echo -e "${RED}0. Exit${NC}"
     echo ""
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════════════╗${NC}"
 }
 
 log_info() { echo -e "${BLUE}[*]${NC} $1"; }
@@ -88,19 +88,19 @@ run_script() {
 }
 
 show_paths() {
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════╗${NC}"
     echo -e "${CYAN}  TOOL PATHS${NC}"
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════╝${NC}"
     echo ""
-    echo "1.  Reconnaissance:         $SCRIPT_DIR/01-reconnaissance/"
-    echo "2.  Enumeration:           $SCRIPT_DIR/02-enumeration-vulnerability/"
-    echo "3.  Initial Compromise:    $SCRIPT_DIR/03-initial-compromise/"
-    echo "4.  Establish Foothold:     $SCRIPT_DIR/04-establish-foothold/"
-    echo "5.  Privilege Escalation:   $SCRIPT_DIR/05-privilege-escalation/"
-    echo "6.  Internal Recon:        $SCRIPT_DIR/06-internal-recon/"
-    echo "7.  Lateral Movement:      $SCRIPT_DIR/07-lateral-movement/"
-    echo "8.  Persistence:           $SCRIPT_DIR/08-persistence/"
-    echo "9.  Actions on Objectives:  $SCRIPT_DIR/09-actions-objectives/"
+    echo "Reconnaissance:         $SCRIPT_DIR/Recon/"
+    echo "Enumeration:           $SCRIPT_DIR/Enum/"
+    echo "Initial Compromise:     $SCRIPT_DIR/Exploit/"
+    echo "Establish Foothold:     $SCRIPT_DIR/Foothold/"
+    echo "Privilege Escalation:   $SCRIPT_DIR/PE/"
+    echo "Internal Recon:         $SCRIPT_DIR/Internal/"
+    echo "Lateral Movement:       $SCRIPT_DIR/Lateral/"
+    echo "Persistence:           $SCRIPT_DIR/Persistence/"
+    echo "Miscellaneous:         $SCRIPT_DIR/Misc/"
     echo ""
 }
 
@@ -124,20 +124,20 @@ check_deps() {
 usage() {
     cat << EOF
 PWNTHEBOX - Professional Penetration Testing Framework
-Standardized Penetration Testing Lifecycle
+Creative Penetration Testing Lifecycle
 
 USAGE: $0 [OPTIONS]
 
 LIFECYCLE PHASES:
-  1    Reconnaissance Suite
-  2    Enumeration & Vulnerability Suite
-  3    Initial Compromise Suite
-  4    Establish Foothold Suite
-  5    Privilege Escalation Suite
+  1    Recon Suite
+  2    Enum Suite
+  3    Exploit Suite
+  4    Foothold Suite
+  5    Privilege Escalation (PE) Suite
   6    Internal Recon Suite
-  7    Lateral Movement Suite
+  7    Lateral Suite
   8    Persistence Suite
-  9    Actions on Objectives Suite
+  9    Misc Suite (Actions on Objectives)
 
 OPTIONS:
   --paths      Show tool paths
@@ -160,61 +160,61 @@ handle_selection() {
     case "$choice" in
         # Phase 1: Reconnaissance
         1)
-            run_script "$SCRIPT_DIR/01-reconnaissance/recon-suite.sh"
+            run_script "$SCRIPT_DIR/Recon/recon-suite.sh"
             ;;
         
         # Phase 2: Enumeration & Vulnerability
         2)
-            run_script "$SCRIPT_DIR/02-enumeration-vulnerability/enum-suite.sh"
+            run_script "$SCRIPT_DIR/Enum/enum-suite.sh"
             ;;
         
         # Phase 3: Initial Compromise
         3)
-            run_script "$SCRIPT_DIR/03-initial-compromise/compromise-suite.sh"
+            run_script "$SCRIPT_DIR/Exploit/compromise-suite.sh"
             ;;
         
         # Phase 4: Establish Foothold
         4)
-            run_script "$SCRIPT_DIR/04-establish-foothold/foothold-suite.sh"
+            run_script "$SCRIPT_DIR/Foothold/foothold-suite.sh"
             ;;
         
         # Phase 5: Privilege Escalation
         5)
-            run_script "$SCRIPT_DIR/05-privilege-escalation/privilege-escalation.sh"
+            run_script "$SCRIPT_DIR/PE/Linux/privesc.sh"
             ;;
         
         # Phase 6: Internal Recon
         6)
-            run_script "$SCRIPT_DIR/06-internal-recon/internal-recon-suite.sh"
+            run_script "$SCRIPT_DIR/Internal/internal-recon-suite.sh"
             ;;
         
         # Phase 7: Lateral Movement
         7)
-            run_script "$SCRIPT_DIR/07-lateral-movement/lateral-suite.sh"
+            run_script "$SCRIPT_DIR/Lateral/lateral-suite.sh"
             ;;
         
         # Phase 8: Persistence
         8)
-            run_script "$SCRIPT_DIR/08-persistence/persistence-suite.sh"
+            run_script "$SCRIPT_DIR/Persistence/persistence-suite.sh"
             ;;
         
-        # Phase 9: Actions on Objectives
+        # Phase 9: Actions on Objectives (now in Misc)
         9)
-            run_script "$SCRIPT_DIR/09-actions-objectives/actions-suite.sh"
+            run_script "$SCRIPT_DIR/Misc/actions-suite.sh"
             ;;
         
         # Direct script execution
         recon|RECON)
-            run_script "$SCRIPT_DIR/01-reconnaissance/recon-suite.sh"
+            run_script "$SCRIPT_DIR/Recon/recon-suite.sh"
             ;;
         enum|ENUM)
-            run_script "$SCRIPT_DIR/02-enumeration-vulnerability/enum-suite.sh"
+            run_script "$SCRIPT_DIR/Enum/enum-suite.sh"
             ;;
         exploit|EXPLOIT)
-            run_script "$SCRIPT_DIR/03-initial-compromise/compromise-suite.sh"
+            run_script "$SCRIPT_DIR/Exploit/compromise-suite.sh"
             ;;
         privesc|PRIVESC)
-            run_script "$SCRIPT_DIR/05-privilege-escalation/privilege-escalation.sh"
+            run_script "$SCRIPT_DIR/PE/Linux/privesc.sh"
             ;;
         
         # Options
