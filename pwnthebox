@@ -31,18 +31,18 @@ fi
 # Change to framework directory
 cd "$SCRIPT_DIR"
 
-# Check if conductor.sh exists
-if [[ ! -f "./conductor.sh" ]]; then
-    echo -e "${RED}[!] Error: conductor.sh not found in $SCRIPT_DIR${NC}"
+# Check if pwnthebox.sh exists
+if [[ ! -f "./pwnthebox.sh" ]]; then
+    echo -e "${RED}[!] Error: pwnthebox.sh not found in $SCRIPT_DIR${NC}"
     echo -e "${YELLOW}[!] Make sure the framework is properly installed.${NC}"
     exit 1
 fi
 
-# Make conductor.sh executable
-chmod +x ./conductor.sh
+# Make pwnthebox.sh executable
+chmod +x ./pwnthebox.sh
 
-# Run conductor.sh with any passed arguments
-./conductor.sh "$@"
+# Run pwnthebox.sh with any passed arguments
+./pwnthebox.sh "$@"
 
 # Exit with conductor's exit code
 exit $?

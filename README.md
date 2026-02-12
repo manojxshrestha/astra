@@ -27,8 +27,8 @@ PwnTheBox is a comprehensive penetration testing framework designed for professi
 - **Python Virtual Environment**: Isolated dependencies for reliability
 
 ### ✅ Framework Features
-- Interactive menu-driven interface (`./conductor.sh`)
-- CLI mode for automation (`./conductor.sh 1`)
+- Interactive menu-driven interface (`./pwnthebox.sh`)
+- CLI mode for automation (`./pwnthebox.sh 1`)
 - Color-coded output for better visibility
 - Helper scripts: `activate.sh`, `pwnthebox` launcher, `update.sh`
 
@@ -47,7 +47,7 @@ cd pwnthebox
 ./install.sh --check
 
 # Launch framework
-./conductor.sh
+./pwnthebox.sh
 ```
 
 ### Installation Options
@@ -61,13 +61,13 @@ cd pwnthebox
 ### Framework Usage
 ```bash
 # Interactive menu
-./conductor.sh
+./pwnthebox.sh
 
 # Direct commands
-./conductor.sh 1        # Run Reconnaissance phase
-./conductor.sh 5        # Run Privilege Escalation
-./conductor.sh --deps    # Check dependencies
-./conductor.sh --paths   # Show tool paths
+./pwnthebox.sh 1        # Run Reconnaissance phase
+./pwnthebox.sh 5        # Run Privilege Escalation
+./pwnthebox.sh --deps    # Check dependencies
+./pwnthebox.sh --paths   # Show tool paths
 ```
 
 ---
@@ -76,7 +76,7 @@ cd pwnthebox
 
 ```
 PwnTheBox/
-├── conductor.sh              # Main framework launcher
+├── pwnthebox.sh              # Main framework launcher
 ├── install.sh               # Smart installation script
 ├── activate.sh              # Source to add framework to PATH
 ├── pwnthebox                # Quick launcher
@@ -208,7 +208,7 @@ echo "source $PWD/activate.sh" >> ~/.bashrc
 ### Reconnaissance
 ```bash
 # Launch recon menu
-./conductor.sh 1
+./pwnthebox.sh 1
 
 # Or run directly
 ./Recon/recon-suite.sh
@@ -218,7 +218,7 @@ echo "source $PWD/activate.sh" >> ~/.bashrc
 
 ### Enumeration
 ```bash
-./conductor.sh 2
+./pwnthebox.sh 2
 ./Enum/enum-suite.sh
 ./Enum/nse.sh 192.168.1.0/24
 ```
@@ -238,7 +238,7 @@ powershell -ep bypass -f Privilege-Escalation/Windows/privesc.ps1
 theHarvester -d company.com -b all
 
 # Or via framework
-./conductor.sh 1  # Select passive recon
+./pwnthebox.sh 1  # Select passive recon
 ```
 
 ### Quick Launcher
@@ -257,13 +257,13 @@ privesc            # Go to PE directory
 
 ### Conductor.sh
 ```bash
-./conductor.sh              # Interactive menu
-./conductor.sh 1            # Run Recon
-./conductor.sh 2            # Run Enum
-./conductor.sh 5            # Run PrivEsc
-./conductor.sh --paths      # Show tool paths
-./conductor.sh --deps       # Check dependencies
-./conductor.sh --help       # Show help
+./pwnthebox.sh              # Interactive menu
+./pwnthebox.sh 1            # Run Recon
+./pwnthebox.sh 2            # Run Enum
+./pwnthebox.sh 5            # Run PrivEsc
+./pwnthebox.sh --paths      # Show tool paths
+./pwnthebox.sh --deps       # Check dependencies
+./pwnthebox.sh --help       # Show help
 ```
 
 ### Installation Script
@@ -314,7 +314,7 @@ MIT License - see LICENSE file for details.
 
 These tools are for **authorized security testing and educational purposes only**. Always obtain proper written authorization before testing any system you do not own.
 
-**Happy Hunting! 🐛🔒**
+**Happy Hacking! 🐛🔒**
 
 ---
 

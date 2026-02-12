@@ -9,7 +9,7 @@ PwnTheBox is a comprehensive penetration testing framework with a creative, clea
 ```
 PwnTheBox/
 ├── FRAMEWORK_README.md              # This file
-├── conductor.sh                     # Main menu launcher
+├── pwnthebox.sh                     # Main menu launcher
 │
 ├── Recon/                           # Phase 1: Information Gathering
 │   ├── recon-suite.sh               # Recon menu wrapper
@@ -131,7 +131,7 @@ PwnTheBox/
 
 ```bash
 # Launch main menu
-./conductor.sh
+./pwnthebox.sh
 
 # Run a specific phase
 ./Recon/recon-suite.sh --menu
@@ -268,6 +268,6 @@ For educational and authorized testing purposes only. Use responsibly.
 When adding scripts:
 1. Place in appropriate phase directory
 2. Create suite wrapper if adding multiple scripts
-3. Update conductor.sh if needed
+3. Update pwnthebox.sh if needed
 4. Add documentation comments
 5. Test before committing

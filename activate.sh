@@ -20,7 +20,7 @@ if [[ -f "$FRAMEWORK_DIR/venv/bin/activate" ]]; then
 fi
 
 # Aliases for quick navigation
-alias pwnthebox='cd "$FRAMEWORK_DIR" && ./conductor.sh'
+alias pwnthebox='cd "$FRAMEWORK_DIR" && ./pwnthebox.sh'
 alias recon='cd "$FRAMEWORK_DIR/Recon" && ./recon-suite.sh'
 alias enum='cd "$FRAMEWORK_DIR/Enum" && ./enum-suite.sh'
 alias exploit='cd "$FRAMEWORK_DIR/Exploit" && ./compromise-suite.sh'

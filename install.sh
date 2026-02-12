@@ -951,7 +951,7 @@ if [[ -f "$FRAMEWORK_DIR/venv/bin/activate" ]]; then
 fi
 
 # Aliases
-alias pwnthebox='cd "$FRAMEWORK_DIR" && ./conductor.sh'
+alias pwnthebox='cd "$FRAMEWORK_DIR" && ./pwnthebox.sh'
 alias recon='cd "$FRAMEWORK_DIR/Recon" && ./recon-suite.sh'
 alias enum='cd "$FRAMEWORK_DIR/Enum" && ./enum-suite.sh'
 alias exploit='cd "$FRAMEWORK_DIR/Exploit" && ./compromise-suite.sh'
@@ -972,7 +972,7 @@ cat > "$LAUNCHER_SCRIPT" << 'LAUNCHER_EOF'
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
-./conductor.sh "$@"
+./pwnthebox.sh "$@"
 LAUNCHER_EOF
 
 chmod +x "$LAUNCHER_SCRIPT"
@@ -1028,7 +1028,7 @@ if ! grep -q "PWNTHEBOX" "$PROFILE_FILE" 2>/dev/null; then
     echo "# PwnTheBox Framework" >> "$PROFILE_FILE"
     echo "export PWNTHEBOX=\"$FRAMEWORK_DIR\"" >> "$PROFILE_FILE"
     echo "export PATH=\"\$PWNTHEBOX:\$PATH\"" >> "$PROFILE_FILE"
-    echo "alias pwnthebox='cd \"$FRAMEWORK_DIR\" && ./conductor.sh'" >> "$PROFILE_FILE"
+    echo "alias pwnthebox='cd \"$FRAMEWORK_DIR\" && ./pwnthebox.sh'" >> "$PROFILE_FILE"
     echo -e "    ${GREEN}✓${NC} Added PwnTheBox to PATH in $PROFILE_FILE"
 else
     echo -e "    ${YELLOW}⊘${NC} PwnTheBox already in PATH"
@@ -1049,7 +1049,7 @@ echo -e "${BLUE}[*] Framework location: $FRAMEWORK_DIR${NC}"
 echo ""
 echo -e "${BLUE}[*] Quick Commands:${NC}"
 echo "    pwnthebox              - Launch main menu"
-echo "    ./conductor.sh         - Launch from framework directory"
+echo "    ./pwnthebox.sh         - Launch from framework directory"
 echo "    source activate.sh     - Add to current shell"
 echo "    ./install.sh --check   - Check tool status"
 echo ""
@@ -1068,7 +1068,7 @@ echo -e "${BLUE}[*] Next Steps:${NC}"
 echo "    1. Review installed tools"
 echo "    2. Configure API keys for premium tools (Shodan, Censys, Hunter)"
 echo "    3. Read documentation in README.md"
-echo "    4. Run ./conductor.sh to start"
+echo "    4. Run ./pwnthebox.sh to start"
 echo ""
 echo -e "${YELLOW}[!] Disclaimer: Use only on systems you have permission to test!${NC}"
 echo ""
