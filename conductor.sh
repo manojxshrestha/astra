@@ -96,7 +96,7 @@ show_paths() {
     echo "Enumeration:           $SCRIPT_DIR/Enum/"
     echo "Initial Compromise:     $SCRIPT_DIR/Exploit/"
     echo "Establish Foothold:     $SCRIPT_DIR/Foothold/"
-    echo "Privilege Escalation:   $SCRIPT_DIR/PE/"
+    echo "Privilege Escalation:   $SCRIPT_DIR/Persistence/Linux/"
     echo "Internal Recon:         $SCRIPT_DIR/Internal/"
     echo "Lateral Movement:       $SCRIPT_DIR/Lateral/"
     echo "Persistence:           $SCRIPT_DIR/Persistence/"
@@ -180,7 +180,7 @@ handle_selection() {
         
         # Phase 5: Privilege Escalation
         5)
-            run_script "$SCRIPT_DIR/PE/Linux/privesc.sh"
+            run_script "$SCRIPT_DIR/Persistence/Linux/privesc.sh"
             ;;
         
         # Phase 6: Internal Recon
@@ -214,7 +214,7 @@ handle_selection() {
             run_script "$SCRIPT_DIR/Exploit/compromise-suite.sh"
             ;;
         privesc|PRIVESC)
-            run_script "$SCRIPT_DIR/PE/Linux/privesc.sh"
+            run_script "$SCRIPT_DIR/Persistence/Linux/privesc.sh"
             ;;
         
         # Options

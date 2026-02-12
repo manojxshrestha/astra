@@ -52,7 +52,8 @@ PwnTheBox/
 │   └── listener.sh                 # Reverse listeners
 │   └── README.md
 │
-├── PE/                              # Phase 5: Privilege Escalation
+├── Persistence/                     # Phase 5 & 8: PE & Maintaining Access
+│   ├── persistence-suite.sh        # Persistence menu wrapper
 │   ├── Linux/
 │   │   ├── privesc.sh               # Linux PE checker (v2.0)
 │   │   ├── utils/                   # Utility functions
@@ -79,10 +80,6 @@ PwnTheBox/
 │
 ├── Lateral/                         # Phase 7: Pivoting & Lateral Movement
 │   ├── lateral-suite.sh             # Lateral menu wrapper
-│   └── README.md
-│
-├── Persistence/                     # Phase 8: Maintaining Access
-│   ├── persistence-suite.sh        # Persistence menu
 │   └── README.md
 │
 ├── Misc/                            # Phase 9: Actions on Objectives
@@ -138,7 +135,8 @@ PwnTheBox/
 ./Enum/enum-suite.sh --menu
 ./Exploit/compromise-suite.sh --menu
 ./Foothold/foothold-suite.sh --menu
-./PE/Linux/privesc.sh --quick
+./Persistence/Linux/privesc.sh --quick          # Linux PE
+./Persistence/Windows/privesc.ps1 -Quick         # Windows PE
 ./Internal/internal-recon-suite.sh --menu
 ./Lateral/lateral-suite.sh --menu
 ./Persistence/persistence-suite.sh --menu
@@ -177,12 +175,12 @@ PwnTheBox/
 ### PE - Privilege Escalation
 ```bash
 # Linux
-./PE/Linux/privesc.sh --quick          # Quick scan
-./PE/Linux/privesc.sh --json           # JSON output
-./PE/Linux/privesc.sh --stealth        # Stealth mode
+./Persistence/Linux/privesc.sh --quick          # Quick scan
+./Persistence/Linux/privesc.sh --json           # JSON output
+./Persistence/Linux/privesc.sh --stealth        # Stealth mode
 
 # Windows
-powershell -ep bypass -f PE/Windows/privesc.ps1 -Quick
+powershell -ep bypass -f Persistence/Windows/privesc.ps1 -Quick
 ```
 
 ### Internal - Post-Compromise Recon
