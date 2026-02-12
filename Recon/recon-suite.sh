@@ -11,7 +11,7 @@
 #                                                                           #
 #############################################################################
 
-set -e
+set -euo pipefail
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -100,20 +100,27 @@ usage() {
 USAGE: $0 [OPTIONS]
 
 OPTIONS:
-    R1                      Domain information gathering
-    R2                      DNS enumeration
-    R3                      Email harvesting
-    R4                      Subdomain discovery
-    R5                      Google dorks
-    R7                      Network discovery (ping sweep)
-    R8                      Traceroute
-    --menu                  Show interactive menu
-    --help                  Show this help
-    --paths                 Show tool paths
+    R1                       Domain information gathering
+    R2                       DNS enumeration
+    R3                       Email harvesting
+    R4                       Subdomain discovery
+    R5                       Google dorks
+    R6                       Social media recon
+    R7                       Network discovery (ping sweep)
+    R8                       Traceroute
+    R9                       Basic port scanning
+    R10                      OS fingerprinting
+    RA                       Run all recon scripts
+    RB                       Reconnaissance from list file
+    --menu                   Show interactive menu
+    --help                   Show this help
+    --paths                  Show tool paths
 
 EXAMPLES:
     $0 R1 example.com
     $0 R2 example.com
+    $0 RA example.com
+    $0 RB targets.txt
     $0 --menu
 
 EOF
@@ -122,39 +129,194 @@ EOF
 handle_selection() {
     local choice="$1"
     shift
-    
+
+    run_cmd() {
+        local cmd="$1"
+        echo -e "${GREEN}[>] Running: ${cmd}${NC}"
+        eval "$cmd"
+    }
+
     case "$choice" in
         R1|r1)
-            log_info "Running Domain Information Gathering..."
-            run_recon_script "domain.sh" "$@"
+            echo -e "${BLUE}[*] Domain Information Gathering${NC}"
+            echo ""
+            echo -n "[*] Enter target domain: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                if [[ -x "$SCRIPT_DIR/domain.sh" ]]; then
+                    run_cmd "$SCRIPT_DIR/domain.sh ${TARGET}"
+                elif command -v whois &>/dev/null; then
+                    run_cmd "whois ${TARGET}"
+                else
+                    echo -e "${YELLOW}[!] domain.sh or whois not found${NC}"
+                fi
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         R2|r2)
-            log_info "Running DNS Enumeration..."
-            run_recon_script "passive.sh" "$@"
+            echo -e "${BLUE}[*] DNS Enumeration${NC}"
+            echo ""
+            echo -n "[*] Enter target domain: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                if [[ -x "$SCRIPT_DIR/passive.sh" ]]; then
+                    run_cmd "$SCRIPT_DIR/passive.sh ${TARGET}"
+                else
+                    run_cmd "dig +short ${TARGET}"
+                    run_cmd "nslookup ${TARGET}"
+                fi
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         R3|r3)
-            log_info "Running Email Harvesting..."
-            run_recon_script "person.sh" "$@"
+            echo -e "${BLUE}[*] Email Harvesting${NC}"
+            echo ""
+            echo -n "[*] Enter domain or email to harvest: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                if [[ -x "$SCRIPT_DIR/person.sh" ]]; then
+                    run_cmd "$SCRIPT_DIR/person.sh ${TARGET}"
+                elif command -v theHarvester &>/dev/null; then
+                    run_cmd "theHarvester -d ${TARGET} -b all"
+                else
+                    echo -e "${YELLOW}[!] person.sh or theHarvester not found${NC}"
+                fi
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         R4|r4)
-            log_info "Running Subdomain Discovery..."
-            run_recon_script "generateTargets.sh" "$@"
+            echo -e "${BLUE}[*] Subdomain Discovery${NC}"
+            echo ""
+            echo -n "[*] Enter target domain: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                if [[ -x "$SCRIPT_DIR/generateTargets.sh" ]]; then
+                    run_cmd "$SCRIPT_DIR/generateTargets.sh ${TARGET}"
+                elif command -v sublist3r &>/dev/null; then
+                    run_cmd "sublist3r -d ${TARGET}"
+                elif command -v assetfinder &>/dev/null; then
+                    run_cmd "assetfinder --subs-only ${TARGET}"
+                else
+                    echo -e "${YELLOW}[!] No subdomain tool found${NC}"
+                fi
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         R5|r5)
-            log_info "Running Google Dorks..."
-            log_warn "Google Dorks require manual research"
-            echo "Common dorks:"
-            echo "  site:example.com"
-            echo "  filetype:xls site:example.com"
-            echo "  intitle:\"index of\" site:example.com"
+            echo -e "${BLUE}[*] Google Dorks${NC}"
+            echo ""
+            echo "[*] Common Google Dorks:"
+            echo "    site:example.com"
+            echo "    site:example.com filetype:xls"
+            echo "    site:example.com inurl:admin"
+            echo "    site:example.com intitle:\"index of\""
+            echo "    site:example.com filetype:pdf"
+            echo ""
+            echo -n "[*] Press Enter to continue... "
+            read
+            ;;
+        R6|r6)
+            echo -e "${BLUE}[*] Social Media Recon${NC}"
+            echo ""
+            echo "[*] Resources for social media reconnaissance:"
+            echo "    - LinkedIn: company employees, structure"
+            echo "    - Twitter: tech stack, mentions, job postings"
+            echo "    - GitHub: code, credentials, activity"
+            echo "    - Crunchbase: company info, funding"
+            echo "    - Hunter.io: email discovery"
+            echo ""
+            echo -n "[*] Press Enter to continue... "
+            read
             ;;
         R7|r7)
-            log_info "Running Network Discovery (Ping Sweep)..."
-            run_recon_script "ping-sweep.sh" "$@"
+            echo -e "${BLUE}[*] Network Discovery (Ping Sweep)${NC}"
+            echo ""
+            echo -n "[*] Enter target CIDR (e.g., 192.168.1.0/24): "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "nmap -sn ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         R8|r8)
-            log_info "Running Traceroute..."
-            run_recon_script "dns-forward.sh" "$@"
+            echo -e "${BLUE}[*] Traceroute${NC}"
+            echo ""
+            echo -n "[*] Enter target hostname or IP: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "traceroute ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
+            ;;
+        R9|r9)
+            echo -e "${BLUE}[*] Basic Port Scan${NC}"
+            echo ""
+            echo -n "[*] Enter target IP or CIDR: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "nmap -F ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
+            ;;
+        R10|r10)
+            echo -e "${BLUE}[*] OS Fingerprinting${NC}"
+            echo ""
+            echo -n "[*] Enter target IP: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "nmap -O --osscan-guess ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
+            ;;
+        RA|ra)
+            echo -e "${BLUE}[*] Run All Recon Scripts${NC}"
+            echo ""
+            echo -n "[*] Enter target domain: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                echo "[*] Running recon scripts on: ${TARGET}"
+                echo ""
+                [[ -x "$SCRIPT_DIR/domain.sh" ]] && run_cmd "$SCRIPT_DIR/domain.sh ${TARGET}"
+                [[ -x "$SCRIPT_DIR/passive.sh" ]] && run_cmd "$SCRIPT_DIR/passive.sh ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
+            ;;
+        RB|rb)
+            echo -e "${BLUE}[*] Reconnaissance from List${NC}"
+            echo ""
+            echo -n "[*] Enter target list file path: "
+            read LIST_FILE
+            echo ""
+            if [[ -f "$LIST_FILE" ]]; then
+                echo "[*] Processing targets from: ${LIST_FILE}"
+                while IFS= read -r target; do
+                    if [[ -n "$target" && "$target" != \#* ]]; then
+                        echo ""
+                        echo "[*] Processing: ${target}"
+                        [[ -x "$SCRIPT_DIR/domain.sh" ]] && run_cmd "$SCRIPT_DIR/domain.sh ${target}" 2>/dev/null || true
+                    fi
+                done < "$LIST_FILE"
+            else
+                echo -e "${YELLOW}[!] File not found: ${LIST_FILE}${NC}"
+            fi
             ;;
         --menu)
             banner

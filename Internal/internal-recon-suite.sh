@@ -13,7 +13,7 @@
 #                                                                           #
 #############################################################################
 
-set -e
+set -euo pipefail
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -98,71 +98,154 @@ EOF
 handle_selection() {
     local choice="$1"
     shift
-    
+
+    run_cmd() {
+        local cmd="$1"
+        echo -e "${GREEN}[>] Running: ${cmd}${NC}"
+        eval "$cmd"
+    }
+
     case "$choice" in
         I1|i1)
-            log_info "Current User Info"
-            echo "whoami"
-            echo "id"
-            echo "whoami /priv"
+            echo -e "${BLUE}[*] Current User Info${NC}"
+            echo ""
+            run_cmd "whoami"
+            run_cmd "id"
             ;;
         I2|i2)
-            log_info "All Users on System"
-            echo "cat /etc/passwd"
+            echo -e "${BLUE}[*] All Users on System${NC}"
+            echo ""
+            run_cmd "cat /etc/passwd"
             ;;
         I3|i3)
-            log_info "Groups and Memberships"
-            echo "groups"
-            echo "id"
+            echo -e "${BLUE}[*] Groups and Memberships${NC}"
+            echo ""
+            run_cmd "groups"
+            run_cmd "id"
             ;;
         I4|i4)
-            log_info "Sudo Privileges"
-            echo "sudo -l"
+            echo -e "${BLUE}[*] Sudo Privileges${NC}"
+            echo ""
+            run_cmd "sudo -l"
             ;;
         I5|i5)
-            log_info "Network Interfaces"
-            echo "ip addr"
-            echo "ifconfig -a"
+            echo -e "${BLUE}[*] Network Interfaces${NC}"
+            echo ""
+            if command -v ip &>/dev/null; then
+                run_cmd "ip addr"
+            else
+                run_cmd "ifconfig -a"
+            fi
             ;;
         I6|i6)
-            log_info "ARP Table"
-            echo "ip neigh"
-            echo "arp -a"
+            echo -e "${BLUE}[*] ARP Table${NC}"
+            echo ""
+            if command -v ip &>/dev/null; then
+                run_cmd "ip neigh"
+            else
+                run_cmd "arp -a"
+            fi
             ;;
         I7|i7)
-            log_info "Routing Table"
-            echo "ip route"
-            echo "route -n"
+            echo -e "${BLUE}[*] Routing Table${NC}"
+            echo ""
+            if command -v ip &>/dev/null; then
+                run_cmd "ip route"
+            else
+                run_cmd "route -n"
+            fi
             ;;
         I8|i8)
-            log_info "DNS Information"
-            echo "cat /etc/resolv.conf"
-            echo "nslookup"
+            echo -e "${BLUE}[*] DNS Information${NC}"
+            echo ""
+            run_cmd "cat /etc/resolv.conf"
             ;;
         I9|i9)
-            log_info "Active Connections"
-            echo "netstat -ant"
-            echo "ss -tulpn"
+            echo -e "${BLUE}[*] Active Connections${NC}"
+            echo ""
+            if command -v ss &>/dev/null; then
+                run_cmd "ss -tulpn"
+            else
+                run_cmd "netstat -ant"
+            fi
             ;;
         I10)
-            log_info "Running Services"
-            echo "ps aux"
-            echo "systemctl list-units --type=service"
+            echo -e "${BLUE}[*] Running Services${NC}"
+            echo ""
+            if command -v systemctl &>/dev/null; then
+                run_cmd "systemctl list-units --type=service --no-pager"
+            fi
+            run_cmd "ps aux --no-headers | head -50"
             ;;
         I11)
-            log_info "Installed Software"
-            echo "dpkg -l"
-            echo "rpm -qa"
+            echo -e "${BLUE}[*] Installed Software${NC}"
+            echo ""
+            if command -v dpkg &>/dev/null; then
+                run_cmd "dpkg -l | grep -v '^ii' | head -20"
+            elif command -v rpm &>/dev/null; then
+                run_cmd "rpm -qa --last | head -20"
+            fi
             ;;
         I12)
-            log_info "Cron Jobs"
-            echo "cat /etc/crontab"
-            echo "ls -la /etc/cron.d/"
+            echo -e "${BLUE}[*] Cron Jobs${NC}"
+            echo ""
+            run_cmd "cat /etc/crontab"
+            echo ""
+            echo "[*] Cron directories:"
+            ls -la /etc/cron.d/ 2>/dev/null
+            ls -la /etc/cron.hourly/ 2>/dev/null
+            ls -la /etc/cron.daily/ 2>/dev/null
             ;;
         I13)
-            log_info "Mounted Filesystems"
-            echo "mount"
-            echo "cat /etc/fstab"
+            echo -e "${BLUE}[*] Mounted Filesystems${NC}"
+            echo ""
+            run_cmd "mount"
+            echo ""
+            run_cmd "cat /etc/fstab"
+            ;;
+        ID1)
+            echo -e "${BLUE}[*] Domain Users (Windows)${NC}"
+            echo ""
+            if command -v net &>/dev/null; then
+                run_cmd "net user /domain"
+            elif command -v Get-ADUser &>/dev/null; then
+                run_cmd "Get-ADUser -Filter * | Select-Object Name | head -20"
+            else
+                echo -e "${YELLOW}[!] Windows AD tools not available${NC}"
+            fi
+            ;;
+        ID2)
+            echo -e "${BLUE}[*] Domain Groups (Windows)${NC}"
+            echo ""
+            if command -v net &>/dev/null; then
+                run_cmd "net group /domain"
+            elif command -v Get-ADGroup &>/dev/null; then
+                run_cmd "Get-ADGroup -Filter * | Select-Object Name | head -20"
+            else
+                echo -e "${YELLOW}[!] Windows AD tools not available${NC}"
+            fi
+            ;;
+        ID3)
+            echo -e "${BLUE}[*] Domain Computers (Windows)${NC}"
+            echo ""
+            if command -v net &>/dev/null; then
+                run_cmd "net view /domain /computers"
+            elif command -v Get-ADComputer &>/dev/null; then
+                run_cmd "Get-ADComputer -Filter * | Select-Object Name | head -20"
+            else
+                echo -e "${YELLOW}[!] Windows AD tools not available${NC}"
+            fi
+            ;;
+        ID4)
+            echo -e "${BLUE}[*] Domain Trusts (Windows)${NC}"
+            echo ""
+            if command -v nltest &>/dev/null; then
+                run_cmd "nltest /domain_trusts"
+            elif command -v Get-ADTrust &>/dev/null; then
+                run_cmd "Get-ADTrust -Filter *"
+            else
+                echo -e "${YELLOW}[!] Windows AD tools not available${NC}"
+            fi
             ;;
         --menu)
             banner

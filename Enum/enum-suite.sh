@@ -12,7 +12,7 @@
 #                                                                           #
 #############################################################################
 
-set -e
+set -euo pipefail
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -92,19 +92,27 @@ usage() {
 USAGE: $0 [OPTIONS]
 
 OPTIONS:
-    E1                      Quick port scan
-    E2                      Full port scan
-    E3                      Service version detection
-    E4                      OS fingerprinting
-    E5                      UDP port scan
-    EV1                     Nikto web scanner
-    EV2                     SSL/TLS analysis
-    EV3                     Directory busting
-    --menu                  Show interactive menu
-    --help                  Show this help
+    E1                       Quick port scan
+    E2                       Full port scan
+    E3                       Service version detection
+    E4                       OS fingerprinting
+    E5                       UDP port scan
+    E6                       HTTP/HTTPS enumeration
+    E7                       SMB/Samba enumeration
+    E8                       SNMP enumeration
+    E9                       FTP enumeration
+    E10                      SSH enumeration
+    EV1                      Nikto web scanner
+    EV2                      SSL/TLS analysis
+    EV3                      Directory busting
+    EV4                      Web API/CVE scanner
+    EV5                      Vulnerability check lists
+    --menu                   Show interactive menu
+    --help                   Show this help
 
 EXAMPLES:
     $0 E1 192.168.1.0/24
+    $0 E4 192.168.1.1
     $0 EV1 http://example.com
     $0 --menu
 
@@ -114,52 +122,224 @@ EOF
 handle_selection() {
     local choice="$1"
     shift
-    
+
+    run_cmd() {
+        local cmd="$1"
+        echo -e "${GREEN}[>] Running: ${cmd}${NC}"
+        eval "$cmd"
+    }
+
     case "$choice" in
         E1|e1)
-            log_info "Quick Port Scan"
-            echo "Usage: $0 E1 <target>"
+            echo -e "${BLUE}[*] Quick Port Scan (nmap -F)${NC}"
             echo ""
-            echo "nmap -F <target>"
+            echo -n "[*] Enter target IP or CIDR: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "nmap -F ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         E2|e2)
-            log_info "Full Port Scan"
-            echo "Usage: $0 E2 <target>"
+            echo -e "${BLUE}[*] Full Port Scan (nmap -p-)${NC}"
             echo ""
-            echo "nmap -p- <target>"
+            echo -n "[*] Enter target IP or CIDR: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "nmap -p- ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         E3|e3)
-            log_info "Service Version Detection"
-            run_enum_script "nse.sh" "$@"
+            echo -e "${BLUE}[*] Service Version Detection${NC}"
+            echo ""
+            echo -n "[*] Enter target IP or CIDR: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                if [[ -x "$SCRIPT_DIR/nse.sh" ]]; then
+                    run_cmd "$SCRIPT_DIR/nse.sh ${TARGET}"
+                else
+                    run_cmd "nmap -sV ${TARGET}"
+                fi
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         E4|e4)
-            log_info "OS Fingerprinting"
-            echo "Usage: $0 E4 <target>"
+            echo -e "${BLUE}[*] OS Fingerprinting${NC}"
             echo ""
-            echo "nmap -O <target>"
+            echo -n "[*] Enter target IP or CIDR: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "nmap -O --osscan-guess ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         E5|e5)
-            log_info "UDP Port Scan"
-            echo "Usage: $0 E5 <target>"
+            echo -e "${BLUE}[*] UDP Port Scan${NC}"
             echo ""
-            echo "nmap -sU <target>"
+            echo -n "[*] Enter target IP or CIDR: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "nmap -sU ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
+            ;;
+        E6|e6)
+            echo -e "${BLUE}[*] HTTP/HTTPS Enumeration${NC}"
+            echo ""
+            echo -n "[*] Enter target URL: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                if [[ -x "$SCRIPT_DIR/web-tech.sh" ]]; then
+                    run_cmd "$SCRIPT_DIR/web-tech.sh ${TARGET}"
+                else
+                    echo -e "${YELLOW}[!] web-tech.sh not found${NC}"
+                fi
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
+            ;;
+        E7|e7)
+            echo -e "${BLUE}[*] SMB/Samba Enumeration${NC}"
+            echo ""
+            echo -n "[*] Enter target IP: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "nmap -p139,445 --script=smb-enum-shares.nse,smb-enum-users.nse ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
+            ;;
+        E8|e8)
+            echo -e "${BLUE}[*] SNMP Enumeration${NC}"
+            echo ""
+            echo -n "[*] Enter target IP: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "nmap -p161 --script=snmp-brute.nse,snmp-info.nse ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
+            ;;
+        E9|e9)
+            echo -e "${BLUE}[*] FTP Enumeration${NC}"
+            echo ""
+            echo -n "[*] Enter target IP: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "nmap -p21 --script=ftp-anon.nse,ftp-brute.nse ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
+            ;;
+        E10|e10)
+            echo -e "${BLUE}[*] SSH Enumeration${NC}"
+            echo ""
+            echo -n "[*] Enter target IP: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "nmap -p22 --script=ssh-brute.nse,ssh2-enum-algos.nse ${TARGET}"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         EV1|ev1)
-            log_info "Nikto Web Scanner"
-            log_info "Nikto is located in Exploit/"
-            echo "Usage: nikto -h <url>"
+            echo -e "${BLUE}[*] Nikto Web Scanner${NC}"
+            echo ""
+            echo -n "[*] Enter target URL: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                if command -v nikto &>/dev/null; then
+                    run_cmd "nikto -h ${TARGET}"
+                else
+                    echo -e "${YELLOW}[!] nikto not found${NC}"
+                fi
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         EV2|ev2)
-            log_info "SSL/TLS Analysis"
-            run_enum_script "../Exploit/ssl.sh" "$@"
+            echo -e "${BLUE}[*] SSL/TLS Analysis${NC}"
+            echo ""
+            echo -n "[*] Enter target IP or hostname: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                if [[ -x "$SCRIPT_DIR/../Exploit/ssl.sh" ]]; then
+                    run_cmd "$SCRIPT_DIR/../Exploit/ssl.sh ${TARGET}"
+                elif command -v sslscan &>/dev/null; then
+                    run_cmd "sslscan ${TARGET}"
+                elif command -v testssl &>/dev/null; then
+                    run_cmd "testssl ${TARGET}"
+                else
+                    echo -e "${YELLOW}[!] SSL scanning tool not found${NC}"
+                fi
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         EV3|ev3)
-            log_info "Directory Busting"
-            echo "Usage: gobuster dir -w wordlist.txt -u <url>"
+            echo -e "${BLUE}[*] Directory Busting${NC}"
+            echo ""
+            echo -n "[*] Enter target URL: "
+            read URL
+            echo -n "[*] Enter wordlist path: "
+            read WORDLIST
+            echo ""
+            if [[ -n "$URL" && -n "$WORDLIST" ]]; then
+                if command -v gobuster &>/dev/null; then
+                    run_cmd "gobuster dir -w ${WORDLIST} -u ${URL}"
+                elif command -v dirsearch &>/dev/null; then
+                    run_cmd "dirsearch -u ${URL} -w ${WORDLIST}"
+                else
+                    echo -e "${YELLOW}[!] gobuster or dirsearch not found${NC}"
+                fi
+            else
+                echo -e "${YELLOW}[!] Missing URL or wordlist${NC}"
+            fi
             ;;
         EV4|ev4)
-            log_info "Vulnerability Scanning"
-            run_enum_script "cve.sh" "$@"
+            echo -e "${BLUE}[*] Web API/CVE Scanner${NC}"
+            echo ""
+            echo -n "[*] Enter target IP or hostname: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                if [[ -x "$SCRIPT_DIR/cve.sh" ]]; then
+                    run_cmd "$SCRIPT_DIR/cve.sh ${TARGET}"
+                else
+                    echo -e "${YELLOW}[!] cve.sh not found${NC}"
+                fi
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
+            ;;
+        EV5|ev5)
+            echo -e "${BLUE}[*] Vulnerability Check Lists${NC}"
+            echo ""
+            echo "[*] Useful resources for vulnerability checking:"
+            echo "    - https://cve.mitre.org"
+            echo "    - https://www.exploit-db.com"
+            echo "    - https://nvd.nist.gov"
+            echo ""
+            echo -n "[*] Press Enter to continue... "
+            read
             ;;
         --menu)
             banner
