@@ -49,7 +49,7 @@ show_help() {
     echo "    ✓ Progress tracking - shows installed/skipped/failed counts"
     echo "    ✓ Multi-OS support - Kali, Ubuntu, Debian, Arch, Fedora, macOS"
     echo "    ✓ Python venv - isolated Python environment"
-    echo "    ✓ Helper scripts - activate.sh, update.sh, pwnthebox launcher"
+    echo "    ✓ Helper scripts - update.sh"
     echo ""
     echo -e "${YELLOW}[!] Disclaimer: Use only on systems you have permission to test!${NC}"
     echo ""
