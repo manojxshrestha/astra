@@ -143,3 +143,5 @@ echo
 echo "[*] Note: For full functionality, install dependencies:"
 echo "    - dnsrecon, dnstwist, subfinder, sublist3r, theHarvester, msfconsole"
 echo
+read -p "Press Enter to continue... "
+exit 0
