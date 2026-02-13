@@ -1,0 +1,322 @@
+[*] Found 5557 urls
+URL: https://api.swaggerhub.com/domains/cdshepherd/test.com/3.0[0m
+URL: https://api.swaggerhub.com/apis/cocoliu2020/myweb2.test.com/1.0.0[0m
+[32m[*] Heroku API KEY: d290f1ee-6c54-4b01-90e6-d701748f0851[0m
+URL: https://api.swaggerhub.com/domains/sirisha.kota/test2go.test.com/1.0[0m
+URL: https://api.swaggerhub.com/apis/Srikantadatta/developer.sritest.com/0.0.1[0m
+[32m[*] email: srikantadattaprasad@gmail.com[0m
+URL: https://api.swaggerhub.com/apis/faisal097/SessionApi/1.0.0[0m
+[32m[*] email: faisalr@lambdatest.com[0m
+URL: https://api.swaggerhub.com/domains/itcompany-in-gandhin/dns.test.com/1.2[0m
+URL: https://api.swaggerhub.com/apis/Bionime/RightestCare/1.0.0[0m
+[32m[*] Heroku API KEY: f9ab24ed-074e-4f8f-a4cf-4d060c6a9696[0m
+URL: https://api.swaggerhub.com/apis/B60413_1/test/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/greedying/webbed_hotel_list_format/1.0.0[0m
+URL: https://api.swaggerhub.com/domains/solbox/api.mcdn.solboxtest.com/v0.6[0m
+[32m[*] Heroku API KEY: bfc93de4-a0ba-4ff2-a2ce-cf898e31b243[0m
+URL: https://api.swaggerhub.com/apis/MICHELEBORELLA_1/ora-esatta/1.0.0[0m
+[32m[*] Heroku API KEY: 00000000-0000-0000-0000-000000000000[0m
+URL: https://api.swaggerhub.com/apis/omnarayan/Hub/1.0.0[0m
+URL: https://api.swaggerhub.com/domains/ALEXBENNY/example.test.com/1[0m
+URL: https://api.swaggerhub.com/apis/pra201886/test.com.api/1.0.0[0m
+[32m[*] email: apiteam@swagger.io[0m
+URL: https://api.swaggerhub.com/apis/kishores27/Test/1.0[0m
+URL: https://api.swaggerhub.com/apis/dreamsoftinnovations/lk-lyrics_api/1.0.0[0m
+[32m[*] google_api: AIzaSyACwIs_H_SCfd32rCezH4tlX7x0y2GtNwI[0m
+URL: https://api.swaggerhub.com/apis/Computop/computop-marketplace_rest_api/1.0.0[0m
+[32m[*] email: productmanagement@computop.com[0m
+URL: https://api.swaggerhub.com/apis/subhashini.kesavan3/ccm-cui_tickets_5_x/0.4.4-Draft[0m
+[32m[*] email: Middleware-DesignTeam@cox.com[0m
+URL: https://api.swaggerhub.com/apis/greedying/hi.com/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/Self2769/Practise_API/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/Sinha491/Wicontest.com/1.0.0[0m
+[32m[*] Heroku API KEY: d290f1ee-6c54-4b01-90e6-d701748f0851[0m
+URL: https://api.swaggerhub.com/apis/Mas38/iStore_v1/1.0.0[0m
+[32m[*] email: admin@test.com[0m
+URL: https://api.swaggerhub.com/apis/fiveme.ls.gm.01/thumbnailtest.com/1.0.0[0m
+[32m[*] Heroku API KEY: 0729a580-2240-11e6-9eb5-0002a5d5c51b[0m
+URL: https://api.swaggerhub.com/domains/Computop/Axepta/1.0[0m
+[32m[*] google_captcha: 6Ly9jcmwuYXBwbGUuY29tL2FwcGxlcm9vdGNhZzM[0m
+URL: https://api.swaggerhub.com/apis/yovendielmundo/multiplexer/0.0.1[0m
+[32m[*] email: luis@test.com[0m
+URL: https://api.swaggerhub.com/apis/goshiip/SHIIPAPI/2.0.1[0m
+[32m[*] amazon_aws_url: shippo-static.s3.amazonaws.com[0m
+URL: https://api.swaggerhub.com/apis/testovitchalexander8/logistics/V1[0m
+[32m[*] Heroku API KEY: a8e21cf9-ac83-41ec-b93d-e6cd5bdf6edf[0m
+URL: https://api.swaggerhub.com/apis/h1392/nutrition-management_rest_api/v0.0.1[0m
+[32m[*] Heroku API KEY: ee3ec8dd-ee5a-4677-8424-be6d3b63123b[0m
+URL: https://api.swaggerhub.com/apis/lateralus08/shift-4_gateway_api/1.0.20[0m
+[32m[*] google_captcha: 6Lly4MPrwww8zom78nWgbQg3BJkTa0FUphBBCCCF[0m
+URL: https://api.swaggerhub.com/apis/AnushkaIdamekorala/decta-public_api/v1.22[0m
+[32m[*] Heroku API KEY: 11111111-2222-4444-8888-444444444444[0m
+URL: https://api.swaggerhub.com/apis/pren-enzigma-team/Sample_at_Lab_API/1.0.0[0m
+[32m[*] email: test@test.com[0m
+URL: https://api.swaggerhub.com/apis/Avet7/Help-Articles/1.0.0[0m
+[32m[*] email: apisupport@avetta.com[0m
+URL: https://api.swaggerhub.com/apis/Worldpay93/launchpad-leads-175/1.7.5[0m
+[32m[*] Heroku API KEY: df8a6d82-3bb4-4f3b-ba18-57a5981ede8e[0m
+URL: https://api.swaggerhub.com/apis/aioates/fraser-1/0.1[0m
+[32m[*] email: myemailaddress@test.com[0m
+URL: https://api.swaggerhub.com/apis/Whip-Around/Managers-App/1.0.0[0m
+[32m[*] email: vladimir@gmail.com[0m
+URL: https://api.swaggerhub.com/apis/ribo/Integrations/1.1.0[0m
+URL: https://api.swaggerhub.com/apis/TOPFEMKA2311/olx-partner_api/2.0[0m
+[32m[*] Heroku API KEY: 99040cfe-d68c-416f-85a9-1401cfa5f109[0m
+URL: https://api.swaggerhub.com/apis/CCLS/nationex-api/4.0[0m
+[32m[*] google_captcha: 6LXOA8IlZpET0YOcDOHLyiEwvAJxVFj7pdZeRRYG[0m
+URL: https://api.swaggerhub.com/apis/alokpaul/api4/0.1[0m
+[32m[*] Heroku API KEY: 3d575218-9f9a-4b76-9986-b0e6eb8bb823[0m
+URL: https://api.swaggerhub.com/apis/telrock/smart-api/2.0.4[0m
+[32m[*] authorization_basic: basic data-integrity[0m
+URL: https://api.swaggerhub.com/apis/alirezavafi/air-gateway_ndc_json_api/1.0.1[0m
+[32m[*] Heroku API KEY: cddb2e0d-908f-4730-9604-c1f6b5e3b9c1[0m
+URL: https://api.swaggerhub.com/apis/igolenastov/decta-gate_api/v0.6[0m
+[32m[*] Heroku API KEY: 9e6c77a4-8f8b-4280-bffb-d1921acd3d72[0m
+URL: https://api.swaggerhub.com/apis/ademirao/rest-api_documentation/1.0.0[0m
+[32m[*] authorization_basic: basic details[0m
+URL: https://api.swaggerhub.com/apis/guanghong.xie/hdb-demo/v2[0m
+[32m[*] email: ds.hdb.test@gmail.com[0m
+URL: https://api.swaggerhub.com/apis/university368/rezdy-api_for_agents/1.0.0[0m
+[32m[*] twilio_app_sid: APISPECIFICATIONDEMOAGENTDONOTEDIT[0m
+URL: https://api.swaggerhub.com/apis/igorbakhtin/decta-gate_api/v0.6[0m
+[32m[*] Heroku API KEY: a9c9bb60-1a1d-456c-bfb0-111111111111[0m
+URL: https://api.swaggerhub.com/apis/MICRON98_1/rezdy-api_for_suppliers/1.0.0[0m
+[32m[*] twilio_app_sid: APISPECIFICATIONDEMOAGENTDONOTEDIT[0m
+URL: https://api.swaggerhub.com/apis/Computop/Paygate_REST_API/1[0m
+[32m[*] google_captcha: 6Ly9jcmwuYXBwbGUuY29tL2FwcGxlcm9vdGNhZzM[0m
+URL: https://api.swaggerhub.com/apis/Efftel/dstny-core_api/5.5.22336[0m
+[32m[*] email: jane@company.com[0m
+URL: https://api.swaggerhub.com/apis/wellness.festival.sg.prod/WFS-Admin-API/1.0.0[0m
+[32m[*] Heroku API KEY: d290f1ee-6c54-4b01-90e6-d701748f0851[0m
+URL: https://api.swaggerhub.com/apis/MackUbX/HittsAdministrator/1.0.0[0m
+[32m[*] Heroku API KEY: d04aa0cc-81d1-4c9f-a1f8-af0f40a107a8[0m
+URL: https://api.swaggerhub.com/apis/wellness.festival.sg.prod/WFS-Public-API/1.0.0[0m
+[32m[*] Heroku API KEY: d290f1ee-6c54-4b01-90e6-d701748f0851[0m
+URL: https://api.swaggerhub.com/apis/nernaykumar98/your-api/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/Dioneya/api/1.0[0m
+[32m[*] Heroku API KEY: 6f7d4992-912f-48dd-92f7-0418fa2b2342[0m
+URL: https://api.swaggerhub.com/apis/SELAI91/MercerWeendeal/1.0.0[0m
+[32m[*] email: quentin.henrotte@cgi.com[0m
+URL: https://api.swaggerhub.com/apis/REEMGAMALATIA/TWK-Eportal-Events/1.0.0[0m
+[32m[*] email: admin@monshaat.com[0m
+URL: https://api.swaggerhub.com/apis/CAI-Chicago/CPG-Admin/1.0.7[0m
+[32m[*] Heroku API KEY: 16efc9ca-4eca-4ccf-9947-1ada239a205e[0m
+URL: https://api.swaggerhub.com/apis/rmanibo/your-api/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/jawadsaleem/walletapi/1.0.0[0m
+[32m[*] email: support@flowsoftware.ky[0m
+URL: https://api.swaggerhub.com/apis/florijan.allaraj/default-tssitle/0.1[0m
+[32m[*] email: tesbgddsdsfgst4@test.com[0m
+URL: https://api.swaggerhub.com/apis/Shadow-250/IDM/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/jake.m.palmer/users/0.1[0m
+[32m[*] Heroku API KEY: EE3DABCB-06D7-46A5-A7C5-D3425CFC62F6[0m
+URL: https://api.swaggerhub.com/apis/abhaycs2/your-api/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/rangalive/payments-rest_api/v2[0m
+[32m[*] email: johndoe@test.com[0m
+URL: https://api.swaggerhub.com/apis/ANDREWMCFARLANE/trade-2_api_development/1[0m
+[32m[*] Heroku API KEY: 8656e22c-1a19-4c62-a63c-84db4e3f73b4[0m
+URL: https://api.swaggerhub.com/apis/rainmaker-travel/rainmaker-inventory/1.0[0m
+[32m[*] Heroku API KEY: bbd5be95-1ea1-4a04-a268-41879f7d8db3[0m
+URL: https://api.swaggerhub.com/apis/gvsakhil/identity-manager_ge_keyrock/v1[0m
+[32m[*] Heroku API KEY: 04c5b070-4292-4b3f-911b-36a103f3ac3f[0m
+URL: https://api.swaggerhub.com/apis/LukaszPankiewicz/default-title/0.1[0m
+[32m[*] email: test@test.com[0m
+URL: https://api.swaggerhub.com/apis/RFDSwagg/Esp/0.0.7[0m
+[32m[*] email: dmcgauley@rfdinc.com[0m
+URL: https://api.swaggerhub.com/apis/abmishra/Baskets/v1[0m
+[32m[*] Heroku API KEY: 893f605e-10e2-423a-bdb4-f952f56eb6d8[0m
+URL: https://api.swaggerhub.com/apis/unnitech/default-title/0.1[0m
+[32m[*] email: tesbgddsdsfgst4@test.com[0m
+URL: https://api.swaggerhub.com/apis/saveerk/TestAccountDetails/v2.0[0m
+[32m[*] Heroku API KEY: 40911a00-0b7a-46d4-9af0-d33da64cb06d[0m
+URL: https://api.swaggerhub.com/apis/florijan.allaraj/smart_studio/0.1[0m
+[32m[*] email: tesbgddsdsfgst4@test.com[0m
+URL: https://api.swaggerhub.com/apis/e5726152/origination-integration_api/v1[0m
+[32m[*] google_captcha: 6LSuIC9DjSWaEzALh6NIqLCgH0iaHTAXgsaFbDXg[0m
+URL: https://api.swaggerhub.com/apis/srane/nms-rest_api_21_0/21.0[0m
+[32m[*] amazon_aws_url2: s3-v1610[0m
+URL: https://api.swaggerhub.com/apis/reddyv512/policy-api_documentation/2.0.0[0m
+[32m[*] Heroku API KEY: B6770DBF-37D2-4877-BBDD-BCEDA0491E05[0m
+URL: https://api.swaggerhub.com/apis/fsilver1/your-api/1.0.0[0m
+[32m[*] email: 36824@test.com[0m
+URL: https://api.swaggerhub.com/apis/Test16143/ttt/1.0.0[0m
+[32m[*] Heroku API KEY: 6fe24b0b-89cd-4b63-8b25-4fc8a84a7054[0m
+URL: https://api.swaggerhub.com/apis/SeamlessPay/portal-api/2.0.0[0m
+[32m[*] google_captcha: 6Ly9hcGkuc2VhbWxlc3NwYXkuY29tIiwiaXNzIjo[0m
+URL: https://api.swaggerhub.com/apis/adityay-perpetualny/Roo-node/1.1[0m
+[32m[*] amazon_aws_url: roo-vet.s3.amazonaws.com[0m
+URL: https://api.swaggerhub.com/apis/org886/NHC_ExternalCase/0.1[0m
+[32m[*] email: Support@yesser.gov.sa[0m
+URL: https://api.swaggerhub.com/apis/DODWYER_1/VastServiceSnippetAPI/1.0.0[0m
+[32m[*] amazon_aws_url2: s3-url[0m
+URL: https://api.swaggerhub.com/apis/andreybiryukov/EnterprizeTransaction/1.0.0[0m
+[32m[*] Heroku API KEY: 00000000-0000-0000-0000-000000000000[0m
+URL: https://api.swaggerhub.com/apis/skiz/zuora-api_reference/2017-07-12[0m
+[32m[*] authorization_basic: basic information[0m
+URL: https://api.swaggerhub.com/apis/user-revenue/zuora-api_reference/2017-10-15[0m
+[32m[*] authorization_basic: basic information[0m
+URL: https://api.swaggerhub.com/apis/npw/insurance-admin/1.0.0[0m
+[32m[*] email: test@test.com[0m
+URL: https://api.swaggerhub.com/domains/SURA_PANAMA/TransversalContext/1.0.0[0m
+[32m[*] twilio_account_sid: ACAgIABWWGlkAAAAAAAAAAAAAAAATAAAAW[0m
+URL: https://api.swaggerhub.com/apis/Capgemini_Invent/copay-enrollment-oas3/1.0.0[0m
+[32m[*] Heroku API KEY: 3a3eb01c-9969-e811-80d9-005056b66ab5[0m
+URL: https://api.swaggerhub.com/apis/patant/orderfrontend/1[0m
+URL: https://api.swaggerhub.com/apis/jaishree.chundawat/your-api/1.0.0[0m
+[32m[*] Heroku API KEY: 168a5efc-af7a-4418-bacc-fb334869ef76[0m
+URL: https://api.swaggerhub.com/apis/Total-P/crm2/1.0.1[0m
+[32m[*] email: jean@totalprocessing.com[0m
+URL: https://api.swaggerhub.com/apis/apidwk/dw_dwk_api/1.0.0[0m
+[32m[*] amazon_aws_url: wemedia01-staging.s3.amazonaws.com[0m
+URL: https://api.swaggerhub.com/apis/ELEVATESaaSTeam/ELEVATE-API/1.7.0[0m
+[32m[*] email: JoeUser@test.com[0m
+URL: https://api.swaggerhub.com/apis/GBonelli/GestioneAnagraficaBolli/1.0.0[0m
+[32m[*] ip: 1.3.3.1[0m
+URL: https://api.swaggerhub.com/apis/Masmovil/mas-subscriptions/0.1.0-rc1[0m
+[32m[*] twilio_account_sid: ACCOUNT_BUNDLE_INACTIVE_SUBSCRIPTI[0m
+URL: https://api.swaggerhub.com/apis/caio.alves/your-api/1.0.0[0m
+[32m[*] google_captcha: 6LFThxxShfFqtsEo0kubJPhWByTh5G9Z-_lhSHsv[0m
+URL: https://api.swaggerhub.com/apis/sanjay16/0610/1.0.0[0m
+[32m[*] google_captcha: 6LF6IcV2fU2Y8nw8QfLm23RnyaJuyIXuUMTzYUGU[0m
+URL: https://api.swaggerhub.com/apis/BadrishChaudhari/api-rest_documentation/6.0.3[0m
+[32m[*] Heroku API KEY: 76914d95-f2a9-47aa-9090-de90e529ce98[0m
+URL: https://api.swaggerhub.com/apis/TANHIMD/sheer-id_api/2.0.0[0m
+[32m[*] email: productsupport@sheerid.com[0m
+URL: https://api.swaggerhub.com/apis/bgiegel/zuora-api_reference/2017-10-15[0m
+[32m[*] authorization_basic: basic information[0m
+URL: https://api.swaggerhub.com/apis/elaniin-5e1/uSource/2.18.0[0m
+[32m[*] Heroku API KEY: 857ca86b-dfe5-464f-af14-1ff6562bc28a[0m
+URL: https://api.swaggerhub.com/apis/tismart/b-2_b_services/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/2Checkout-API/api-rest_documentation/6.0-oas3[0m
+[32m[*] Heroku API KEY: 76914d95-f2a9-47aa-9090-de90e529ce98[0m
+URL: https://api.swaggerhub.com/apis/StickyCareer/ToastmastersVisit/1.0.0[0m
+[32m[*] email: hesmondjeet.oon@stickycareer.com[0m
+URL: https://api.swaggerhub.com/apis/johndoeee/petstore_api/1.0[0m
+[32m[*] email: apiteam@swagger.io[0m
+URL: https://api.swaggerhub.com/apis/shahbaz275817/pal-systems/1.1[0m
+[32m[*] Heroku API KEY: 6bb3d73b-2f77-4053-9971-829a48b30b5f[0m
+URL: https://api.swaggerhub.com/apis/Roo-Swagger/Roo_API_Document/1.0[0m
+[32m[*] amazon_aws_url: roo-vet.s3.amazonaws.com[0m
+URL: https://api.swaggerhub.com/apis/lgaddam/zuora-api_reference/2017-02-07[0m
+[32m[*] google_captcha: 6LTaXGN9tu4X2naKiWIifKVIljhJpwdvzpbPZH3d[0m
+URL: https://api.swaggerhub.com/apis/Akshath1985/Billing_Account_Validation/1.0.0-oas5[0m
+[32m[*] email: support@aciworldwide.com[0m
+URL: https://api.swaggerhub.com/apis/CHUANCHUANKANG_1/bts-multi_hotel_availability_shopping_api/1.0.0[0m
+[32m[*] email: bts.help@derbysoft.net[0m
+URL: https://api.swaggerhub.com/apis/jivung/Yggio_New/1.0.0[0m
+[32m[*] email: yggio@sensative.com[0m
+URL: https://api.swaggerhub.com/apis/MAG_Distribution/Travel/1.0.0[0m
+[32m[*] Heroku API KEY: a4015535-bd34-4192-9c79-e027bd1bcf21[0m
+URL: https://api.swaggerhub.com/apis/ISLUCO2004_1/APIFincadoCS/1.0.0[0m
+[32m[*] email: juan.perez@test.com[0m
+URL: https://api.swaggerhub.com/apis/stremium/stremium-dvr/1.0.0[0m
+[32m[*] Heroku API KEY: d290f1ee-6c54-4b01-90e6-d701748f0851[0m
+URL: https://api.swaggerhub.com/apis/Satoripop/APICGY/1.0.0[0m
+[32m[*] email: test@test.com[0m
+URL: https://api.swaggerhub.com/apis/edeerxd/api-flight/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/Corsearch-API-Dev/single-use-token/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/Siddhartha83/samplecandiate/1.0.0[0m
+[32m[*] Heroku API KEY: 64f99ae4-4ec8-436f-9ea6-e1e863fc7115[0m
+URL: https://api.swaggerhub.com/apis/saiappzoycom/angio-metrix/1.0.0[0m
+[32m[*] email: you@your-company.com[0m
+URL: https://api.swaggerhub.com/apis/murtza/your-api/1.0.0[0m
+[32m[*] email: support@rain.co.za[0m
+URL: https://api.swaggerhub.com/apis/nikita-sobol/HappyKh/1.0.0[0m
+[32m[*] email: test@test.com[0m
+URL: https://api.swaggerhub.com/apis/vishwapriyanatha/dolphiq/1.0.0[0m
+[32m[*] email: test@test.com[0m
+URL: https://api.swaggerhub.com/apis/pamplo/micro-auth/v0.0.0[0m
+[32m[*] twilio_account_sid: ACbXtU7tfD7H2FmiR6N5pHieCysWxOV2EK[0m
+URL: https://api.swaggerhub.com/apis/jdpnielsen/dm-kravspec-events/1[0m
+[32m[*] Heroku API KEY: d290f1ee-6c54-4b01-90e6-d701748f0851[0m
+URL: https://api.swaggerhub.com/apis/COP4331Group156/SmallProject/1.0.0[0m
+[32m[*] email: reynoldsno@knights.ucf.edu[0m
+URL: https://api.swaggerhub.com/apis/DAHIANAVEGA1117732_1/LW-Taller1/1.0.0[0m
+[32m[*] email: john@doe.com[0m
+URL: https://api.swaggerhub.com/apis/tanveertuba/Test_Ex/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/AmanpreetS/RR-Notifications/1.0.0[0m
+[32m[*] email: test@test.com[0m
+URL: https://api.swaggerhub.com/apis/Andriana/NominationAPI/1.0.0[0m
+[32m[*] Heroku API KEY: d290f1ee-6c54-4b01-90e6-d701748f0851[0m
+URL: https://api.swaggerhub.com/apis/PPANANA_1/CANALES_DIGITALES/1.0.0[0m
+[32m[*] Heroku API KEY: 00000000-0000-0000-0000-000000000000[0m
+URL: https://api.swaggerhub.com/apis/henriqueandrade93/desafio/1.0.0[0m
+[32m[*] email: henrique.tinti.andrade@gmail.com[0m
+URL: https://api.swaggerhub.com/apis/a.alabdi/EtihadServices/0.1[0m
+[32m[*] email: test@test.com[0m
+URL: https://api.swaggerhub.com/apis/wthiti/Cazzme/1.0.0[0m
+[32m[*] amazon_aws_url: cazzme.s3.amazonaws.com[0m
+URL: https://api.swaggerhub.com/apis/EverStore2/Home24RegistrationAndInit/1.0.0[0m
+[32m[*] email: simon.schmid@home24-outlet.de[0m
+URL: https://api.swaggerhub.com/apis/aviorsciences/Tap2Care/1.0.0[0m
+[32m[*] email: api@aviorsciences.com[0m
+URL: https://api.swaggerhub.com/apis/fruscus/InspectionDefinition/1.0.0[0m
+[32m[*] twilio_account_sid: AC6F40A-B7A2-4E32-871E-EC22515EE69[0m
+URL: https://api.swaggerhub.com/apis/jesperlandmer/road-status_information_api/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/HUNDALJAGDEEP/WQL/1.0[0m
+[32m[*] Heroku API KEY: a27cdad0-e6b3-11ee-bdac-0efc3927b4df[0m
+URL: https://api.swaggerhub.com/apis/zcloudteam7/fixland-api/1.0.0-oas3[0m
+[32m[*] email: z4p@tut.by[0m
+URL: https://api.swaggerhub.com/apis/zcong1993/ZENAPI/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/codynolf-agdna/FMIS-API-Definition-3.0/1.1[0m
+[32m[*] Heroku API KEY: 720343ab-9518-43f1-a292-07ecd0725ffd[0m
+URL: https://api.swaggerhub.com/apis/yanngorvel/Promethee/1.0.0[0m
+[32m[*] email: apiteam@swagger.io[0m
+URL: https://api.swaggerhub.com/apis/sendrefunds/ManagedSales/1.8.3[0m
+[32m[*] Heroku API KEY: 232387e4-2f12-4ef9-8f0c-6ef596be9b45[0m
+URL: https://api.swaggerhub.com/apis/erandotan40/flo-live/1.6.0[0m
+[32m[*] email: test@test.com[0m
+URL: https://api.swaggerhub.com/apis/akshay-bhor/Adtol/1.0.0[0m
+[32m[*] email: akbhor50@gmail.com[0m
+URL: https://api.swaggerhub.com/apis/Reed-Recruitment/Candidates/1.1[0m
+[32m[*] Heroku API KEY: a7b26693-f925-42e6-b9fe-205eea32d635[0m
+URL: https://api.swaggerhub.com/apis/Mubashar/ips-rtp_av_mgmt/1.1.0[0m
+[32m[*] Heroku API KEY: f7a8d486-dbf6-45e0-8a33-030a67d2fff2[0m
+URL: https://api.swaggerhub.com/apis/Rudnev/es-spa/1.0.0[0m
+[32m[*] email: test@test.com[0m
+URL: https://api.swaggerhub.com/apis/crypto-kevin/seal-lake_api/2.9.4[0m
+[32m[*] Heroku API KEY: 74a90b10-c227-11ea-b917-41000dd362f5[0m
+URL: https://api.swaggerhub.com/apis/AISHWARYA1RAI/adi-integration_service_practice_api_documentation/v1[0m
+[32m[*] Heroku API KEY: 0c2a65e0-9402-4c36-8522-8dc60621ff8d[0m
+URL: https://api.swaggerhub.com/apis/Sobinco/ChronoLogicOnline/3.1[0m
+[32m[*] email: test@test.com[0m
+URL: https://api.swaggerhub.com/apis/i001962/seal-lake_api/2.9.4[0m
+[32m[*] Heroku API KEY: 74a90b10-c227-11ea-b917-41000dd362f5[0m
+URL: https://api.swaggerhub.com/apis/danielo/H2H/1.0.0[0m
+[32m[*] email: daniel@pollithy.com[0m
+URL: https://api.swaggerhub.com/apis/USB7/usb-lead_generation_ap_is/0.8[0m
+[32m[*] email: apicoe@usbank.com[0m
+URL: https://api.swaggerhub.com/apis/jaikodom/hackazon-mobile_api/1.0.1[0m
+URL: https://api.swaggerhub.com/apis/Peeklogic4/InstaJetOpenAPI/1.0.1[0m
+[32m[*] email: isaac2020@gmail.com[0m
+URL: https://api.swaggerhub.com/apis/MPA_Project/LV-Kapris/1.0.0[0m
+[32m[*] email: you@your-company.com[0m
+URL: https://api.swaggerhub.com/apis/HERNANDOMONTES/TechoPresupuestalFaseIdentif/23.01.00[0m
+[32m[*] email: hmontes@mef.gob.pe[0m
+URL: https://api.swaggerhub.com/apis/TCS-IT/TCS-TADB-API/1.0.0[0m
+[32m[*] email: mturpin@tcservices.com[0m
+URL: https://api.swaggerhub.com/apis/gigroup/wfm-proxy_api/1.0.0[0m
+[32m[*] email: mario.rossi@test.com[0m
+URL: https://api.swaggerhub.com/apis/for.connect1007/usrs/1.0.0[0m
+[32m[*] Heroku API KEY: d290f1ee-6c54-4b01-90e6-d701748f0851[0m
+URL: https://api.swaggerhub.com/apis/cbwilliams6/ultra_contact_manager/1.0.0[0m
+[32m[*] email: ch028726@ucf.edu[0m
+URL: https://api.swaggerhub.com/apis/NTULLBANE/OpenAPISpecforCMS/1.0.0[0m
+[32m[*] email: smartbear@test.com[0m
+URL: https://api.swaggerhub.com/apis/GYG/cure-the_laundry_list/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/benkinmat/homelier/1.0.0[0m
+[32m[*] email: benkinmat@gmail.com[0m
+URL: https://api.swaggerhub.com/apis/akopplin/sq-laa_s/0.0.1[0m
+URL: https://api.swaggerhub.com/apis/EventsAIR/EventsAIRDraftAPI/1.03[0m
+[32m[*] Heroku API KEY: d290f1ee-6c54-4b01-90e6-d701748f0851[0m
+URL: https://api.swaggerhub.com/apis/billoBJ/Blue-Express/1.0.0[0m
+[32m[*] email: test@test.com[0m
+URL: https://api.swaggerhub.com/apis/GolfGenius/DrivingDistance/1.0.0[0m
+URL: https://api.swaggerhub.com/apis/t.krishna.kotian/cart-api/1.0.0[0m
+[32m[*] Heroku API KEY: 59994837-a5cf-486a-b651-194c88ab9714[0m
+URL: https://api.swaggerhub.com/apis/TRASTRA/Partners_v1/1.0.1[0m
+[32m[*] email: hp@trastra.com[0m
+URL: https://api.swaggerhub.com/apis/BSPENCER_1/Simple_Test/1.0.0[0m
+[32m[*] email: user@mail.com[0m
+URL: https://api.swaggerhub.com/apis/test012/testapiname/1.0.0[0m
+[32m[*] email: test@test.com[0m
+URL: https://ap

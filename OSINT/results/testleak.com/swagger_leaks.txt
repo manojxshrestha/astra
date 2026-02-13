@@ -1,0 +1,3 @@
+[*] Found 1 urls
+URL: https://api.swaggerhub.com/apis/WebMago/alpha-streak_core_api/1.0.21[0m
+[32m[*] authorization_basic: basic profile[0m

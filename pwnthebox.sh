@@ -57,6 +57,9 @@ show_menu() {
     echo -e "${YELLOW}[X]${NC} ${CYAN}Binary/Reversing${NC}  →  Binary Exploitation"
     echo "      └─ pwnpasi, ROPgadget, pwndbg, checksec"
     echo ""
+    echo -e "${YELLOW}[O]${NC} ${CYAN}OSINT${NC}  →  Information Gathering"
+    echo "      └─ infoshyt, cloud enum, dorks, email harvest"
+    echo ""
     echo -e "${RED}[0]${NC} ${RED}Exit${NC}"
     echo ""
     echo -e "${CYAN}═══════════════ ${YELLOW}I get paid to break things. At home, I do it for free.${NC} ${CYAN}═══════════════${NC}"
@@ -226,6 +229,13 @@ handle_selection() {
             print_separator
             run_script "$SCRIPT_DIR/Binary/binary-suite.sh"
             ;;
+        O|o)
+            echo ""
+            print_separator
+            log_info "Launching OSINT Suite"
+            print_separator
+            run_script "$SCRIPT_DIR/OSINT/osint-suite.sh"
+            ;;
         recon|RECON)
             run_script "$SCRIPT_DIR/Recon/recon-suite.sh"
             ;;
@@ -289,7 +299,7 @@ main() {
         show_menu
         
         echo ""
-        read -p "Select phase (0-9, X): " choice
+        read -p "Select phase (0-9, X, O): " choice
         
         handle_selection "$choice"
         

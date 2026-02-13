@@ -1,0 +1,1 @@
+file error: open /home/pwn/Tools/gitdorks_go/Dorks/smalldorks.txt: no such file or directory

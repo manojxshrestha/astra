@@ -1,0 +1,21 @@
+
+[1m                      __          _          __     
+   ___  ___  ________/ /    ___  (_)______ _/ /____ 
+  / _ \/ _ \/ __/ __/ _ \  / _ \/ / __/ _ `/ __/ -_)
+ / .__/\___/_/  \__/_//_/ / .__/_/_/  \_,_/\__/\__/ 
+/_/                      /_/                    
+              by [34mMand Consulting Group[0m
+                 [36m@zer0pwn @xixasec[0m
+
+[1m[32m[+][0m Query returned [32m884767[0m search results.[0m
+
+[1m- Requests:[0m[32m629757[0m
+[1m- Workspaces:[0m[32m53974[0m
+[1m- Collections:[0m[32m200041[0m
+[1m- Teams:[0m[32m113[0m
+[1m- APIs:[0m[32m769[0m
+[1m- Flows:[0m[32m113[0m
+
+
+[33m[*][0m Querying workspace ID [36m7f2e783c-ca39-41d0-8edf-519d8320855e[0m
+
