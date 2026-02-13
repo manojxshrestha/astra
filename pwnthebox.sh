@@ -15,62 +15,48 @@ banner() {
     echo ""
     echo -e "${MAGENTA}"
     cat << 'EOF'
-       .------.
-       / ~ ~ \,------. ______
-     ,' ~ ~ ~ / (@) \ ,' \
-   ,' /`. ~ ~ \ / \
- ,' | ,'\ ~ ~ ~ X \ \ \
-' ,' V--< ( \ \ \
- ,' (vv \/\ \ \ | |
-' ,' / (vv "" \ \ | | |
-_,' / / vv """ \ | / / /
-  \__,' / | vv / / / / /
-      \__/ / | | \ / /,',','
-         \__/\_^ | \ /,'',','\
-                `-^.__>.____/ ' ,' \
-                        // //---' |
-      ===============(((((((=================
-         pwnthebox v1.0 | \ \ \
-                                 / | | \
-                                / / / \ \
-                                `. | \
+                      .'--,
+                    ,.-( (o)\
+                   /   .)\ ')
+                 .',.'/    /
+            ()=///=))))==()
+                   /
 EOF
     echo -e "${NC}"
+    echo -e "${CYAN}─────── ${YELLOW}pwnthebox v1.0${NC} • ${CYAN}Professional VAPT Toolkit${NC} • ${CYAN}by manojxshrestha${NC} ${CYAN}───────${NC}"
 }
 show_menu() {
     echo ""
-    echo -e " ${YELLOW}[1]${NC} ${CYAN}Recon${NC} Information Gathering"
-    echo " └─ Passive & Active recon, OSINT, domain enumeration"
+    echo -e "${YELLOW}[1]${NC} ${CYAN}Recon${NC}  →  Information Gathering"
+    echo "      └─ Passive & Active recon, OSINT, domain enumeration"
     echo ""
-    echo -e " ${YELLOW}[2]${NC} ${CYAN}Enum${NC} Identify Weaknesses"
-    echo " └─ Port scanning, service detection, vulnerability scanning"
+    echo -e "${YELLOW}[2]${NC} ${CYAN}Enum${NC}  →  Identify Weaknesses"
+    echo "      └─ Port scanning, service detection, vulnerability scanning"
     echo ""
-    echo -e " ${YELLOW}[3]${NC} ${CYAN}Exploit${NC} Gain Initial Access"
-    echo " └─ Exploitation, payload generation, web attacks"
+    echo -e "${YELLOW}[3]${NC} ${CYAN}Exploit${NC}  →  Gain Initial Access"
+    echo "      └─ Exploitation, payload generation, web attacks"
     echo ""
-    echo -e " ${YELLOW}[4]${NC} ${CYAN}Foothold${NC} Stabilize Access"
-    echo " └─ Shell stabilization, listeners, session management"
+    echo -e "${YELLOW}[4]${NC} ${CYAN}Foothold${NC}  →  Stabilize Access"
+    echo "      └─ Shell stabilization, listeners, session management"
     echo ""
-    echo -e " ${YELLOW}[5]${NC} ${CYAN}Privilege-Escalation${NC} Escalate Privileges"
-    echo " └─ Local exploits, misconfigurations, credential abuse"
+    echo -e "${YELLOW}[5]${NC} ${CYAN}Privilege-Escalation${NC}  →  Escalate Privileges"
+    echo "      └─ Local exploits, misconfigurations, credential abuse"
     echo ""
-    echo -e "${CYAN}───────────────────────────────────────────────────────────────────────────────${NC}"
+    echo -e "${YELLOW}[6]${NC} ${CYAN}Internal${NC}  →  Post-Compromise Recon"
+    echo "      └─ User enumeration, network discovery, domain info"
     echo ""
-    echo -e " ${YELLOW}[6]${NC} ${CYAN}Internal${NC} Post-Compromise Recon"
-    echo " └─ User enumeration, network discovery, domain info"
+    echo -e "${YELLOW}[7]${NC} ${CYAN}Lateral${NC}  →  Move Through Network"
+    echo "      └─ SSH pivoting, psexec, WMI, tunneling"
     echo ""
-    echo -e " ${YELLOW}[7]${NC} ${CYAN}Lateral${NC} Move Through Network"
-    echo " └─ SSH pivoting, psexec, WMI, tunneling"
+    echo -e "${YELLOW}[8]${NC} ${CYAN}Persistence${NC}  →  Maintain Access"
+    echo "      └─ Backdoors, scheduled tasks, services, SSH keys"
     echo ""
-    echo -e " ${YELLOW}[8]${NC} ${CYAN}Persistence${NC} Maintain Access"
-    echo " └─ Backdoors, scheduled tasks, services, SSH keys"
+    echo -e "${YELLOW}[9]${NC} ${CYAN}Misc${NC}  →  Additional Tools"
+    echo "      └─ Actions on objectives, hash cracking, stego"
     echo ""
-    echo -e " ${YELLOW}[9]${NC} ${CYAN}Misc${NC} Additional Tools"
-    echo " └─ Actions on objectives, hash cracking, stego"
+    echo -e "${RED}[0]${NC} ${RED}Exit${NC}"
     echo ""
-    echo -e " ${RED}[0]${NC} ${RED}Exit${NC}"
-    echo ""
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}═══════════════ ${YELLOW}I get paid to break things. At home, I do it for free.${NC} ${CYAN}═══════════════${NC}"
     echo ""
 }
 log_info() { echo -e "${BLUE}[*]${NC} $1"; }
@@ -279,26 +265,6 @@ handle_selection() {
             ;;
     esac
 }
-scroll_credits() {
-    local text="$1"
-    local width=79
-    local padding=""
-    
-    # Create padding to start from right
-    for ((i=0; i<width; i++)); do
-        padding="$padding "
-    done
-    
-    local full_text="$padding$text$padding"
-    local text_len=${#full_text}
-    
-    # Fast scroll - 0.03s delay (completes in ~3-4 seconds)
-    for ((i=0; i<=text_len-width; i++)); do
-        printf "\r%s" "${full_text:$i:$width}"
-        sleep 0.03
-    done
-    echo ""
-}
 
 main() {
     if [[ $# -gt 0 ]]; then
@@ -312,14 +278,8 @@ main() {
         # Show menu IMMEDIATELY - no waiting!
         show_menu
         
-        # Credits scroll at bottom while user reads menu
         echo ""
-        printf "${YELLOW}"
-        scroll_credits "PwnTheBox Framework v1.0 • 9-Phase Penetration Testing Suite • Created by manojxshrestha • Instagram: @manojxshrestha • X: @manojxshrestha • GitHub: github.com/manojxshrestha"
-        printf "${NC}"
-        
-        echo ""
-        read -p "Enter phase (0-9): " choice
+        read -p "Select phase (0-9): " choice
         
         handle_selection "$choice"
         
