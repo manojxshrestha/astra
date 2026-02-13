@@ -49,8 +49,8 @@ show_menu() {
     echo "   B5.  objdump - Disassemble Binary"
     echo ""
     echo -e "${YELLOW}Debugging${NC}"
-    echo "   B6.  pwndbg - GDB Plugin Setup"
-    echo "   B7.  GDB Debug with Pwndbg"
+    echo "   B6.  pwndbg - GDB Plugin Info"
+    echo "   B7.  Pwntools - Interactive Debugger"
     echo ""
     echo -e "${YELLOW}Tools${NC}"
     echo "   BA.  Install/Update All Tools"
@@ -163,23 +163,22 @@ handle_selection() {
             fi
             ;;
         B6|b6)
-            echo -e "${BLUE}[*] pwndbg - GDB Plugin Setup${NC}"
+            echo -e "${BLUE}[*] pwndbg - GDB Plugin Info${NC}"
             echo ""
-            if [[ ! -d "$HOME/pwndbg" ]]; then
-                echo -e "${YELLOW}[!] pwndbg not found. Clone from ~/pwndbg${NC}"
-                exit 1
-            fi
-            echo "[*] Installing pwndbg to GDB..."
-            run_cmd "cd $HOME/pwndbg && ./setup.sh"
-            log_good "pwndbg installed!"
+            echo "[*] pwndbg is installed in framework venv"
+            echo "[*] Location: ~/pwndbg/"
+            echo "[*] For manual setup: cd ~/pwndbg && ./setup.sh"
+            log_good "pwndbg ready for use!"
             ;;
         B7|b7)
-            echo -e "${BLUE}[*] GDB Debug with Pwndbg${NC}"
+            echo -e "${BLUE}[*] GDB Debug with Pwntools${NC}"
             echo ""
             echo -n "[*] Enter binary path: "
             read BINARY
             if [[ -n "$BINARY" && -f "$BINARY" ]]; then
-                run_cmd "gdb -ex 'source ~/pwndbg/gdbinit.py' '$BINARY'"
+                source ~/pwnthebox/venv/bin/activate
+                run_cmd "pwntools"
+                log_good "Use: pwn> gdb.attach(binary, gdbscript='break main\\ncontinue')"
             else
                 echo -e "${YELLOW}[!] Binary not found${NC}"
             fi
