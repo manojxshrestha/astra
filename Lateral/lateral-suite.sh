@@ -25,23 +25,15 @@ NC='\033[0m'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 banner() {
-    echo -e "${CYAN}"
-    cat << 'EOF'
-╔═══════════════════════════════════════════════════════════════════════════╗
-║                                                                           ║
-║              LATERAL MOVEMENT SUITE                                       ║
-║              Phase 7: Move through the network                             ║
-║                                                                           ║
-╚═══════════════════════════════════════════════════════════════════════════╝
-EOF
-    echo -e "${NC}"
+    echo ""
+    echo -e "${CYAN}─────── LATERAL MOVEMENT SUITE ───────"
+    echo -e "─────── Phase 7: Move through the network ───────${NC}"
+    echo ""
 }
 
 show_menu() {
     echo ""
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "${CYAN}  LATERAL MOVEMENT${NC}"
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}─────── LATERAL MOVEMENT ───────"
     echo ""
     echo -e "${YELLOW}SSH Pivoting${NC}"
     echo "   L1.  SSH Local Port Forward"

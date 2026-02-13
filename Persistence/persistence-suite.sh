@@ -25,23 +25,15 @@ NC='\033[0m'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 banner() {
-    echo -e "${CYAN}"
-    cat << 'EOF'
-╔═══════════════════════════════════════════════════════════════════════════╗
-║                                                                           ║
-║              PERSISTENCE SUITE                                           ║
-║              Phase 8: Maintain access across reboots/logouts               ║
-║                                                                           ║
-╚═══════════════════════════════════════════════════════════════════════════╝
-EOF
-    echo -e "${NC}"
+    echo ""
+    echo -e "${CYAN}─────── PERSISTENCE SUITE ───────"
+    echo -e "─────── Phase 8: Maintain access across reboots/logouts ───────${NC}"
+    echo ""
 }
 
 show_menu() {
     echo ""
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "${CYAN}  PERSISTENCE${NC}"
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}─────── PERSISTENCE ───────"
     echo ""
     echo -e "${YELLOW}Linux Persistence${NC}"
     echo "   P1.  SSH Backdoor Keys"

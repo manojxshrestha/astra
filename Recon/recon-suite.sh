@@ -23,23 +23,15 @@ NC='\033[0m'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 banner() {
-    echo -e "${CYAN}"
-    cat << 'EOF'
- ╔═══════════════════════════════════════════════════════════════════════════════════╗
- ║                                                                           ║
- ║                      RECON SUITE                                         ║
- ║                   Phase 1: Information Gathering                         ║
- ║                                                                           ║
- ╚═══════════════════════════════════════════════════════════════════════════╝
-EOF
-    echo -e "${NC}"
+    echo ""
+    echo -e "${CYAN}─────── RECON SUITE ───────"
+    echo -e "─────── Phase 1: Information Gathering ───────${NC}"
+    echo ""
 }
 
 show_menu() {
     echo ""
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "${CYAN}  RECONNAISSANCE${NC}"
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}─────── RECONNAISSANCE ───────"
     echo ""
     echo -e "${YELLOW}Passive Reconnaissance${NC}"
     echo "   R1.  Domain Information (whois, dig, nslookup)"
@@ -61,32 +53,11 @@ show_menu() {
     echo ""
     echo -e "${RED}0. Exit to Main Menu${NC}"
     echo ""
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
-}
-
-log_info() { echo -e "${BLUE}[*]${NC} $1"; }
-log_good() { echo -e "${GREEN}[+]${NC} $1"; }
-log_warn() { echo -e "${YELLOW}[!]${NC} $1"; }
-
-run_recon_script() {
-    local script="$1"
-    shift
-    
-    if [[ -x "$SCRIPT_DIR/$script" ]]; then
-        log_info "Running: $script"
-        "$SCRIPT_DIR/$script" "$@"
-    elif [[ -f "$SCRIPT_DIR/$script" ]]; then
-        log_info "Running: $script"
-        bash "$SCRIPT_DIR/$script" "$@"
-    else
-        log_warn "Script not found: $script"
-    fi
 }
 
 show_tools() {
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "${CYAN}  RECONNAISSANCE TOOLS${NC}"
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
+    echo ""
+    echo -e "${CYAN}─────── RECONNAISSANCE TOOLS ───────"
     echo ""
     echo "Scripts Location: $SCRIPT_DIR"
     echo ""

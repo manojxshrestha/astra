@@ -24,23 +24,15 @@ NC='\033[0m'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 banner() {
-    echo -e "${CYAN}"
-    cat << 'EOF'
-╔═══════════════════════════════════════════════════════════════════════════╗
-║                                                                           ║
-║              ESTABLISH FOOTHOLD SUITE                                     ║
-║              Phase 4: Stabilize and maintain access                        ║
-║                                                                           ║
-╚═══════════════════════════════════════════════════════════════════════════╝
-EOF
-    echo -e "${NC}"
+    echo ""
+    echo -e "${CYAN}─────── ESTABLISH FOOTHOLD SUITE ───────"
+    echo -e "─────── Phase 4: Stabilize and maintain access ───────${NC}"
+    echo ""
 }
 
 show_menu() {
     echo ""
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "${CYAN}  ESTABLISH FOOTHOLD${NC}"
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}─────── ESTABLISH FOOTHOLD ───────"
     echo ""
     echo -e "${YELLOW}Shell Stabilization${NC}"
     echo "   F1.  Python PTY Spawn"

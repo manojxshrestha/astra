@@ -24,23 +24,15 @@ NC='\033[0m'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 banner() {
-    echo -e "${CYAN}"
-    cat << 'EOF'
- ╔═══════════════════════════════════════════════════════════════════════════════════╗
- ║                                                                           ║
- ║                      ENUM SUITE                                          ║
- ║                Phase 2: Identify Weaknesses                               ║
- ║                                                                           ║
- ╚═══════════════════════════════════════════════════════════════════════════╝
-EOF
-    echo -e "${NC}"
+    echo ""
+    echo -e "${CYAN}─────── ENUM SUITE ───────"
+    echo -e "─────── Phase 2: Identify Weaknesses ───────${NC}"
+    echo ""
 }
 
 show_menu() {
     echo ""
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "${CYAN}  ENUMERATION & VULNERABILITY ANALYSIS${NC}"
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}─────── ENUMERATION & VULNERABILITY ANALYSIS ───────"
     echo ""
     echo -e "${YELLOW}Port Scanning${NC}"
     echo "   E1.  Quick Port Scan"

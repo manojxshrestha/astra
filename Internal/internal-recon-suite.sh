@@ -25,23 +25,15 @@ NC='\033[0m'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 banner() {
-    echo -e "${CYAN}"
-    cat << 'EOF'
-╔═══════════════════════════════════════════════════════════════════════════╗
-║                                                                           ║
-║              INTERNAL RECONNAISSANCE SUITE                                ║
-║              Phase 6: Enumerate internal network and resources             ║
-║                                                                           ║
-╚═══════════════════════════════════════════════════════════════════════════╝
-EOF
-    echo -e "${NC}"
+    echo ""
+    echo -e "${CYAN}─────── INTERNAL RECONNAISSANCE SUITE ───────"
+    echo -e "─────── Phase 6: Enumerate internal network and resources ───────${NC}"
+    echo ""
 }
 
 show_menu() {
     echo ""
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "${CYAN}  INTERNAL RECONNAISSANCE${NC}"
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}─────── INTERNAL RECONNAISSANCE ───────"
     echo ""
     echo -e "${YELLOW}User & Group Enumeration${NC}"
     echo "   I1.  Current User Info"

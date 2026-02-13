@@ -42,16 +42,10 @@ EXPLOITS=()
 CVES=()
 
 banner() {
-    echo -e "${CYAN}"
-    cat << 'EOF'
-╔═══════════════════════════════════════════════════════════════════╗
-║                                                                   ║
-║           LINUX PRIVILEGE ESCALATION CHECKER                      ║
-║              PEASS-ng Inspired Professional Edition               ║
-║                                                                   ║
-╚═══════════════════════════════════════════════════════════════════╝
-EOF
-    echo -e "${NC}"
+    echo ""
+    echo -e "${CYAN}─────── LINUX PRIVILEGE ESCALATION CHECKER ───────"
+    echo -e "─────── PEASS-ng Inspired Professional Edition ───────${NC}"
+    echo ""
 }
 
 usage() {
@@ -122,9 +116,8 @@ log_high() {
 section() {
     echo ""
     if [[ "$STEALTH_MODE" == "false" ]]; then
-        echo -e "${CYAN}═══════════════════════════════════════════════════════════════════${NC}"
-        echo -e "${CYAN}  $1${NC}"
-        echo -e "${CYAN}═══════════════════════════════════════════════════════════════════${NC}"
+        echo ""
+        echo -e "${CYAN}─────── $1 ───────"
     else
         echo "=== $1 ==="
     fi

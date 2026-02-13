@@ -25,23 +25,15 @@ NC='\033[0m'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 banner() {
-    echo -e "${CYAN}"
-    cat << 'EOF'
-╔═══════════════════════════════════════════════════════════════════════════╗
-║                                                                   ║
-║              ACTIONS ON OBJECTIVES SUITE                           ║
-║              Phase 9: Complete the mission                         ║
-║                                                                   ║
-╚═══════════════════════════════════════════════════════════════════╝
-EOF
-    echo -e "${NC}"
+    echo ""
+    echo -e "${CYAN}─────── ACTIONS ON OBJECTIVES SUITE ───────"
+    echo -e "─────── Phase 9: Complete the mission ───────${NC}"
+    echo ""
 }
 
 show_menu() {
     echo ""
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "${CYAN}  ACTIONS ON OBJECTIVES${NC}"
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}─────── ACTIONS ON OBJECTIVES ───────"
     echo ""
     echo -e "${YELLOW}Credential Harvesting${NC}"
     echo "   O1.  Linux Credential Harvest"
