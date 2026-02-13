@@ -29,7 +29,7 @@ scroll_text() {
     
     # Scroll from right to left
     for ((i=0; i<=text_len-width; i++)); do
-        printf "\r${CYAN}║${NC} %s ${CYAN}║${NC}" "${full_text:$i:$width}"
+        printf "\r%s" "${full_text:$i:$width}"
         sleep 0.08
     done
     echo ""
@@ -39,13 +39,9 @@ show_marquee() {
     local marquee_text="A comprehensive 9-phase penetration testing framework for authorized security assessments. Professional Vulnerability Assessment & Penetration Testing Toolkit | Author: manojxshrestha | Instagram: @manojxshrestha | X: @manojxshrestha | Medium: @manojxshrestha | GitHub: github.com/manojxshrestha"
     
     echo ""
-    echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║${NC}                                                                               ${CYAN}║${NC}"
     echo -ne "${YELLOW}"
     scroll_text "$marquee_text"
     echo -ne "${NC}"
-    echo -e "${CYAN}║${NC}                                                                               ${CYAN}║${NC}"
-    echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
     echo ""
 }
 
