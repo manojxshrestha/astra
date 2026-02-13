@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# infoshyt Installer
-# Installs tools required by infoshyt.sh
+# osint-suite Installer
+# Installs tools required by osint-suite.sh
 # Usage: ./install.sh [OPTIONS]
 #
 # OPTIONS:
@@ -85,19 +85,19 @@ check_installation() {
     if [[ -f "$HOME/Tools/.github_tokens" ]]; then
         echo -e "  ${GREEN}[OK]${RESET} GitHub tokens"
     else
-        echo -e "  ${RED}[MISSING]${RESET} GitHub tokens (run ./configure_infoshyt.sh)"
+        echo -e "  ${RED}[MISSING]${RESET} GitHub tokens (run ./configure_osint-suite.sh)"
     fi
     
     if [[ -f "$HOME/Tools/.gitlab_tokens" ]]; then
         echo -e "  ${GREEN}[OK]${RESET} GitLab tokens"
     else
-        echo -e "  ${RED}[MISSING]${RESET} GitLab tokens (run ./configure_infoshyt.sh)"
+        echo -e "  ${RED}[MISSING]${RESET} GitLab tokens (run ./configure_osint-suite.sh)"
     fi
     
-    if [[ -f "infoshyt.cfg" ]]; then
-        echo -e "  ${GREEN}[OK]${RESET} infoshyt.cfg"
+    if [[ -f "osint-suite.cfg" ]]; then
+        echo -e "  ${GREEN}[OK]${RESET} osint-suite.cfg"
     else
-        echo -e "  ${RED}[MISSING]${RESET} infoshyt.cfg (run ./configure_infoshyt.sh)"
+        echo -e "  ${RED}[MISSING]${RESET} osint-suite.cfg (run ./configure_osint-suite.sh)"
     fi
     
     exit 0
@@ -113,7 +113,7 @@ echo -e "
 █       █ █    ▐   █                   ▐       █   █        █     █         
 ▐       ▐ ▐        ▐                           ▐   ▐        ▐     ▐         
                                     
-infoshyt Installer
+osint-suite Installer
 "
 
 # Variables
@@ -373,7 +373,7 @@ if [[ $FORCE == true ]]; then
     echo -e "${YELLOW}[FORCE] Force reinstall mode enabled${RESET}"
 fi
 
-echo -e "${GREEN}[START] Installing infoshyt tools${RESET}"
+echo -e "${GREEN}[START] Installing osint-suite tools${RESET}"
 install_system_packages
 install_golang
 install_gotools
@@ -381,5 +381,5 @@ install_repos
 echo -e "${GREEN}[SUCCESS] Installation completed!${RESET}"
 echo ""
 echo -e "${YELLOW}Next steps:${RESET}"
-echo -e "  1. Run ${GREEN}./configure_infoshyt.sh${RESET} to set up API keys"
+echo -e "  1. Run ${GREEN}./configure_osint-suite.sh${RESET} to set up API keys"
 echo -e "  2. Run ${GREEN}./install.sh --check${RESET} to verify installation"

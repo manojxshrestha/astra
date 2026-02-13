@@ -60,6 +60,9 @@ show_menu() {
     echo -e "${YELLOW}[O]${NC} ${CYAN}OSINT${NC}  →  Information Gathering"
     echo "      └─ infoshyt, cloud enum, dorks, email harvest"
     echo ""
+    echo -e "${YELLOW}[C]${NC} ${CYAN}Crypto${NC}  →  Cryptography Tools"
+    echo "      └─ Cipher decoding, RSA attacks, hash cracking"
+    echo ""
     echo -e "${RED}[0]${NC} ${RED}Exit${NC}"
     echo ""
     echo -e "${CYAN}═══════════════ ${YELLOW}I get paid to break things. At home, I do it for free.${NC} ${CYAN}═══════════════${NC}"
@@ -100,6 +103,7 @@ show_paths() {
     echo -e " ${BLUE}📁${NC} Lateral Movement ${CYAN}→${NC} $SCRIPT_DIR/Lateral/"
     echo -e " ${BLUE}📁${NC} Persistence ${CYAN}→${NC} $SCRIPT_DIR/Persistence/"
     echo -e " ${BLUE}📁${NC} Miscellaneous ${CYAN}→${NC} $SCRIPT_DIR/Misc/"
+    echo -e " ${BLUE}📁${NC} Cryptography ${CYAN}→${NC} $SCRIPT_DIR/Crypto/"
     echo ""
 }
 check_deps() {
@@ -236,6 +240,13 @@ handle_selection() {
             print_separator
             run_script "$SCRIPT_DIR/OSINT/osint-suite.sh"
             ;;
+        C|c)
+            echo ""
+            print_separator
+            log_info "Launching Crypto Suite"
+            print_separator
+            run_script "$SCRIPT_DIR/Crypto/crypto-suite.sh"
+            ;;
         recon|RECON)
             run_script "$SCRIPT_DIR/Recon/recon-suite.sh"
             ;;
@@ -270,11 +281,6 @@ handle_selection() {
             ;;
         0|exit)
             echo ""
-            echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
-            echo -e "${CYAN}║${NC} ${GREEN}Thank you for using pwnthebox Framework!${NC} ${CYAN}║${NC}"
-            echo -e "${CYAN}║${NC} ${YELLOW}Stay ethical. Hack responsibly.${NC} ${CYAN}║${NC}"
-            echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
-            echo ""
             exit 0
             ;;
         *)
@@ -299,7 +305,7 @@ main() {
         show_menu
         
         echo ""
-        read -p "Select phase (0-9, X, O): " choice
+        read -p "Select phase (0-9, X, O, C): " choice
         
         handle_selection "$choice"
         

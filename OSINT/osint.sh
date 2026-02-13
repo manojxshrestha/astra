@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# infoshyt - OSINT Reconnaissance Tool
-# Usage: ./infoshyt.sh -d <domain> [-D]
+# osint-suite - OSINT Reconnaissance Tool
+# Usage: ./osint-suite.sh -d <domain> [-D]
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Colors
 reset='\033[0m'
@@ -11,9 +13,9 @@ cyan='\033[1;36m'
 green='\033[0;32m'
 
 # Variables
-LOGFILE="infoshyt.log"
-tools=$(cat infoshyt.cfg | grep "TOOLS_DIR" | cut -d'=' -f2)
-source infoshyt.cfg
+LOGFILE="osint-suite.log"
+tools=$(cat "${SCRIPT_DIR}/osint-suite.cfg" | grep "TOOLS_DIR" | cut -d'=' -f2)
+source "${SCRIPT_DIR}/osint-suite.cfg"
 
 # Default values
 OSINT=true
@@ -82,15 +84,19 @@ done
 
 # Check if domain is provided
 if [ -z "$domain" ] && [ -z "$HUDSON_EMAIL" ] && [ -z "$HUDSON_USERNAME" ] && [ -z "$HUDSON_PHONE" ]; then
-    echo "Usage: $0 -d <domain> [--username <user> --email <email> --phone <number>] [-D]"
     echo ""
-    echo "Options:"
-    echo "  -d <domain>        Target domain"
-    echo "  --username <user>  Search by username"
-    echo "  --email <email>    Search by email"
-    echo "  --phone <number>   Search by phone number"
-    echo "  -D                 Force re-run (diff mode)"
-    exit 1
+    read -p "Enter target domain: " domain
+    if [ -z "$domain" ]; then
+        echo "Usage: $0 -d <domain> [--username <user> --email <email> --phone <number>] [-D]"
+        echo ""
+        echo "Options:"
+        echo "  -d <domain>        Target domain"
+        echo "  --username <user>  Search by username"
+        echo "  --email <email>    Search by email"
+        echo "  --phone <number>   Search by phone number"
+        echo "  -D                 Force re-run (diff mode)"
+        exit 1
+    fi
 fi
 
 # Set directory structure
@@ -128,18 +134,10 @@ end_func() {
 }
 
 # Banner
-echo -e "${cyan}
- ▄▀▀█▀▄    ▄▀▀▄ ▀▄  ▄▀▀▀█▄    ▄▀▀▀▀▄   ▄▀▀▀▀▄  ▄▀▀▄ ▄▄   ▄▀▀▄ ▀▀▄  ▄▀▀▀█▀▀▄ 
-█   █  █  █  █ █ █ █  ▄▀  ▀▄ █      █ █ █   ▐ █  █   ▄▀ █   ▀▄ ▄▀ █    █  ▐ 
-▐   █  ▐  ▐  █  ▀█ ▐ █▄▄▄▄   █      █    ▀▄   ▐  █▄▄▄█  ▐     █   ▐   █     
-    █       █   █   █    ▐   ▀▄    ▄▀ ▀▄   █     █   █        █      █      
- ▄▀▀▀▀▀▄  ▄▀   █    █          ▀▀▀▀    █▀▀▀     ▄▀  ▄▀      ▄▀     ▄▀       
-█       █ █    ▐   █                   ▐       █   █        █     █         
-▐       ▐ ▐        ▐                   ▐   ▐        ▐     ▐         
-         
-                    OSINT Reconnaissance Tool                    
-                                    by ~/.manojxshrestha             
-${reset}"
+echo ""
+echo -e "─────── OSINT SUITE ───────"
+echo -e "─────── Phase 1: Information Gathering ───────"
+echo ""
 
 # Start OSINT scan
 echo -e "${yellow}[$(date +'%Y-%m-%d %H:%M:%S %z')] [START] OSINT scan for $domain${reset}"
