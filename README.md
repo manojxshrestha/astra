@@ -87,7 +87,6 @@ PwnTheBox is a professional-grade penetration testing framework designed for com
 ### 🛠️ Comprehensive Tool Suite
 
 #### Reconnaissance (Phase 1)
-- ✅ theHarvester v4.10.0 (latest from GitHub)
 - DNSRecon, DNSTwist, Subfinder
 - Recon-ng, SpiderFoot
 - Maltego, theHarvester
