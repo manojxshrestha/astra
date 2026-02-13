@@ -42,6 +42,27 @@ EOF
     echo -e "${NC}"
 }
 
+scroll_marquee() {
+    local text="PwnTheBox Framework v1.0 • 9-Phase Penetration Testing Suite for Authorized Security Assessments • Professional VAPT Toolkit • Created by manojxshrestha • Instagram: @manojxshrestha • X: @manojxshrestha • Medium: @manojxshrestha • GitHub: github.com/manojxshrestha"
+    local width=79
+    local padding=""
+    
+    # Create padding
+    for ((i=0; i<width; i++)); do
+        padding="$padding "
+    done
+    
+    local full_text="$padding$text$padding"
+    local text_len=${#full_text}
+    
+    # Scroll once from right to left
+    for ((i=0; i<=text_len-width; i++)); do
+        printf "\r%s" "${full_text:$i:$width}"
+        sleep 0.12
+    done
+    echo ""
+}
+
 show_menu() {
     echo ""
     echo -e " ${YELLOW}[1]${NC} ${CYAN}Recon${NC}                    Information Gathering"
@@ -76,6 +97,10 @@ show_menu() {
     echo -e " ${RED}[0]${NC} ${RED}Exit${NC}"
     echo ""
     echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════════════${NC}"
+    echo ""
+    printf "${YELLOW}"
+    scroll_marquee
+    printf "${NC}"
     echo ""
 }
 
