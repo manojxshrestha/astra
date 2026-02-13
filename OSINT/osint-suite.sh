@@ -232,7 +232,9 @@ handle_selection() {
             run_cmd "bash install.sh"
             ;;
         0)
-            exit 0
+            echo ""
+            log_info "Returning to main menu..."
+            break
             ;;
         *)
             echo -e "${RED}[!] Invalid choice: $choice${NC}"
@@ -242,7 +244,24 @@ handle_selection() {
 
 banner
 check_tools
-show_menu
 
-read -p "Select option (0-9, A): " choice
-handle_selection "$choice"
+while true; do
+    show_menu
+    read -p "Select option (0-9, A): " choice
+    
+    case "$choice" in
+        0)
+            echo ""
+            log_info "Returning to main menu..."
+            break
+            ;;
+        *)
+            handle_selection "$choice"
+            ;;
+    esac
+    
+    echo ""
+    read -p "Press Enter to continue..."
+    banner
+done
+
