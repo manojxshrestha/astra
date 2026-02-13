@@ -168,7 +168,7 @@ handle_selection() {
             read TARGET
             echo ""
             if [[ -n "$TARGET" ]]; then
-                run_script "subenum.sh" "$TARGET"
+                run_cmd "bash $SCRIPT_DIR/subenum.sh $TARGET"
             else
                 echo -e "${YELLOW}[!] Missing target${NC}"
             fi
