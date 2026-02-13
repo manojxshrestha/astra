@@ -10,6 +10,9 @@ MAGENTA='\033[0;35m'
 NC='\033[0m'
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+VERSION="1.0.0"
+AUTHOR="manojxshrestha"
+GITHUB="https://github.com/manojxshrestha/pwnthebox"
 
 banner() {
     clear
@@ -17,7 +20,7 @@ banner() {
     cat << 'EOF'
 ╔═══════════════════════════════════════════════════════════════════════════════╗
 ║                                                                               ║
-║                    PWNTHEBOX FRAMEWORK                                      ║
+║                    PWNTHEBOX FRAMEWORK                                        ║
 ║              Professional Penetration Testing Suite                           ║
 ║                                                                               ║
 ║              Standardized Penetration Testing Lifecycle                       ║
@@ -25,52 +28,80 @@ banner() {
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 EOF
     echo -e "${NC}"
+    echo -e "${MAGENTA}"
+    cat << 'EOF'
+       .------.
+       /  ~ ~   \,------.      ______
+     ,'  ~ ~ ~  /  (@)   \   ,'      \
+   ,'          /`.    ~ ~ \ /         \
+ ,'           | ,'\  ~ ~ ~ X     \  \  \
+'  ,'          V--<       (       \  \  \
+ ,'               (vv      \/\  \  \  |  |
+'  ,'   /         (vv   ""    \  \  | |  |
+_,'    /   /       vv   """    \ |  / / /
+  \__,'   /  |     vv          / / / / /
+      \__/   / |  | \         / /,',','
+         \__/\_^  |  \       /,'',','\
+                `-^.__>.____/  ' ,'   \
+                        // //---'      |
+      ===============(((((((=================
+         pwnthebox v1.0          | \ \  \
+                                 / |  |  \
+                                / /  / \  \
+                                `.     |   \
+EOF
+    echo -e "${NC}"
 }
 
 show_menu() {
     echo ""
     echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║  PENETRATION TESTING LIFECYCLE                                     ║${NC}"
+    echo -e "${CYAN}║${NC} ${YELLOW}PENETRATION TESTING LIFECYCLE${NC}                                                ${CYAN}║${NC}"
     echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
     echo ""
     
-    echo -e "${YELLOW}1. Recon${NC}                       Information Gathering"
-    echo "       Passive & Active recon, OSINT, domain enumeration"
+    echo -e " ${YELLOW}[1]${NC} ${CYAN}Recon${NC}                    Information Gathering"
+    echo "      └─ Passive & Active recon, OSINT, domain enumeration"
     echo ""
-    echo -e "${YELLOW}2. Enum${NC}                        Identify weaknesses"
-    echo "       Port scanning, service detection, vulnerability scanning"
+    echo -e " ${YELLOW}[2]${NC} ${CYAN}Enum${NC}                     Identify Weaknesses"
+    echo "      └─ Port scanning, service detection, vulnerability scanning"
     echo ""
-    echo -e "${YELLOW}3. Exploit${NC}                      Gain initial access"
-    echo "       Exploitation, payload generation, web attacks"
+    echo -e " ${YELLOW}[3]${NC} ${CYAN}Exploit${NC}                  Gain Initial Access"
+    echo "      └─ Exploitation, payload generation, web attacks"
     echo ""
-    echo -e "${YELLOW}4. Foothold${NC}                    Stabilize access"
-    echo "       Shell stabilization, listeners, session management"
+    echo -e " ${YELLOW}[4]${NC} ${CYAN}Foothold${NC}                 Stabilize Access"
+    echo "      └─ Shell stabilization, listeners, session management"
     echo ""
-    echo -e "${YELLOW}5. Privilege-Escalation${NC}          Escalate privileges"
-    echo "       Local exploits, misconfigurations, credential abuse"
+    echo -e " ${YELLOW}[5]${NC} ${CYAN}Privilege-Escalation${NC}     Escalate Privileges"
+    echo "      └─ Local exploits, misconfigurations, credential abuse"
     echo ""
     echo -e "${CYAN}───────────────────────────────────────────────────────────────────────────────${NC}"
     echo ""
-    echo -e "${YELLOW}6. Internal${NC}                    Post-compromise recon"
-    echo "       User enumeration, network discovery, domain info"
+    echo -e " ${YELLOW}[6]${NC} ${CYAN}Internal${NC}                 Post-Compromise Recon"
+    echo "      └─ User enumeration, network discovery, domain info"
     echo ""
-    echo -e "${YELLOW}7. Lateral${NC}                     Move through network"
-    echo "       SSH pivoting, psexec, WMI, tunneling"
+    echo -e " ${YELLOW}[7]${NC} ${CYAN}Lateral${NC}                  Move Through Network"
+    echo "      └─ SSH pivoting, psexec, WMI, tunneling"
     echo ""
-    echo -e "${YELLOW}8. Persistence${NC}                  Maintain access"
-    echo "       Backdoors, scheduled tasks, services, SSH keys"
+    echo -e " ${YELLOW}[8]${NC} ${CYAN}Persistence${NC}              Maintain Access"
+    echo "      └─ Backdoors, scheduled tasks, services, SSH keys"
     echo ""
-    echo -e "${YELLOW}9. Misc${NC}                        Additional tools"
-    echo "       Actions on objectives, hash cracking, stego"
+    echo -e " ${YELLOW}[9]${NC} ${CYAN}Misc${NC}                     Additional Tools"
+    echo "      └─ Actions on objectives, hash cracking, stego"
     echo ""
-    echo -e "${RED}0. Exit${NC}"
+    echo -e " ${RED}[0]${NC} ${RED}Exit${NC}"
     echo ""
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════════════${NC}"
 }
 
 log_info() { echo -e "${BLUE}[*]${NC} $1"; }
 log_good() { echo -e "${GREEN}[+]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[!]${NC} $1"; }
+log_error() { echo -e "${RED}[-]${NC} $1"; }
+
+print_separator() {
+    echo -e "${CYAN}───────────────────────────────────────────────────────────────────────────────${NC}"
+}
 
 run_script() {
     local script="$1"
@@ -88,70 +119,80 @@ run_script() {
 }
 
 show_paths() {
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}  TOOL PATHS${NC}"
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════════════╝${NC}"
     echo ""
-    echo "Reconnaissance:         $SCRIPT_DIR/Recon/"
-    echo "Enumeration:           $SCRIPT_DIR/Enum/"
-    echo "Initial Compromise:     $SCRIPT_DIR/Exploit/"
-    echo "Establish Foothold:     $SCRIPT_DIR/Foothold/"
-    echo "Privilege Escalation:   $SCRIPT_DIR/Privilege-Escalation/"
-    echo "Internal Recon:         $SCRIPT_DIR/Internal/"
-    echo "Lateral Movement:       $SCRIPT_DIR/Lateral/"
-    echo "Persistence:           $SCRIPT_DIR/Persistence/"
-    echo "Miscellaneous:         $SCRIPT_DIR/Misc/"
+    echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║${NC} ${YELLOW}TOOL PATHS${NC}                                                                   ${CYAN}║${NC}"
+    echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+    echo -e " ${BLUE}📁${NC} Reconnaissance       ${CYAN}→${NC} $SCRIPT_DIR/Recon/"
+    echo -e " ${BLUE}📁${NC} Enumeration          ${CYAN}→${NC} $SCRIPT_DIR/Enum/"
+    echo -e " ${BLUE}📁${NC} Initial Compromise   ${CYAN}→${NC} $SCRIPT_DIR/Exploit/"
+    echo -e " ${BLUE}📁${NC} Establish Foothold   ${CYAN}→${NC} $SCRIPT_DIR/Foothold/"
+    echo -e " ${BLUE}📁${NC} Privilege Escalation ${CYAN}→${NC} $SCRIPT_DIR/Privilege-Escalation/"
+    echo -e " ${BLUE}📁${NC} Internal Recon       ${CYAN}→${NC} $SCRIPT_DIR/Internal/"
+    echo -e " ${BLUE}📁${NC} Lateral Movement     ${CYAN}→${NC} $SCRIPT_DIR/Lateral/"
+    echo -e " ${BLUE}📁${NC} Persistence          ${CYAN}→${NC} $SCRIPT_DIR/Persistence/"
+    echo -e " ${BLUE}📁${NC} Miscellaneous        ${CYAN}→${NC} $SCRIPT_DIR/Misc/"
     echo ""
 }
 
 check_deps() {
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "${CYAN}  DEPENDENCIES${NC}"
-    echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
+    echo ""
+    echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║${NC} ${YELLOW}DEPENDENCY CHECK${NC}                                                             ${CYAN}║${NC}"
+    echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
     echo ""
     
     local deps=("bash" "python3" "nmap" "msfvenom" "curl" "wget")
+    local installed=0
+    local missing=0
     
     for dep in "${deps[@]}"; do
         if command -v "$dep" >/dev/null 2>&1; then
-            echo -e "  ${GREEN}✓${NC} $dep"
+            echo -e " ${GREEN}✓${NC} ${GREEN}$dep${NC}"
+            ((installed++))
         else
-            echo -e "  ${RED}✗${NC} $dep (missing)"
+            echo -e " ${RED}✗${NC} ${RED}$dep${NC} ${YELLOW}(missing)${NC}"
+            ((missing++))
         fi
     done
+    
+    echo ""
+    echo -e " ${CYAN}Summary:${NC} ${GREEN}$installed installed${NC} | ${RED}$missing missing${NC}"
+    echo ""
 }
 
 usage() {
-    cat << EOF
-PWNTHEBOX - Professional Penetration Testing Framework
-Creative Penetration Testing Lifecycle
-
-USAGE: $0 [OPTIONS]
-
-LIFECYCLE PHASES:
-  1    Recon Suite
-  2    Enum Suite
-  3    Exploit Suite
-  4    Foothold Suite
-  5    Privilege Escalation (PE) Suite
-  6    Internal Recon Suite
-  7    Lateral Suite
-  8    Persistence Suite
-  9    Misc Suite (Actions on Objectives)
-
-OPTIONS:
-  --paths      Show tool paths
-  --deps       Check dependencies
-  --help       Show this help
-  --update     Update framework
-
-EXAMPLES:
-  $0                    # Interactive menu
-  $0 1                  # Run reconnaissance
-  $0 5                  # Run privilege escalation
-  $0 --paths            # Show all paths
-
-EOF
+    echo ""
+    echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║${NC} ${YELLOW}PWNTHEBOX - Professional Penetration Testing Framework${NC}                       ${CYAN}║${NC}"
+    echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+    echo -e "${CYAN}USAGE:${NC} ${YELLOW}$0${NC} ${CYAN}[OPTIONS]${NC}"
+    echo ""
+    echo -e "${CYAN}LIFECYCLE PHASES:${NC}"
+    echo -e "  ${YELLOW}1${NC}    Recon Suite              ${CYAN}─${NC} Information gathering and OSINT"
+    echo -e "  ${YELLOW}2${NC}    Enum Suite               ${CYAN}─${NC} Port scanning and service discovery"
+    echo -e "  ${YELLOW}3${NC}    Exploit Suite            ${CYAN}─${NC} Vulnerability exploitation"
+    echo -e "  ${YELLOW}4${NC}    Foothold Suite           ${CYAN}─${NC} Shell stabilization"
+    echo -e "  ${YELLOW}5${NC}    Privilege Escalation     ${CYAN}─${NC} PE and privilege abuse"
+    echo -e "  ${YELLOW}6${NC}    Internal Recon Suite     ${CYAN}─${NC} Post-compromise enumeration"
+    echo -e "  ${YELLOW}7${NC}    Lateral Suite            ${CYAN}─${NC} Network pivoting and movement"
+    echo -e "  ${YELLOW}8${NC}    Persistence Suite        ${CYAN}─${NC} Maintain access"
+    echo -e "  ${YELLOW}9${NC}    Misc Suite               ${CYAN}─${NC} Actions on objectives"
+    echo ""
+    echo -e "${CYAN}OPTIONS:${NC}"
+    echo -e "  ${CYAN}--paths${NC}      Show tool paths"
+    echo -e "  ${CYAN}--deps${NC}       Check dependencies"
+    echo -e "  ${CYAN}--help${NC}       Show this help message"
+    echo -e "  ${CYAN}--update${NC}     Update framework from GitHub"
+    echo ""
+    echo -e "${CYAN}EXAMPLES:${NC}"
+    echo -e "  ${YELLOW}$0${NC}                    # Launch interactive menu"
+    echo -e "  ${YELLOW}$0 1${NC}                  # Run reconnaissance phase"
+    echo -e "  ${YELLOW}$0 5${NC}                  # Run privilege escalation"
+    echo -e "  ${YELLOW}$0 --paths${NC}            # Display tool paths"
+    echo ""
 }
 
 handle_selection() {
@@ -160,46 +201,82 @@ handle_selection() {
     case "$choice" in
         # Phase 1: Reconnaissance
         1)
+            echo ""
+            print_separator
+            log_info "Launching Phase 1: Reconnaissance"
+            print_separator
             run_script "$SCRIPT_DIR/Recon/recon-suite.sh"
             ;;
         
         # Phase 2: Enumeration & Vulnerability
         2)
+            echo ""
+            print_separator
+            log_info "Launching Phase 2: Enumeration"
+            print_separator
             run_script "$SCRIPT_DIR/Enum/enum-suite.sh"
             ;;
         
         # Phase 3: Initial Compromise
         3)
+            echo ""
+            print_separator
+            log_info "Launching Phase 3: Exploitation"
+            print_separator
             run_script "$SCRIPT_DIR/Exploit/compromise-suite.sh"
             ;;
         
         # Phase 4: Establish Foothold
         4)
+            echo ""
+            print_separator
+            log_info "Launching Phase 4: Foothold"
+            print_separator
             run_script "$SCRIPT_DIR/Foothold/foothold-suite.sh"
             ;;
         
         # Phase 5: Privilege Escalation
         5)
+            echo ""
+            print_separator
+            log_info "Launching Phase 5: Privilege Escalation"
+            print_separator
             run_script "$SCRIPT_DIR/Privilege-Escalation/Linux/privesc.sh"
             ;;
         
         # Phase 6: Internal Recon
         6)
+            echo ""
+            print_separator
+            log_info "Launching Phase 6: Internal Recon"
+            print_separator
             run_script "$SCRIPT_DIR/Internal/internal-recon-suite.sh"
             ;;
         
         # Phase 7: Lateral Movement
         7)
+            echo ""
+            print_separator
+            log_info "Launching Phase 7: Lateral Movement"
+            print_separator
             run_script "$SCRIPT_DIR/Lateral/lateral-suite.sh"
             ;;
         
         # Phase 8: Persistence
         8)
+            echo ""
+            print_separator
+            log_info "Launching Phase 8: Persistence"
+            print_separator
             run_script "$SCRIPT_DIR/Persistence/persistence-suite.sh"
             ;;
         
         # Phase 9: Actions on Objectives (now in Misc)
         9)
+            echo ""
+            print_separator
+            log_info "Launching Phase 9: Actions on Objectives"
+            print_separator
             run_script "$SCRIPT_DIR/Misc/actions-suite.sh"
             ;;
         
@@ -230,18 +307,30 @@ handle_selection() {
             usage
             ;;
         --update)
-            log_info "Update framework: cd $SCRIPT_DIR && git pull"
+            echo ""
+            print_separator
+            log_info "Updating framework..."
+            cd "$SCRIPT_DIR" && git pull
+            print_separator
+            log_good "Update complete!"
             read -p "Press Enter to continue..."
             ;;
         
         # Exit
         0|exit)
-            echo -e "${GREEN}Goodbye!${NC}"
+            echo ""
+            echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
+            echo -e "${CYAN}║${NC} ${GREEN}Thank you for using PwnTheBox Framework!${NC}                                    ${CYAN}║${NC}"
+            echo -e "${CYAN}║${NC} ${YELLOW}Stay ethical. Hack responsibly.${NC}                                             ${CYAN}║${NC}"
+            echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
+            echo ""
             exit 0
             ;;
         
         *)
-            log_warn "Invalid selection: $choice"
+            echo ""
+            log_error "Invalid selection: $choice"
+            echo ""
             usage
             ;;
     esac
