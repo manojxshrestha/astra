@@ -16,18 +16,7 @@ GITHUB="https://github.com/manojxshrestha/pwnthebox"
 
 banner() {
     clear
-    echo -e "${CYAN}"
-    cat << 'EOF'
-╔═══════════════════════════════════════════════════════════════════════════════╗
-║                                                                               ║
-║                    PWNTHEBOX FRAMEWORK                                        ║
-║              Professional Penetration Testing Suite                           ║
-║                                                                               ║
-║              Standardized Penetration Testing Lifecycle                       ║
-║                                                                               ║
-╚═══════════════════════════════════════════════════════════════════════════════╝
-EOF
-    echo -e "${NC}"
+    echo ""
     echo -e "${MAGENTA}"
     cat << 'EOF'
        .------.
@@ -51,6 +40,18 @@ _,'    /   /       vv   """    \ |  / / /
                                 `.     |   \
 EOF
     echo -e "${NC}"
+    echo ""
+    echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║${NC} ${YELLOW}A comprehensive 9-phase penetration testing framework for authorized${NC}         ${CYAN}║${NC}"
+    echo -e "${CYAN}║${NC} ${YELLOW}security assessments.${NC}                                                        ${CYAN}║${NC}"
+    echo -e "${CYAN}╠═══════════════════════════════════════════════════════════════════════════════╣${NC}"
+    echo -e "${CYAN}║${NC} Professional Vulnerability Assessment & Penetration Testing Toolkit          ${CYAN}║${NC}"
+    echo -e "${CYAN}║${NC}                                                                               ${CYAN}║${NC}"
+    echo -e "${CYAN}║${NC} ${MAGENTA}Author:${NC} ${CYAN}manojxshrestha${NC}                                                        ${CYAN}║${NC}"
+    echo -e "${CYAN}║${NC} ${MAGENTA}Social:${NC} ${CYAN}Instagram${NC} ${YELLOW}@${NC}${CYAN}manojxshrestha${NC} | ${CYAN}X${NC} ${YELLOW}@${NC}${CYAN}manojxshrestha${NC} | ${CYAN}Medium${NC} ${YELLOW}@${NC}${CYAN}manojxshrestha${NC}   ${CYAN}║${NC}"
+    echo -e "${CYAN}║${NC} ${MAGENTA}GitHub:${NC} ${CYAN}github.com/manojxshrestha${NC}                                           ${CYAN}║${NC}"
+    echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
 }
 
 show_menu() {
