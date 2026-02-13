@@ -14,6 +14,45 @@ VERSION="1.0.0"
 AUTHOR="manojxshrestha"
 GITHUB="https://github.com/manojxshrestha/pwnthebox"
 
+scroll_text() {
+    local text="$1"
+    local width=79
+    local padding=""
+    
+    # Create padding to start from right
+    for ((i=0; i<width; i++)); do
+        padding="$padding "
+    done
+    
+    local full_text="$padding$text$padding"
+    local text_len=${#full_text}
+    
+    # Scroll from right to left
+    for ((i=0; i<=text_len-width; i++)); do
+        printf "\r%s" "${full_text:$i:$width}"
+        sleep 0.08
+    done
+    echo ""
+}
+
+show_marquee() {
+    echo ""
+    echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║${NC}                                                                               ${CYAN}║${NC}"
+    printf "${CYAN}║${NC} "
+    echo -ne "${YELLOW}"
+    scroll_text "A comprehensive 9-phase penetration testing framework for authorized security assessments. Professional Vulnerability Assessment & Penetration Testing Toolkit"
+    echo -ne "${NC}"
+    printf "${CYAN}║${NC}                                                                               ${CYAN}║${NC}\n"
+    printf "${CYAN}║${NC} "
+    echo -ne "${MAGENTA}"
+    scroll_text "Author: manojxshrestha | Instagram: @manojxshrestha | X: @manojxshrestha | Medium: @manojxshrestha | GitHub: github.com/manojxshrestha"
+    echo -ne "${NC}"
+    printf "${CYAN}║${NC}                                                                               ${CYAN}║${NC}\n"
+    echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+}
+
 banner() {
     clear
     echo ""
@@ -40,18 +79,7 @@ _,'    /   /       vv   """    \ |  / / /
                                 `.     |   \
 EOF
     echo -e "${NC}"
-    echo ""
-    echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║${NC} ${YELLOW}A comprehensive 9-phase penetration testing framework for authorized${NC}         ${CYAN}║${NC}"
-    echo -e "${CYAN}║${NC} ${YELLOW}security assessments.${NC}                                                        ${CYAN}║${NC}"
-    echo -e "${CYAN}╠═══════════════════════════════════════════════════════════════════════════════╣${NC}"
-    echo -e "${CYAN}║${NC} Professional Vulnerability Assessment & Penetration Testing Toolkit          ${CYAN}║${NC}"
-    echo -e "${CYAN}║${NC}                                                                               ${CYAN}║${NC}"
-    echo -e "${CYAN}║${NC} ${MAGENTA}Author:${NC} ${CYAN}manojxshrestha${NC}                                                        ${CYAN}║${NC}"
-    echo -e "${CYAN}║${NC} ${MAGENTA}Social:${NC} ${CYAN}Instagram${NC} ${YELLOW}@${NC}${CYAN}manojxshrestha${NC} | ${CYAN}X${NC} ${YELLOW}@${NC}${CYAN}manojxshrestha${NC} | ${CYAN}Medium${NC} ${YELLOW}@${NC}${CYAN}manojxshrestha${NC}   ${CYAN}║${NC}"
-    echo -e "${CYAN}║${NC} ${MAGENTA}GitHub:${NC} ${CYAN}github.com/manojxshrestha${NC}                                           ${CYAN}║${NC}"
-    echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
-    echo ""
+    show_marquee
 }
 
 show_menu() {
