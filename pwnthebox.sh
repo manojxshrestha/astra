@@ -27,12 +27,14 @@ scroll_text() {
     local full_text="$padding$text$padding"
     local text_len=${#full_text}
     
-    # Scroll from right to left
-    for ((i=0; i<=text_len-width; i++)); do
-        printf "\r%s" "${full_text:$i:$width}"
-        sleep 0.08
+    # Loop continuously
+    while true; do
+        # Scroll from right to left
+        for ((i=0; i<=text_len-width; i++)); do
+            printf "\r%s" "${full_text:$i:$width}"
+            sleep 0.15
+        done
     done
-    echo ""
 }
 
 show_marquee() {
@@ -71,7 +73,9 @@ _,'    /   /       vv   """    \ |  / / /
                                 `.     |   \
 EOF
     echo -e "${NC}"
-    show_marquee
+    # Start marquee in background
+    show_marquee &
+    MARQUEE_PID=$!
 }
 
 show_menu() {
@@ -334,6 +338,7 @@ handle_selection() {
         
         # Exit
         0|exit)
+            cleanup_marquee
             echo ""
             echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
             echo -e "${CYAN}║${NC} ${GREEN}Thank you for using PwnTheBox Framework!${NC}                                    ${CYAN}║${NC}"
@@ -352,6 +357,13 @@ handle_selection() {
     esac
 }
 
+cleanup_marquee() {
+    if [[ -n "$MARQUEE_PID" ]] && kill -0 "$MARQUEE_PID" 2>/dev/null; then
+        kill "$MARQUEE_PID" 2>/dev/null
+        wait "$MARQUEE_PID" 2>/dev/null
+    fi
+}
+
 main() {
     if [[ $# -gt 0 ]]; then
         handle_selection "$1"
@@ -363,6 +375,8 @@ main() {
         show_menu
         
         echo ""
+        # Kill marquee before reading input
+        cleanup_marquee
         read -p "Enter phase (0-9): " choice
         
         handle_selection "$choice"
