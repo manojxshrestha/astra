@@ -14,6 +14,25 @@ VERSION="1.0.0"
 AUTHOR="manojxshrestha"
 GITHUB="https://github.com/manojxshrestha/pwnthebox"
 
+scroll_marquee() {
+    local text="PwnTheBox Framework v1.0 • 9-Phase Penetration Testing Suite for Authorized Security Assessments • Professional VAPT Toolkit • Created by manojxshrestha • Instagram: @manojxshrestha • X: @manojxshrestha • Medium: @manojxshrestha • GitHub: github.com/manojxshrestha"
+    local width=79
+    local padding=""
+    
+    for ((i=0; i<width; i++)); do
+        padding="$padding "
+    done
+    
+    local full_text="$padding$text$padding"
+    local text_len=${#full_text}
+    
+    for ((i=0; i<=text_len-width; i++)); do
+        printf "\r%s" "${full_text:$i:$width}"
+        sleep 0.12
+    done
+    echo ""
+}
+
 banner() {
     clear
     echo ""
@@ -44,6 +63,8 @@ EOF
     printf "${YELLOW}"
     scroll_marquee
     printf "${NC}"
+    echo ""
+    echo -e "${CYAN}───────────────────────────────────────────────────────────────────────────────${NC}"
     echo ""
 }
 
