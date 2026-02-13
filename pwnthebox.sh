@@ -36,7 +36,7 @@ scroll_text() {
 }
 
 show_marquee() {
-    local marquee_text="A comprehensive 9-phase penetration testing framework for authorized security assessments. Professional Vulnerability Assessment & Penetration Testing Toolkit | Author: manojxshrestha | Instagram: @manojxshrestha | X: @manojxshrestha | Medium: @manojxshrestha | GitHub: github.com/manojxshrestha"
+    local marquee_text="PwnTheBox Framework v1.0 • 9-Phase Penetration Testing Suite for Authorized Security Assessments • Professional VAPT Toolkit • Created by manojxshrestha • Instagram: @manojxshrestha • X: @manojxshrestha • Medium: @manojxshrestha • GitHub: github.com/manojxshrestha"
     
     echo ""
     echo -ne "${YELLOW}"
@@ -76,11 +76,6 @@ EOF
 
 show_menu() {
     echo ""
-    echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║${NC} ${YELLOW}PENETRATION TESTING LIFECYCLE${NC}                                                ${CYAN}║${NC}"
-    echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
-    echo ""
-    
     echo -e " ${YELLOW}[1]${NC} ${CYAN}Recon${NC}                    Information Gathering"
     echo "      └─ Passive & Active recon, OSINT, domain enumeration"
     echo ""
