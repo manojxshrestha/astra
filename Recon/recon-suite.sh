@@ -144,7 +144,16 @@ handle_selection() {
             fi
             ;;
         R3|r3)
-            run_cmd "bash $SCRIPT_DIR/email-harvest.sh"
+            echo -e "${BLUE}[*] Email Harvesting${NC}"
+            echo ""
+            echo -n "[*] Enter target domain: "
+            read TARGET
+            echo ""
+            if [[ -n "$TARGET" ]]; then
+                run_cmd "bash $SCRIPT_DIR/email-harvest.sh $TARGET"
+            else
+                echo -e "${YELLOW}[!] Missing target${NC}"
+            fi
             ;;
         R4|r4)
             echo -e "${BLUE}[*] Subdomain Discovery${NC}"
