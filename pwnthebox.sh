@@ -54,6 +54,9 @@ show_menu() {
     echo -e "${YELLOW}[9]${NC} ${CYAN}Misc${NC}  →  Additional Tools"
     echo "      └─ Actions on objectives, hash cracking, stego"
     echo ""
+    echo -e "${YELLOW}[X]${NC} ${CYAN}Binary/Reversing${NC}  →  Binary Exploitation"
+    echo "      └─ pwnpasi, ROPgadget, pwndbg, checksec"
+    echo ""
     echo -e "${RED}[0]${NC} ${RED}Exit${NC}"
     echo ""
     echo -e "${CYAN}═══════════════ ${YELLOW}I get paid to break things. At home, I do it for free.${NC} ${CYAN}═══════════════${NC}"
@@ -216,6 +219,13 @@ handle_selection() {
             print_separator
             run_script "$SCRIPT_DIR/Misc/actions-suite.sh"
             ;;
+        X|x)
+            echo ""
+            print_separator
+            log_info "Launching Binary/Reversing Suite"
+            print_separator
+            run_script "$SCRIPT_DIR/Binary/binary-suite.sh"
+            ;;
         recon|RECON)
             run_script "$SCRIPT_DIR/Recon/recon-suite.sh"
             ;;
@@ -279,7 +289,7 @@ main() {
         show_menu
         
         echo ""
-        read -p "Select phase (0-9): " choice
+        read -p "Select phase (0-9, X): " choice
         
         handle_selection "$choice"
         
