@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/manojxshrestha/pwnthebox)
+[![Version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/manojxshrestha/pwnthebox)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Kali%20Linux%20%7C%20WSL%20%7C%20Parrot%20OS-blue.svg)](https://github.com/manojxshrestha/pwnthebox)
 [![Shell](https://img.shields.io/badge/shell-Bash%205.0+-yellow.svg)](https://www.gnu.org/software/bash/)
@@ -579,14 +579,14 @@ git push origin feature/new-tool
 
 ## 📈 Roadmap
 
-### Version 2.1.0 (Planned)
+### Version 1.1.0 (Planned)
 - [ ] REST API for remote control
 - [ ] Web-based management interface
 - [ ] Automated reporting system
 - [ ] Multi-target assessment support
 - [ ] Session management and persistence
 
-### Version 2.2.0 (Planned)
+### Version 1.2.0 (Planned)
 - [ ] Cloud-specific modules (AWS, Azure, GCP)
 - [ ] Container security assessments
 - [ ] CI/CD integration
