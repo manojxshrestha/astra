@@ -14,39 +14,6 @@ VERSION="1.0.0"
 AUTHOR="manojxshrestha"
 GITHUB="https://github.com/manojxshrestha/pwnthebox"
 
-scroll_text() {
-    local text="$1"
-    local width=79
-    local padding=""
-    
-    # Create padding to start from right
-    for ((i=0; i<width; i++)); do
-        padding="$padding "
-    done
-    
-    local full_text="$padding$text$padding"
-    local text_len=${#full_text}
-    
-    # Loop continuously
-    while true; do
-        # Scroll from right to left
-        for ((i=0; i<=text_len-width; i++)); do
-            printf "\r%s" "${full_text:$i:$width}"
-            sleep 0.15
-        done
-    done
-}
-
-show_marquee() {
-    local marquee_text="PwnTheBox Framework v1.0 • 9-Phase Penetration Testing Suite for Authorized Security Assessments • Professional VAPT Toolkit • Created by manojxshrestha • Instagram: @manojxshrestha • X: @manojxshrestha • Medium: @manojxshrestha • GitHub: github.com/manojxshrestha"
-    
-    echo ""
-    echo -ne "${YELLOW}"
-    scroll_text "$marquee_text"
-    echo -ne "${NC}"
-    echo ""
-}
-
 banner() {
     clear
     echo ""
@@ -73,9 +40,6 @@ _,'    /   /       vv   """    \ |  / / /
                                 `.     |   \
 EOF
     echo -e "${NC}"
-    # Start marquee in background
-    show_marquee &
-    MARQUEE_PID=$!
 }
 
 show_menu() {
@@ -112,6 +76,7 @@ show_menu() {
     echo -e " ${RED}[0]${NC} ${RED}Exit${NC}"
     echo ""
     echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════════════${NC}"
+    echo ""
 }
 
 log_info() { echo -e "${BLUE}[*]${NC} $1"; }
@@ -219,7 +184,6 @@ handle_selection() {
     local choice="$1"
     
     case "$choice" in
-        # Phase 1: Reconnaissance
         1)
             echo ""
             print_separator
@@ -228,7 +192,6 @@ handle_selection() {
             run_script "$SCRIPT_DIR/Recon/recon-suite.sh"
             ;;
         
-        # Phase 2: Enumeration & Vulnerability
         2)
             echo ""
             print_separator
@@ -237,7 +200,6 @@ handle_selection() {
             run_script "$SCRIPT_DIR/Enum/enum-suite.sh"
             ;;
         
-        # Phase 3: Initial Compromise
         3)
             echo ""
             print_separator
@@ -246,7 +208,6 @@ handle_selection() {
             run_script "$SCRIPT_DIR/Exploit/compromise-suite.sh"
             ;;
         
-        # Phase 4: Establish Foothold
         4)
             echo ""
             print_separator
@@ -255,7 +216,6 @@ handle_selection() {
             run_script "$SCRIPT_DIR/Foothold/foothold-suite.sh"
             ;;
         
-        # Phase 5: Privilege Escalation
         5)
             echo ""
             print_separator
@@ -264,7 +224,6 @@ handle_selection() {
             run_script "$SCRIPT_DIR/Privilege-Escalation/Linux/privesc.sh"
             ;;
         
-        # Phase 6: Internal Recon
         6)
             echo ""
             print_separator
@@ -273,7 +232,6 @@ handle_selection() {
             run_script "$SCRIPT_DIR/Internal/internal-recon-suite.sh"
             ;;
         
-        # Phase 7: Lateral Movement
         7)
             echo ""
             print_separator
@@ -282,7 +240,6 @@ handle_selection() {
             run_script "$SCRIPT_DIR/Lateral/lateral-suite.sh"
             ;;
         
-        # Phase 8: Persistence
         8)
             echo ""
             print_separator
@@ -291,7 +248,6 @@ handle_selection() {
             run_script "$SCRIPT_DIR/Persistence/persistence-suite.sh"
             ;;
         
-        # Phase 9: Actions on Objectives (now in Misc)
         9)
             echo ""
             print_separator
@@ -300,7 +256,6 @@ handle_selection() {
             run_script "$SCRIPT_DIR/Misc/actions-suite.sh"
             ;;
         
-        # Direct script execution
         recon|RECON)
             run_script "$SCRIPT_DIR/Recon/recon-suite.sh"
             ;;
@@ -314,7 +269,6 @@ handle_selection() {
             run_script "$SCRIPT_DIR/Privilege-Escalation/Linux/privesc.sh"
             ;;
         
-        # Options
         --paths)
             show_paths
             read -p "Press Enter to continue..."
@@ -336,9 +290,7 @@ handle_selection() {
             read -p "Press Enter to continue..."
             ;;
         
-        # Exit
         0|exit)
-            cleanup_marquee
             echo ""
             echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
             echo -e "${CYAN}║${NC} ${GREEN}Thank you for using PwnTheBox Framework!${NC}                                    ${CYAN}║${NC}"
@@ -357,13 +309,6 @@ handle_selection() {
     esac
 }
 
-cleanup_marquee() {
-    if [[ -n "$MARQUEE_PID" ]] && kill -0 "$MARQUEE_PID" 2>/dev/null; then
-        kill "$MARQUEE_PID" 2>/dev/null
-        wait "$MARQUEE_PID" 2>/dev/null
-    fi
-}
-
 main() {
     if [[ $# -gt 0 ]]; then
         handle_selection "$1"
@@ -375,8 +320,6 @@ main() {
         show_menu
         
         echo ""
-        # Kill marquee before reading input
-        cleanup_marquee
         read -p "Enter phase (0-9): " choice
         
         handle_selection "$choice"
