@@ -1,6 +1,6 @@
 # Wordlists
 
-This directory contains wordlists used by PwnTheBox framework.
+This directory contains wordlists used by pwnthebox framework.
 
 ## Included Wordlists
 

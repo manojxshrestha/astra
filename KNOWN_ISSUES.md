@@ -1,6 +1,6 @@
 # Known Issues
 
-This document tracks known issues and limitations in the PwnTheBox framework.
+This document tracks known issues and limitations in the pwnthebox framework.
 
 ## Fixed Issues ✓
 

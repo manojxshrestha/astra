@@ -1,13 +1,13 @@
-# PwnTheBox Penetration Testing Framework
+# pwnthebox Penetration Testing Framework
 
 ## Overview
 
-PwnTheBox is a comprehensive penetration testing framework with a creative, clean directory structure. The framework is organized into 9 core phases plus miscellaneous utilities, making it easy to navigate and use.
+pwnthebox is a comprehensive penetration testing framework with a creative, clean directory structure. The framework is organized into 9 core phases plus miscellaneous utilities, making it easy to navigate and use.
 
 ## Directory Structure
 
 ```
-PwnTheBox/
+pwnthebox/
 ├── FRAMEWORK_README.md              # This file
 ├── pwnthebox.sh                     # Main menu launcher
 │

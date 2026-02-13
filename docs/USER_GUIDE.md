@@ -1,4 +1,4 @@
-# PwnTheBox User Guide
+# pwnthebox User Guide
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@
 
 ## Introduction
 
-PwnTheBox is a professional penetration testing framework designed for authorized security assessments and red team operations. The framework implements a comprehensive 9-phase methodology for conducting thorough security assessments.
+pwnthebox is a professional penetration testing framework designed for authorized security assessments and red team operations. The framework implements a comprehensive 9-phase methodology for conducting thorough security assessments.
 
 ### Key Features
 
@@ -100,7 +100,7 @@ chmod +x **/*.sh 2>/dev/null
 ### Architecture
 
 ```
-PwnTheBox/
+pwnthebox/
 ├── pwnthebox.sh          # Main launcher
 ├── install.sh            # Installation script
 ├── update.sh             # Update script
@@ -781,7 +781,7 @@ cat docs/USER_GUIDE.md
 
 ### IMPORTANT - READ BEFORE USE
 
-**By using PwnTheBox, you agree to the following:**
+**By using pwnthebox, you agree to the following:**
 
 1. **Authorization Required**
    - You MUST have explicit written authorization before testing any system
@@ -794,7 +794,7 @@ cat docs/USER_GUIDE.md
    - Report all findings according to engagement rules
 
 3. **No Warranty**
-   - PwnTheBox is provided "as is"
+   - pwnthebox is provided "as is"
    - No warranty of any kind
    - Use at your own risk
 

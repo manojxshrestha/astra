@@ -1,4 +1,4 @@
-# 🛡️ PwnTheBox Framework
+# 🛡️ pwnthebox Framework
 
 <div align="center">
 
@@ -35,7 +35,7 @@
 
 ## 📋 Overview
 
-PwnTheBox is a professional-grade penetration testing framework designed for comprehensive security assessments. Following industry-standard methodologies, it provides a structured approach to vulnerability assessment and exploitation through a modular 9-phase lifecycle.
+pwnthebox is a professional-grade penetration testing framework designed for comprehensive security assessments. Following industry-standard methodologies, it provides a structured approach to vulnerability assessment and exploitation through a modular 9-phase lifecycle.
 
 ### 🎯 Purpose
 
@@ -49,7 +49,7 @@ PwnTheBox is a professional-grade penetration testing framework designed for com
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                         PwnTheBox Framework                          │
+│                         pwnthebox Framework                          │
 │                  Professional Penetration Testing                      │
 └─────────────────────────────────────────────────────────────────────┘
                                  │
@@ -251,7 +251,7 @@ chmod +x **/*.sh 2>/dev/null
 ## 📁 Directory Structure
 
 ```
-PwnTheBox/
+pwnthebox/
 ├── pwnthebox.sh              # 🎯 Main framework launcher
 ├── install.sh               # 🔧 Smart installation script
 ├── update.sh                # 🔄 Framework updater
@@ -477,7 +477,7 @@ export PWNTHEBOX_NMAP_ARGS="-T4 -A"
 Create `config/pwnthebox.conf`:
 
 ```bash
-# PwnTheBox Configuration
+# pwnthebox Configuration
 
 # Output directory
 OUTPUT_DIR="/home/pwn/pwnthebox/data"
@@ -620,7 +620,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### 🚨 IMPORTANT - READ BEFORE USE
 
-**By using PwnTheBox, you agree to the following:**
+**By using pwnthebox, you agree to the following:**
 
 ### 1. Authorization Requirement
 
@@ -689,7 +689,7 @@ USE AT YOUR OWN RISK
 
 <div align="center">
 
-**PwnTheBox** - *Professional Penetration Testing Framework*
+**pwnthebox** - *Professional Penetration Testing Framework*
 
 [![GitHub stars](https://img.shields.io/github/stars/manojxshrestha/pwnthebox?style=flat-square)](https://github.com/manojxshrestha/pwnthebox/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/manojxshrestha/pwnthebox?style=flat-square)](https://github.com/manojxshrestha/pwnthebox/network)

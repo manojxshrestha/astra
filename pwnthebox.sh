@@ -261,7 +261,7 @@ handle_selection() {
         0|exit)
             echo ""
             echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
-            echo -e "${CYAN}║${NC} ${GREEN}Thank you for using PwnTheBox Framework!${NC} ${CYAN}║${NC}"
+            echo -e "${CYAN}║${NC} ${GREEN}Thank you for using pwnthebox Framework!${NC} ${CYAN}║${NC}"
             echo -e "${CYAN}║${NC} ${YELLOW}Stay ethical. Hack responsibly.${NC} ${CYAN}║${NC}"
             echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
             echo ""

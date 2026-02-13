@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# PwnTheBox Framework Installation Script
+# pwnthebox Framework Installation Script
 # Professional Vulnerability Assessment & Penetration Testing Toolkit
 
 RED='\033[0;31m'
@@ -973,11 +973,11 @@ echo ""
 UPDATE_SCRIPT="$FRAMEWORK_DIR/update.sh"
 cat > "$UPDATE_SCRIPT" << 'UPDATE_EOF'
 #!/bin/bash
-# PwnTheBox Framework Update Script
+# pwnthebox Framework Update Script
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "[*] Updating PwnTheBox Framework..."
+echo "[*] Updating pwnthebox Framework..."
 echo ""
 
 # Update package lists
@@ -1016,13 +1016,13 @@ fi
 
 if ! grep -q "PWNTHEBOX" "$PROFILE_FILE" 2>/dev/null; then
     echo "" >> "$PROFILE_FILE"
-    echo "# PwnTheBox Framework" >> "$PROFILE_FILE"
+    echo "# pwnthebox Framework" >> "$PROFILE_FILE"
     echo "export PWNTHEBOX=\"$FRAMEWORK_DIR\"" >> "$PROFILE_FILE"
     echo "export PATH=\"\$PWNTHEBOX:\$PATH\"" >> "$PROFILE_FILE"
     echo "alias pwnthebox='cd \"$FRAMEWORK_DIR\" && ./pwnthebox.sh'" >> "$PROFILE_FILE"
-    echo -e "    ${GREEN}✓${NC} Added PwnTheBox to PATH in $PROFILE_FILE"
+    echo -e "    ${GREEN}✓${NC} Added pwnthebox to PATH in $PROFILE_FILE"
 else
-    echo -e "    ${YELLOW}⊘${NC} PwnTheBox already in PATH"
+    echo -e "    ${YELLOW}⊘${NC} pwnthebox already in PATH"
 fi
 
 # Summary

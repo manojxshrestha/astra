@@ -1,9 +1,9 @@
 #!/bin/bash
-# PwnTheBox Framework Update Script
+# pwnthebox Framework Update Script
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "[*] Updating PwnTheBox Framework..."
+echo "[*] Updating pwnthebox Framework..."
 echo ""
 
 # Update package lists
