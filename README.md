@@ -111,6 +111,13 @@ pwnthebox is a professional-grade penetration testing framework designed for com
 - Persistence mechanisms
 - Data exfiltration
 
+#### Cryptography Tools
+- Ciphey - Auto decoder (base, hex, classical ciphers)
+- codext - Exotic encodings (base91, base65536)
+- CTF-CryptoTool - Multi-cipher brute force
+- RsaCtfTool - RSA attack toolkit
+- Hash tools - Identification and cracking
+
 ### 🎨 User Interface
 
 ```
@@ -132,8 +139,8 @@ $ ./pwnthebox.sh
 [7]    Lateral Movement      - Network pivoting
 [8]    Persistence           - Maintain access
 [9]    Actions on Objectives - Complete mission
-[10]   Full Assessment       - Automated workflow
-[11]   Report Generation     - Create assessment report
+[O]    OSINT                - Full OSINT automation
+[C]    Crypto               - Cryptography tools
 
 [0]    Exit
 
