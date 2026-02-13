@@ -108,7 +108,7 @@ setup_c2_terraform() {
     
     echo -e "${BLUE}[*] Setting up C2 infrastructure with Terraform${NC}"
     
-    cat > main.tf << EOF
+    cat > main.tf << 'TERRAFORM_EOF'
 # C2 Infrastructure - Terraform
 provider "aws" {
   region = "us-east-1"
@@ -117,36 +117,40 @@ provider "aws" {
 resource "aws_instance" "c2_redirector" {
   ami           = "ami-0c02fb55956c7d315"
   instance_type = "t2.micro"
-  
+
   tags = {
     Name        = "C2-Redirector"
     Environment = "RedTeam"
   }
-  
-  user_data = <<-EOF
+
+  user_data = <<-USERDATA_EOF
 #!/bin/bash
 apt update
 apt install -y nginx socat
-cat > /etc/nginx/sites-available/redirector <<-NGINX
+cat > /etc/nginx/sites-available/redirector << 'NGINX_EOF'
 server {
     listen 80;
-    server_name $c2_domain;
+    server_name _C2_DOMAIN_;
     location / {
-        proxy_pass http://$c2_domain:$listener_port;
-        proxy_set_header Host \$host;
-        proxy_set_header X-Forwarded-For \$remote_addr;
+        proxy_pass http://_C2_DOMAIN_:_LISTENER_PORT_;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $remote_addr;
     }
 }
-NGINX
+NGINX_EOF
 ln -sf /etc/nginx/sites-available/redirector /etc/nginx/sites-enabled/
 systemctl restart nginx
-EOF
+USERDATA_EOF
 }
 
 output "instance_ip" {
   value = aws_instance.c2_redirector.public_ip
 }
-EOF
+TERRAFORM_EOF
+
+    # Replace placeholders with actual values
+    sed -i "s/_C2_DOMAIN_/$c2_domain/g" main.tf
+    sed -i "s/_LISTENER_PORT_/$listener_port/g" main.tf
     
     echo -e "${GREEN}[+] Created main.tf for C2 infrastructure${NC}"
     echo -e "${YELLOW}[*] Run: terraform init && terraform apply${NC}"

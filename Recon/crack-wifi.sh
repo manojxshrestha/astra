@@ -519,7 +519,7 @@ sleep 60
 
 aircrack-ng -a 1 *.cap
 
-pkill -9 xterm 2>/dev/null               # BUG - this is not working.  Still seeing output on the screen
+killall -9 xterm 2>/dev/null || pkill -9 -f xterm 2>/dev/null || true
 
 echo "Your results will be saved to a file."
 echo

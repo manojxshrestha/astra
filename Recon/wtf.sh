@@ -26,7 +26,7 @@ __          __  _________   _________
     \/  \/         |_|     |_|
 
         Wireless Testing Framework
-
+${NC}"
     echo
     echo
 }

