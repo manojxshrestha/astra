@@ -109,7 +109,7 @@ log_critical() {
 }
 
 log_high() {
-    echo -e "${LIGHT_RED}[HIGH]${NC} $1"
+    echo -e "${RED}[HIGH]${NC} $1"
     [[ -n "$REPORT_FILE" ]] && echo "[HIGH] $1" >> "$REPORT_FILE"
 }
 

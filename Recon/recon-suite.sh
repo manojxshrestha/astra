@@ -20,6 +20,10 @@ BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 NC='\033[0m'
 
+log_info() { echo -e "${BLUE}[*]${NC} $1"; }
+log_good() { echo -e "${GREEN}[+]${NC} $1"; }
+log_warn() { echo -e "${YELLOW}[!]${NC} $1"; }
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 banner() {

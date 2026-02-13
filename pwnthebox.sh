@@ -7,7 +7,7 @@ CYAN='\033[0;36m'
 MAGENTA='\033[0;35m'
 NC='\033[0m'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-VERSION="1.0.0"
+VERSION="v1.0"
 AUTHOR="manojxshrestha"
 GITHUB="https://github.com/manojxshrestha/pwnthebox"
 banner() {
