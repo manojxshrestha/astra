@@ -263,12 +263,66 @@ check_status() {
     echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
     echo ""
     
+    # Install pwnpasi
+    if [[ ! -d "$HOME/pwnpasi" ]]; then
+        echo -e "${BLUE}[*] Installing pwnpasi...${NC}"
+        cd "$HOME"
+        git clone https://github.com/heimao-box/pwnpasi.git > /dev/null 2>&1
+        if [[ -d "$HOME/pwnpasi" ]]; then
+            cd "$HOME/pwnpasi" && pip3 install -r requirements.txt > /dev/null 2>&1
+            echo -e "    ${GREEN}✓${NC} pwnpasi installed"
+            INSTALLED=$((INSTALLED + 1))
+        else
+            echo -e "    ${YELLOW}⊘${NC} pwnpasi (failed)"
+            NOT_INSTALLED=$((NOT_INSTALLED + 1))
+        fi
+    else
+        echo -e "    ${YELLOW}⊘${NC} pwnpasi (already installed)"
+        INSTALLED=$((INSTALLED + 1))
+    fi
+    
+    # Install ROPgadget
+    if [[ ! -d "$HOME/ROPgadget" ]]; then
+        echo -e "${BLUE}[*] Installing ROPgadget...${NC}"
+        cd "$HOME"
+        git clone https://github.com/JonathanSalwan/ROPgadget.git > /dev/null 2>&1
+        if [[ -d "$HOME/ROPgadget" ]]; then
+            cd "$HOME/ROPgadget" && pip3 install -e . > /dev/null 2>&1
+            echo -e "    ${GREEN}✓${NC} ROPgadget installed"
+            INSTALLED=$((INSTALLED + 1))
+        else
+            echo -e "    ${YELLOW}⊘${NC} ROPgadget (failed)"
+            NOT_INSTALLED=$((NOT_INSTALLED + 1))
+        fi
+    else
+        echo -e "    ${YELLOW}⊘${NC} ROPgadget (already installed)"
+        INSTALLED=$((INSTALLED + 1))
+    fi
+    
+    # Install pwndbg in venv
+    if [[ ! -d "$HOME/pwndbg" ]]; then
+        echo -e "${BLUE}[*] Installing pwndbg...${NC}"
+        cd "$HOME"
+        git clone https://github.com/pwndbg/pwndbg.git > /dev/null 2>&1
+    fi
+    
+    if [[ -d "$HOME/pwndbg" ]]; then
+        if [[ -f "$HOME/pwndbg/uv.lock" ]]; then
+            rm -f "$HOME/pwndbg/uv.lock"
+        fi
+        cd "$HOME/pwndbg" && pip install -e . > /dev/null 2>&1
+        echo -e "    ${GREEN}✓${NC} pwndbg installed"
+        INSTALLED=$((INSTALLED + 1))
+    else
+        echo -e "    ${YELLOW}⊘${NC} pwndbg (failed)"
+        NOT_INSTALLED=$((NOT_INSTALLED + 1))
+    fi
+    
     BINARY_TOOLS=(
         "gdb:command:GDB"
         "ropper:debian:Ropper"
         "ropgadget:python:ROPGadget"
         "one-gadget:python:OneGadget"
-        "pwndbg:command:Pwndbg"
     )
     
     for tool_info in "${BINARY_TOOLS[@]}"; do
@@ -761,25 +815,6 @@ for pkg_info in "${BINARY_PACKAGES[@]}"; do
     IFS=':' read -r package display_name <<< "$pkg_info"
     install_debian "$package" "$display_name"
 done
-
-# Install pwndbg specifically
-if ! command_exists pwndbg; then
-    echo -e "${BLUE}[*] Installing pwndbg...${NC}"
-    cd /tmp
-    if [[ -d /tmp/pwndbg ]]; then
-        rm -rf /tmp/pwndbg
-    fi
-    git clone https://github.com/pwndbg/pwndbg > /dev/null 2>&1
-    cd pwndbg
-    ./setup.sh > /dev/null 2>&1
-    echo -e "    ${GREEN}✓${NC} pwndbg installed"
-    INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
-else
-    echo -e "    ${YELLOW}⊘${NC} pwndbg (already installed)"
-    SKIPPED_COUNT=$((SKIPPED_COUNT + 1))
-fi
-
-echo ""
 
 # Install steganography tools
 echo -e "${CYAN}═══════════════════════════════════════════════════════════════════════${NC}"
