@@ -11,6 +11,18 @@ NC=$(tput sgr0)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OUTPUT_FILE="subdomains.txt"
 
+cleanup() {
+    echo ""
+    echo -e "${YELLOW}[!] Interrupted! Killing processes...${NC}"
+    kill $PID1 $PID2 $PID3 $PID4 $PID5 2>/dev/null
+    wait 2>/dev/null
+    rm -f tmp-$TARGET.txt 2>/dev/null
+    echo -e "${RED}[!] Subdomain enumeration stopped${NC}"
+    exit 1
+}
+
+trap cleanup SIGINT
+
 run_cmd() {
     local cmd="$1"
     echo -e "${CYAN}[*] Running: $cmd${NC}"
