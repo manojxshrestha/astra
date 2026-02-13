@@ -174,17 +174,7 @@ handle_selection() {
             fi
             ;;
         R5|r5)
-            echo -e "${BLUE}[*] Google Dorks${NC}"
-            echo ""
-            echo "[*] Common Google Dorks:"
-            echo "    site:example.com"
-            echo "    site:example.com filetype:xls"
-            echo "    site:example.com inurl:admin"
-            echo "    site:example.com intitle:\"index of\""
-            echo "    site:example.com filetype:pdf"
-            echo ""
-            echo -n "[*] Press Enter to continue... "
-            read
+            run_cmd "bash $SCRIPT_DIR/google-dorks.sh"
             ;;
         R6|r6)
             echo -e "${BLUE}[*] Social Media Recon${NC}"
