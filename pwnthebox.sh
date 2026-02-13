@@ -309,6 +309,27 @@ handle_selection() {
     esac
 }
 
+scroll_text() {
+    local text="$1"
+    local width=79
+    local padding=""
+    
+    # Create padding to start from right
+    for ((i=0; i<width; i++)); do
+        padding="$padding "
+    done
+    
+    local full_text="$padding$text$padding"
+    local text_len=${#full_text}
+    
+    # Scroll from right to left once
+    for ((i=0; i<=text_len-width; i++)); do
+        printf "\r%s" "${full_text:$i:$width}"
+        sleep 0.10
+    done
+    echo ""
+}
+
 main() {
     if [[ $# -gt 0 ]]; then
         handle_selection "$1"
@@ -320,9 +341,9 @@ main() {
         
         # Show scrolling text immediately after banner
         echo ""
-        echo -e "${YELLOW}PwnTheBox Framework v1.0 • 9-Phase Penetration Testing Suite for Authorized Security Assessments •${NC}"
-        echo -e "${YELLOW}Professional VAPT Toolkit • Created by manojxshrestha • Instagram: @manojxshrestha • X: @manojxshrestha •${NC}"
-        echo -e "${YELLOW}Medium: @manojxshrestha • GitHub: github.com/manojxshrestha${NC}"
+        printf "${YELLOW}"
+        scroll_text "PwnTheBox Framework v1.0 • 9-Phase Penetration Testing Suite for Authorized Security Assessments • Professional VAPT Toolkit • Created by manojxshrestha • Instagram: @manojxshrestha • X: @manojxshrestha • Medium: @manojxshrestha • GitHub: github.com/manojxshrestha"
+        printf "${NC}"
         echo ""
         echo -e "${CYAN}───────────────────────────────────────────────────────────────────────────────${NC}"
         echo ""
