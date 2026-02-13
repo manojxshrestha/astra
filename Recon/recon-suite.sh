@@ -168,15 +168,7 @@ handle_selection() {
             read TARGET
             echo ""
             if [[ -n "$TARGET" ]]; then
-                if [[ -x "$SCRIPT_DIR/generateTargets.sh" ]]; then
-                    run_cmd "$SCRIPT_DIR/generateTargets.sh ${TARGET}"
-                elif command -v sublist3r &>/dev/null; then
-                    run_cmd "sublist3r -d ${TARGET}"
-                elif command -v assetfinder &>/dev/null; then
-                    run_cmd "assetfinder --subs-only ${TARGET}"
-                else
-                    echo -e "${YELLOW}[!] No subdomain tool found${NC}"
-                fi
+                run_script "subenum.sh" "$TARGET"
             else
                 echo -e "${YELLOW}[!] Missing target${NC}"
             fi
