@@ -144,22 +144,7 @@ handle_selection() {
             fi
             ;;
         R3|r3)
-            echo -e "${BLUE}[*] Email Harvesting${NC}"
-            echo ""
-            echo -n "[*] Enter domain or email to harvest: "
-            read TARGET
-            echo ""
-            if [[ -n "$TARGET" ]]; then
-                if [[ -x "$SCRIPT_DIR/person.sh" ]]; then
-                    run_cmd "$SCRIPT_DIR/person.sh ${TARGET}"
-                elif command -v theHarvester &>/dev/null; then
-                    run_cmd "theHarvester -d ${TARGET} -b all"
-                else
-                    echo -e "${YELLOW}[!] person.sh or theHarvester not found${NC}"
-                fi
-            else
-                echo -e "${YELLOW}[!] Missing target${NC}"
-            fi
+            run_cmd "bash $SCRIPT_DIR/email-harvest.sh"
             ;;
         R4|r4)
             echo -e "${BLUE}[*] Subdomain Discovery${NC}"
