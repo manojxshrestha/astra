@@ -6,7 +6,7 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-WORDLIST_DIR="/usr/share/wordlists"
+WORDLIST_DIR="/home/pwn/pwnthebox/wordlists"
 
 MODE_TYPE="${1:-menu}"
 
@@ -76,7 +76,7 @@ EOF
 crack_hash() {
     local mode="$1"
     local hash="$2"
-    local wordlist="${3:-/usr/share/wordlists/rockyou.txt}"
+    local wordlist="${3:-$WORDLIST_DIR/rockyou.txt}"
     
     if ! command -v hashcat &>/dev/null; then
         echo -e "${RED}[!] Hashcat not installed${NC}"
@@ -84,16 +84,26 @@ crack_hash() {
         return 1
     fi
     
+    local temp_hash_file="/tmp/hashcat_temp_$$.txt"
+    echo "$hash" > "$temp_hash_file"
+    
     echo ""
     echo -e "${GREEN}[*] Cracking hash with mode $mode...${NC}"
     echo -e "${GREEN}[*] Wordlist: $wordlist${NC}"
     echo ""
     
     if [[ -n "$wordlist" && -f "$wordlist" ]]; then
-        hashcat -m "$mode" "$hash" "$wordlist" --show
+        hashcat -m "$mode" "$temp_hash_file" "$wordlist" 
+        echo ""
+        echo -e "${CYAN}[*] Results:${NC}"
+        hashcat -m "$mode" "$temp_hash_file" "$wordlist" --show
     else
-        hashcat -m "$mode" "$hash" --show
+        echo -e "${RED}[!] Wordlist not found: $wordlist${NC}"
+        rm -f "$temp_hash_file"
+        return 1
     fi
+    
+    rm -f "$temp_hash_file"
     
     echo ""
     echo -e "${YELLOW}[*] To crack with rules:${NC}"
@@ -108,9 +118,9 @@ case "$MODE_TYPE" in
         echo ""
         echo -n "Enter MD5 hash: "
         read HASH
-        echo -n "Enter wordlist [/usr/share/wordlists/rockyou.txt]: "
+        echo -n "Enter wordlist [$WORDLIST_DIR/rockyou.txt]: "
         read WORDLIST
-        WORDLIST=${WORDLIST:-"/usr/share/wordlists/rockyou.txt"}
+        WORDLIST=${WORDLIST:-"$WORDLIST_DIR/rockyou.txt"}
         
         if [[ -n "$HASH" ]]; then
             crack_hash "0" "$HASH" "$WORDLIST"
@@ -128,9 +138,9 @@ case "$MODE_TYPE" in
         echo -n "Enter mode (100=SHA1, 500=SHA256, 1300=SHA512): "
         read MODE
         MODE=${MODE:-100}
-        echo -n "Enter wordlist [/usr/share/wordlists/rockyou.txt]: "
+        echo -n "Enter wordlist [$WORDLIST_DIR/rockyou.txt]: "
         read WORDLIST
-        WORDLIST=${WORDLIST:-"/usr/share/wordlists/rockyou.txt"}
+        WORDLIST=${WORDLIST:-"$WORDLIST_DIR/rockyou.txt"}
         
         if [[ -n "$HASH" ]]; then
             crack_hash "$MODE" "$HASH" "$WORDLIST"
@@ -167,9 +177,9 @@ case "$MODE_TYPE" in
         echo -n "Enter mode [1000]: "
         read MODE
         MODE=${MODE:-1000}
-        echo -n "Enter wordlist [/usr/share/wordlists/rockyou.txt]: "
+        echo -n "Enter wordlist [$WORDLIST_DIR/rockyou.txt]: "
         read WORDLIST
-        WORDLIST=${WORDLIST:-"/usr/share/wordlists/rockyou.txt"}
+        WORDLIST=${WORDLIST:-"$WORDLIST_DIR/rockyou.txt"}
         
         if [[ -n "$HASH" ]]; then
             crack_hash "$MODE" "$HASH" "$WORDLIST"
@@ -201,15 +211,47 @@ case "$MODE_TYPE" in
     custom)
         show_hashcat_modes
         echo ""
-        echo -n "Enter hash: "
+        echo -e "${YELLOW}Example:${NC}"
+        echo "  Hash: 5d41402abc4b2a76b9719d911017c592"
+        echo "  Mode: 0 (for MD5)"
+        echo "  Wordlist: /home/pwn/pwnthebox/wordlists/rockyou.txt"
+        echo ""
+        echo -e "${CYAN}Quick Mode Selection:${NC}"
+        echo "  0   = MD5              (32 chars)"
+        echo "  100 = SHA1             (40 chars)"
+        echo "  500 = SHA256           (64 chars)"
+        echo " 1300 = SHA512           (128 chars)"
+        echo " 1000 = NTLM             (32 chars)"
+        echo " 3200 = bcrypt           (60 chars, starts with \$2)"
+        echo "  300  = MySQL           (16 chars, starts with *)"
+        echo ""
+        echo -e "${CYAN}Available Wordlists:${NC}"
+        echo "  1. rockyou.txt         (default)"
+        echo "  2. common-passwords.txt"
+        echo "  3. Custom path"
+        echo ""
+        echo -n "Enter hash to crack: "
         read HASH
-        echo -n "Enter hashcat mode: "
+        echo -n "Enter hashcat mode number [0 for MD5]: "
         read MODE
-        echo -n "Enter wordlist: "
-        read WORDLIST
+        MODE=${MODE:-0}
+        echo -n "Select wordlist (1/2/3) [1]: "
+        read WL_CHOICE
+        
+        case "$WL_CHOICE" in
+            1) WORDLIST="$WORDLIST_DIR/rockyou.txt" ;;
+            2) WORDLIST="$WORDLIST_DIR/common-passwords.txt" ;;
+            3) 
+                echo -n "Enter custom wordlist path: "
+                read WORDLIST
+                ;;
+            *) WORDLIST="$WORDLIST_DIR/rockyou.txt" ;;
+        esac
         
         if [[ -n "$HASH" ]] && [[ -n "$MODE" ]]; then
             crack_hash "$MODE" "$HASH" "$WORDLIST"
+        else
+            echo -e "${RED}[!] Missing hash or mode${NC}"
         fi
         ;;
     *)
@@ -229,9 +271,9 @@ case "$MODE_TYPE" in
             echo ""
             read -p "Enter hash: " HASH
             read -p "Enter hash mode: " MODE
-            read -p "Enter wordlist [/usr/share/wordlists/rockyou.txt]: " WORDLIST
+            read -p "Enter wordlist [$WORDLIST_DIR/rockyou.txt]: " WORDLIST
             
-            WORDLIST=${WORDLIST:-"/usr/share/wordlists/rockyou.txt"}
+            WORDLIST=${WORDLIST:-"$WORDLIST_DIR/rockyou.txt"}
             
             if [[ -n "$HASH" ]] && [[ -n "$MODE" ]]; then
                 crack_hash "$MODE" "$HASH" "$WORDLIST"
@@ -243,9 +285,9 @@ case "$MODE_TYPE" in
             echo ""
             echo -e "${CYAN}[*] John the Ripper Mode${NC}"
             read -p "Enter hash file: " HASHFILE
-            read -p "Enter wordlist [/usr/share/wordlists/rockyou.txt]: " WORDLIST
+            read -p "Enter wordlist [$WORDLIST_DIR/rockyou.txt]: " WORDLIST
             
-            WORDLIST=${WORDLIST:-"/usr/share/wordlists/rockyou.txt"}
+            WORDLIST=${WORDLIST:-"$WORDLIST_DIR/rockyou.txt"}
             
             if [[ -n "$HASHFILE" ]]; then
                 if [[ -f "$HASHFILE" ]]; then
