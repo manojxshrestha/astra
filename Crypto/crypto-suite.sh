@@ -49,9 +49,16 @@ show_menu() {
     echo -e "${YELLOW}RSA Attacks${NC}"
     echo "   C5.  rsactftool - RSA attack toolkit"
     echo ""
-    echo -e "${YELLOW}Hash Tools${NC}"
+    echo -e "${YELLOW}Hash Identification${NC}"
     echo "   C6.  hash-identify - Identify hash type"
-    echo "   C7.  hash-crack - Crack hashes (hashcat/John)"
+    echo ""
+    echo -e "${YELLOW}Hash Cracking (Hashcat)${NC}"
+    echo "   C7.  MD5/MD4 cracking"
+    echo "   C8.  SHA1/SHA2 cracking"
+    echo "   C9.  bcrypt/scrypt/Argon2"
+    echo "   C10. NTLM/Net-NTLM cracking"
+    echo "   C11. MySQL/PostgreSQL cracking"
+    echo "   C12. Custom hash mode"
     echo ""
     echo -e "${YELLOW}Tools${NC}"
     echo "   CA.  Install/Update Crypto Tools"
@@ -89,8 +96,28 @@ run_selection() {
             bash "$SCRIPT_DIR/hash-identify.sh"
             ;;
         C7|c7)
-            echo -e "${BLUE}[*] Hash Crack${NC}"
-            bash "$SCRIPT_DIR/hash-crack.sh"
+            echo -e "${BLUE}[*] MD5/MD4 Hash Cracking${NC}"
+            bash "$SCRIPT_DIR/hash-crack.sh" "md5"
+            ;;
+        C8|c8)
+            echo -e "${BLUE}[*] SHA1/SHA2 Hash Cracking${NC}"
+            bash "$SCRIPT_DIR/hash-crack.sh" "sha"
+            ;;
+        C9|c9)
+            echo -e "${BLUE}[*] bcrypt/scrypt/Argon2 Cracking${NC}"
+            bash "$SCRIPT_DIR/hash-crack.sh" "modern"
+            ;;
+        C10|c10)
+            echo -e "${BLUE}[*] NTLM/Net-NTLM Cracking${NC}"
+            bash "$SCRIPT_DIR/hash-crack.sh" "ntlm"
+            ;;
+        C11|c11)
+            echo -e "${BLUE}[*] Database Hash Cracking${NC}"
+            bash "$SCRIPT_DIR/hash-crack.sh" "db"
+            ;;
+        C12|c12)
+            echo -e "${BLUE}[*] Custom Hash Mode${NC}"
+            bash "$SCRIPT_DIR/hash-crack.sh" "custom"
             ;;
         CA|ca)
             echo -e "${BLUE}[*] Install/Update Crypto Tools${NC}"
@@ -113,7 +140,7 @@ banner
 
 while true; do
     show_menu
-    read -p "Select option (0-7, A): " choice
+    read -p "Select option (0-12, A): " choice
     
     if [[ -z "$choice" ]]; then
         continue
