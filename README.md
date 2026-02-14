@@ -118,6 +118,13 @@ pwnthebox is a professional-grade penetration testing framework designed for com
 - RsaCtfTool - RSA attack toolkit
 - Hash tools - Identification and cracking
 
+#### Binary/Reversing Tools
+- PwnPasi - Automated binary exploitation
+- ROPgadget - Find ROP gadgets
+- Checksec - Binary protection analysis
+- pwndbg - GDB plugin for pwning
+- Pwntools - Interactive debugger
+
 ### 🎨 User Interface
 
 ```
@@ -141,6 +148,7 @@ $ ./pwnthebox.sh
 [9]    Actions on Objectives - Complete mission
 [O]    OSINT                - Full OSINT automation
 [C]    Crypto               - Cryptography tools
+[B]    Binary/Reversing    - Binary exploitation
 
 [0]    Exit
 
@@ -509,6 +517,334 @@ PYTHON_VENV="/home/pwn/pwnthebox/venv"
 # Logging
 LOG_LEVEL="INFO"
 LOG_FILE="/home/pwn/pwnthebox/data/pwnthebox.log"
+```
+
+---
+
+## 🔧 Binary/Reversing Suite
+
+The Binary/Reversing Suite provides comprehensive tools for binary exploitation and reverse engineering tasks in CTF competitions and penetration testing.
+
+### Menu Structure
+
+```
+─────── BINARY EXPLOITATION ───────
+
+Automated Exploitation
+   B1.  PwnPasi - Auto Binary Exploitation
+   B2.  ROPgadget - Find ROP Gadgets
+
+Binary Analysis
+   B3.  Checksec - Binary Protections
+   B4.  Extract Strings
+   B5.  objdump - Disassemble Binary
+
+Debugging
+   B6.  pwndbg - GDB Plugin Info
+   B7.  Pwntools - Interactive Debugger
+
+Tools
+   BA.  Install/Update All Tools
+```
+
+---
+
+### B1. PwnPasi - Automated Binary Exploitation
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Automated binary exploitation framework that finds and exploits vulnerabilities |
+| **Why use it?** | Automates the exploit development process, saving time in CTFs |
+| **What it does** | Detects buffer overflows, format strings, RCE, and generates exploits |
+| **How to use** | Select B1, enter binary path, optionally add remote IP:port |
+| **CTF Use** | Quickly exploit binary challenges without manual exploit coding |
+
+**Usage:**
+```
+Select B1
+Enter binary path: /path/to/binary
+Enter target IP (press Enter for local): 10.10.10.10
+Enter target port (press Enter for local): 1337
+```
+
+**Example:**
+```bash
+# Local binary exploitation
+python3 ~/pwnpasi/pwnpasi.py -l ./vulnerable_binary
+
+# Remote binary exploitation
+python3 ~/pwnpasi/pwnpasi.py -l ./binary -ip 10.10.10.10 -p 1337
+```
+
+---
+
+### B2. ROPgadget - Find ROP Gadgets
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Tool for finding ROP (Return-Oriented Programming) gadgets in binaries |
+| **Why use it?** | ROP is used to bypass DEP/ASLR by chaining existing code snippets |
+| **What it does** | Finds useful gadgets (instructions + ret) for building ROP chains |
+| **How to use** | Select B2, enter binary path, view available gadgets |
+| **CTF Use** | Build ROP chains to achieve code execution in buffer overflows |
+
+**Usage:**
+```
+Select B2
+Enter binary path: /path/to/binary
+```
+
+**Common Commands:**
+```bash
+# Find all ROP gadgets
+ROPgadget.py --binary ./binary
+
+# Find specific gadgets (e.g., pop rdi; ret)
+ROPgadget.py --binary ./binary | grep "pop rdi"
+
+# Find syscall gadgets
+ROPgadget.py --binary ./binary | grep "syscall"
+
+# Generate ROP chain
+ROPgadget.py --binary ./binary --ropchain
+```
+
+**Useful Gadgets:**
+| Gadget | Use |
+|--------|-----|
+| `pop rdi; ret` | Control first argument (64-bit) |
+| `pop rsi; ret` | Control second argument |
+| `pop rdx; ret` | Control third argument |
+| `syscall` | Invoke system calls |
+| `ret` | Stack alignment |
+
+---
+
+### B3. Checksec - Binary Protection Analysis
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Analyzes binary security protections |
+| **Why use it?** | You need to know what protections to bypass before exploiting |
+| **Protections checked** | NX, PIE, RELRO, Stack Canaries, FORTIFY |
+| **How to use** | Select B3, enter binary path |
+| **CTF Use** | Determine exploitation strategy based on security flags |
+
+**Protection Flags:**
+| Protection | Description | Bypass |
+|------------|-------------|--------|
+| **NX** | Non-executable stack | ROP, JOP |
+| **PIE** | Position Independent Executable | Brute force, leak |
+| **RELRO** | Relocation Read-Only | Partial vs Full |
+| **Stack Canary** | Stack protector | Format string, overflow |
+| **FORTIFY** | Buffer overflow protection | Careful crafting |
+
+**Example Output:**
+```
+[*] '/path/to/binary'
+    Arch:     amd64-64bit
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+```
+
+---
+
+### B4. Extract Strings
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Extracts readable strings from binary |
+| **Why use it?** | Reveals hardcoded passwords, URLs, flags, function names |
+| **How to use** | Select B4, enter binary, specify min length |
+| **CTF Use** | Find flags, API keys, or hints in binary |
+
+**Usage:**
+```
+Select B4
+Enter binary path: /path/to/binary
+Minimum string length (default 4): 6
+```
+
+**Commands:**
+```bash
+# Basic string extraction
+strings -n 6 binary | head -50
+
+# Unicode strings
+strings -e l binary
+
+# Strings with addresses
+strings -t x binary
+
+# Grep for interesting strings
+strings binary | grep -i "password"
+strings binary | grep -i "http"
+strings binary | grep -i "flag"
+```
+
+---
+
+### B5. objdump - Disassemble Binary
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Disassembles binary to view assembly code |
+| **Why use it?** | Understand binary logic, find vulnerabilities |
+| **How to use** | Select B5, enter binary, enter function name |
+| **CTF Use** | Analyze functions, find vulnerable code |
+
+**Usage:**
+```
+Select B5
+Enter binary path: /path/to/binary
+Enter function name (or press Enter for main): main
+```
+
+**Commands:**
+```bash
+# Disassemble main function
+objdump -d binary | grep -A 50 "<main>:"
+
+# Disassemble specific function
+objdump -d binary | grep -A 30 "<function_name>:"
+
+# View all functions
+objdump -d binary | grep -E "^[0-9a-f]+ <.*>:"
+
+# View ELF headers
+objdump -x binary
+
+# View dynamic symbols
+objdump -T binary
+```
+
+**Common x86_64 Instructions:**
+| Instruction | Description |
+|-------------|-------------|
+| `mov` | Move data |
+| `pop` | Pop from stack |
+| `push` | Push to stack |
+| `call` | Call function |
+| `ret` | Return from function |
+| `syscall` | System call |
+| `cmp` | Compare values |
+| `jmp` | Unconditional jump |
+| `je/jne` | Conditional jumps |
+
+---
+
+### B6. pwndbg - GDB Plugin
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | GDB plugin specifically for pwning (binary exploitation) |
+| **Why use it?** | Makes debugging binaries much easier with enhanced features |
+| **Features** | Heap analysis, memory visualization, exploit development |
+| **How to use** | Select B6, or run `gdb binary` with pwndbg loaded |
+| **CTF Use** | Debug exploits, analyze binary behavior |
+
+**Installation:**
+```bash
+# Via binary-suite (BA option)
+cd ~/pwndbg && ./setup.sh
+```
+
+**Basic Commands:**
+```bash
+# Start debugging
+gdb ./binary
+
+# In pwndbg:
+run                    # Run the program
+break main            # Set breakpoint at main
+continue              # Continue execution
+next                  # Next instruction
+step                  # Step into function
+x/20gx $rsp          # Examine stack (20 qwords)
+x/20i $pc            # Examine code
+heap                  # Show heap info
+bins                  # Show heap bins
+find                  # Search memory
+search                # Search for bytes in memory
+```
+
+**pwndbg Commands:**
+| Command | Description |
+|---------|-------------|
+| `pwndbg> p x` | Pretty print variable x |
+| `pwndbg> telescope` | Visual memory dump |
+| `pwndbg> heap` | Heap analysis |
+| `pwndbg> bins` | Fastbin/dunsbin/tcache |
+| `pwndbg> rop` | ROP chain search |
+| `pwndbg> regs` | Show registers |
+| `pwndbg> stack` | Show stack |
+
+---
+
+### B7. Pwntools - Interactive Debugger
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Python library for binary exploitation |
+| **Why use it?** | Write exploits, interact with processes, create payloads |
+| **Features** | Process interaction, shellcode generation, ELF parsing |
+| **How to use** | Select B7, enter binary, use pwntools in venv |
+| **CTF Use** | Build complex exploits and interact with remote services |
+
+**Installation (in venv):**
+```bash
+source ~/pwnthebox/venv/bin/activate
+pip install pwntools
+```
+
+**Example Exploit:**
+```python
+from pwn import *
+
+# Local exploitation
+p = process('./binary')
+p.sendline(b'A' * 64 + p64(0xdeadbeef))
+print(p.recv())
+
+# Remote exploitation
+p = remote('10.10.10.10', 1337)
+p.sendline(b'payload')
+print(p.recv())
+
+# GDB attach
+gdb.attach(binary, gdbscript='break main\ncontinue')
+```
+
+**Common pwntools Functions:**
+| Function | Description |
+|----------|-------------|
+| `process()` | Start local process |
+| `remote()` | Connect to remote |
+| `send()` | Send data |
+| `sendline()` | Send line with newline |
+| `recv()` | Receive data |
+| `interactive()` | Interactive mode |
+| `packed()` | Create ROP chain |
+| `elf()` | Parse ELF binary |
+
+---
+
+### BA. Install/Update Tools
+
+| Aspect | Details |
+|--------|---------|
+| **What it does** | Installs all binary exploitation tools |
+| **Tools installed** | pwnpasi, ROPgadget, pwndbg |
+| **How to use** | Select BA from menu |
+
+**Installation:**
+```bash
+# Clones and installs:
+# - ~/pwnpasi - Automated exploitation
+# - ~/ROPgadget - ROP gadget finder  
+# - ~/pwndbg - GDB plugin
 ```
 
 ---
