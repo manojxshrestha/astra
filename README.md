@@ -125,6 +125,18 @@ pwnthebox is a professional-grade penetration testing framework designed for com
 - pwndbg - GDB plugin for pwning
 - Pwntools - Interactive debugger
 
+#### OSINT Tools
+- cloud-enum - Cloud service enumeration
+- dorks-hunter - Google dorks scanner
+- email-harvester - Email harvesting
+- fav-up - Favicon-based reconnaissance
+- leak-search - Data breach search
+- metagoofil - Metadata extraction
+- msftrecon - Microsoft reconnaissance
+- spoofy - SPF/DMARC checker
+- swagger-spy - API endpoint discovery
+- whois - Domain information lookup
+
 ### 🎨 User Interface
 
 ```
@@ -518,6 +530,330 @@ PYTHON_VENV="/home/pwn/pwnthebox/venv"
 LOG_LEVEL="INFO"
 LOG_FILE="/home/pwn/pwnthebox/data/pwnthebox.log"
 ```
+
+---
+
+## 🔧 OSINT Suite
+
+The OSINT Suite provides comprehensive tools for Open Source Intelligence gathering, useful for reconnaissance, CTF competitions, and penetration testing.
+
+### Menu Structure
+
+```
+─────── RECONNAISSANCE TOOLS ───────
+
+Cloud & Infrastructure
+   O1.  cloud-enum - AWS/Azure/GCP enumeration
+   O2.  swagger-spy - API endpoint discovery
+
+Search & Discovery
+   O3.  dorks-hunter - Google dorks scanner
+   O4.  metagoofil - Metadata extraction
+   O5.  fav-up - Favicon-based reconnaissance
+
+Email & Identity
+   O6.  email-harvester - Email address harvesting
+   O7.  leak-search - Data breach search
+
+Domain & Network
+   O8.  whois - Domain whois lookup
+   O9.  spoofy - SPF/DMARC checker
+   O10. msftrecon - Microsoft services recon
+
+Full Automation
+   O11. osint - Full OSINT automation script
+   O12. configure-osint - Configure OSINT tools
+
+Tools
+   OA.  Install/Update All Tools
+```
+
+---
+
+### O1. cloud-enum - Cloud Service Enumeration
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Enumerates cloud resources (AWS, Azure, GCP) |
+| **Why use it?** | Find publicly exposed cloud assets |
+| **What it does** | Checks for S3 buckets, Azure blobs, GCP storage |
+| **How to use** | Select O1, enter domain name |
+| **CTF Use** | Find hidden cloud resources, flags in misconfigured buckets |
+
+**Usage:**
+```
+Select O1
+Enter domain/company name: example
+```
+
+**What it finds:**
+- AWS S3 buckets (`example`, `example-com`, `www-example`)
+- Azure Blob storage
+- Google Cloud Storage
+- DigitalOcean spaces
+
+---
+
+### O2. swagger-spy - API Endpoint Discovery
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Finds and analyzes Swagger/OpenAPI endpoints |
+| **Why use it?** | Discovers hidden API endpoints and parameters |
+| **What it does** | Crawls for API docs, extracts endpoints, parameters |
+| **How to use** | Select O2, enter target URL |
+| **CTF Use** | Discover API endpoints that may contain flags |
+
+**Usage:**
+```
+Select O2
+Enter target URL: https://api.example.com
+```
+
+**Example:**
+```bash
+# Direct usage
+python3 swagger-spy.py -u https://api.example.com
+
+# Find hidden endpoints
+swagger-spy.py -u https://target.com/api-docs
+```
+
+---
+
+### O3. dorks-hunter - Google Dorks Scanner
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Automated Google Dorking tool |
+| **Why use it?** | Find sensitive information using Google search |
+| **What it does** | Runs predefined dorks to find exposed data |
+| **How to use** | Select O3, enter target domain |
+| **CTF Use** | Find flags, credentials, sensitive files |
+
+**Usage:**
+```
+Select O3
+Enter target domain: example.com
+```
+
+**Common Dorks:**
+| Dork | Finds |
+|------|-------|
+| `site:example.com filetype:pdf` | PDF files |
+| `site:example.com inurl:admin` | Admin pages |
+| `site:example.com "password"` | Passwords |
+| `site:example.com filetype:log` | Log files |
+| `site:example.com ext:sql` | SQL dumps |
+
+---
+
+### O4. metagoofil - Metadata Extraction
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Extracts metadata from public files |
+| **Why use it?** | Find usernames, software versions, internal paths |
+| **What it does** | Downloads and analyzes documents for metadata |
+| **How to use** | Select O4, enter target domain |
+| **CTF Use** | Discover internal usernames, software info |
+
+**Usage:**
+```
+Select O4
+Enter target domain: example.com
+```
+
+**What it extracts:**
+- Author names
+- Software versions
+- File paths
+- Creation dates
+- GPS coordinates (from images)
+
+---
+
+### O5. fav-up - Favicon-Based Reconnaissance
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Uses favicon hash to identify services |
+| **Why use it?** | Fingerprint web technologies, find related domains |
+| **What it does** | Calculates favicon hash, searches database |
+| **How to use** | Select O5, enter target URL |
+| **CTF Use** | Identify technologies, find related domains |
+
+**Usage:**
+```
+Select O5
+Enter target URL: https://example.com
+```
+
+**How it works:**
+1. Fetches favicon.ico
+2. Calculates MD5 hash
+3. Searches against known database
+4. Returns technology stack
+
+---
+
+### O6. email-harvester - Email Address Harvesting
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Collects email addresses from various sources |
+| **Why use it?** | Build target email list for phishing |
+| **What it does** | Searches search engines, DNS records, websites |
+| **How to use** | Select O6, enter target domain |
+| **CTF Use** | Find valid email addresses |
+
+**Usage:**
+```
+Select O6
+Enter target domain: example.com
+```
+
+**Sources:**
+- Search engines
+- WHOIS records
+- DNS records (MX)
+- Web scraping
+
+---
+
+### O7. leak-search - Data Breach Search
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Searches for compromised credentials |
+| **Why use it?** | Check if target emails appear in breaches |
+| **What it does** | Queries breach databases |
+| **How to use** | Select O7, enter email/domain |
+| **CTF Use** | Find leaked credentials |
+
+**Usage:**
+```
+Select O7
+Enter email or domain: target@example.com
+```
+
+---
+
+### O8. whois - Domain Lookup
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Queries domain registration information |
+| **Why use it?** | Get registrant info, nameservers, dates |
+| **What it does** | Retrieves WHOIS records |
+| **How to use** | Select O8, enter domain |
+| **CTF Use** | Gather target information |
+
+**Usage:**
+```
+Select O8
+Enter domain: example.com
+```
+
+**What you get:**
+- Registrant name/email
+- Registration dates
+- Nameservers
+- Registrar info
+
+---
+
+### O9. spoofy - SPF/DMARC Checker
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Analyzes email security configurations |
+| **Why use it?** | Find email spoofing vulnerabilities |
+| **What it does** | Checks SPF and DMARC records |
+| **How to use** | Select O9, enter domain |
+| **CTF Use** | Test email domain security |
+
+**Usage:**
+```
+Select O9
+Enter domain: example.com
+```
+
+**What it checks:**
+- SPF record validity
+- DMARC policy
+- Potential for spoofing
+
+---
+
+### O10. msftrecon - Microsoft Services Recon
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Enumerates Microsoft-related endpoints |
+| **Why use it?** | Find Azure, Office 365, Teams, etc. |
+| **What it does** | Discovers Microsoft service subdomains |
+| **How to use** | Select O10, enter domain |
+| **CTF Use** | Find Microsoft service endpoints |
+
+**Usage:**
+```
+Select O10
+Enter domain: example.com
+```
+
+**What it finds:**
+- Azure subdomains
+- Office 365 endpoints
+- Teams/Slack integrations
+- OneDrive/SharePoint
+
+---
+
+### O11. osint - Full OSINT Automation
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Runs all OSINT tools automatically |
+| **Why use it?** | Comprehensive reconnaissance in one go |
+| **What it does** | Executes all OSINT tools, compiles results |
+| **How to use** | Select O11, enter target |
+| **CTF Use** | Quick comprehensive scan |
+
+**Usage:**
+```
+Select O11
+Enter target: example.com
+```
+
+**Runs:**
+- cloud-enum
+- dorks-hunter
+- email-harvester
+- metagoofil
+- fav-up
+- whois
+
+---
+
+### O12. configure-osint - Configure OSINT Tools
+
+| Aspect | Details |
+|--------|---------|
+| **What is it?** | Configures API keys and settings |
+| **Why use it?** | Enable premium features |
+| **What it does** | Sets up tool configurations |
+| **How to use** | Select O12 |
+
+---
+
+### OA. Install/Update Tools
+
+| Aspect | Details |
+|--------|---------|
+| **What it does** | Installs all OSINT tools and dependencies |
+| **Tools installed** | All OSINT tools from the suite |
+| **How to use** | Select OA from menu |
 
 ---
 
