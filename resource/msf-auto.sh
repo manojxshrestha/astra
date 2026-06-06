@@ -20,7 +20,7 @@ banner() {
     cat << 'EOF'
 ╔═══════════════════════════════════════════════════════════╗
 ║         METASPLOIT RESOURCE AUTOMATION                   ║
-║              pwnthebox Framework                        ║
+║              astra Framework                        ║
 ╚═══════════════════════════════════════════════════════════╝
 EOF
     echo -e "${NC}"

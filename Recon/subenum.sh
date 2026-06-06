@@ -26,7 +26,7 @@ trap cleanup SIGINT
 run_cmd() {
     local cmd="$1"
     echo -e "${CYAN}[*] Running: $cmd${NC}"
-    eval "$cmd"
+    bash -c "$cmd"
 }
 
 echo -e "${CYAN}${BOLD}[*] Subdomain Enumeration${NC}"

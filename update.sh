@@ -1,9 +1,9 @@
 #!/bin/bash
-# pwnthebox Framework Update Script
+# astra Framework Update Script
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "[*] Updating pwnthebox Framework..."
+echo "[*] Updating astra Framework..."
 echo ""
 
 # Update package lists

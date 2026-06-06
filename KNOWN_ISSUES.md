@@ -1,16 +1,16 @@
 # Known Issues
 
-This document tracks known issues and limitations in the pwnthebox framework.
+This document tracks known issues and limitations in the astra framework.
 
-## Fixed Issues ✓
+## Fixed Issues
 
 ### Syntax Errors (FIXED in latest update)
 The following scripts had syntax errors that have been resolved:
-- ✅ `config/deploy/infra-deployer.sh` - Fixed nested heredoc issues
-- ✅ `Privilege-Escalation/Linux/checks/suid_sgid.sh` - Fixed unclosed quotes and heredoc delimiters
-- ✅ `Exploit/payloads.sh` - Fixed PowerShell command escaping
-- ✅ `Recon/wtf.sh` - Fixed unclosed quote in banner function
-- ✅ `Recon/crack-wifi.sh` - Fixed pkill bug (now uses killall)
+- * `config/deploy/infra-deployer.sh` - Fixed nested heredoc issues
+- * `Privilege-Escalation/Linux/checks/suid_sgid.sh` - Fixed unclosed quotes and heredoc delimiters
+- * `Exploit/payloads.sh` - Fixed PowerShell command escaping
+- * `Recon/wtf.sh` - Fixed unclosed quote in banner function
+- * `Recon/crack-wifi.sh` - Fixed pkill bug (now uses killall)
 
 ## Framework Issues
 

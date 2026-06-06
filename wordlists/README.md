@@ -1,6 +1,6 @@
 # Wordlists
 
-This directory contains wordlists used by pwnthebox framework.
+This directory contains wordlists used by astra framework.
 
 ## Included Wordlists
 
@@ -22,5 +22,5 @@ This directory contains wordlists used by pwnthebox framework.
 sudo apt install seclists
 
 # Copy to framework wordlists
-sudo cp /usr/share/wordlists/SecLists/* /home/pwn/pwnthebox/wordlists/
+sudo cp /usr/share/wordlists/SecLists/* /home/pwn/astra/wordlists/
 ```

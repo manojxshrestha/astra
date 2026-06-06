@@ -1,3 +1,4 @@
+#!/bin/bash
 
 
 if pgrep firefox > /dev/null; then

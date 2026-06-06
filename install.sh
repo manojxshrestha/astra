@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# pwnthebox Framework Installation Script
+# astra Framework Installation Script
 # Professional Vulnerability Assessment & Penetration Testing Toolkit
 
 RED='\033[0;31m'
@@ -24,7 +24,7 @@ show_help() {
     echo -e "${CYAN}"
     echo "╔═══════════════════════════════════════════════════════════════════════════════╗"
     echo "║                                                                               ║"
-    echo "║                    PWNTHEBOX FRAMEWORK                                      ║"
+    echo "║                    ASTRA FRAMEWORK                                      ║"
     echo "║              Professional Penetration Testing Suite                           ║"
     echo "║                       Installation Script                                     ║"
     echo "║                                                                               ║"
@@ -124,7 +124,7 @@ check_status() {
     echo -e "${CYAN}"
     echo "╔═══════════════════════════════════════════════════════════════════════════════╗"
     echo "║                                                                               ║"
-    echo "║                    PWNTHEBOX FRAMEWORK                                      ║"
+    echo "║                    ASTRA FRAMEWORK                                      ║"
     echo "║              Professional Penetration Testing Suite                           ║"
     echo "║                    Installation Status Check                                  ║"
     echo "║                                                                               ║"
@@ -606,7 +606,7 @@ esac
 echo -e "${CYAN}"
 echo "╔═══════════════════════════════════════════════════════════════════════════════╗"
 echo "║                                                                               ║"
-echo "║                    PWNTHEBOX FRAMEWORK                                      ║"
+echo "║                    ASTRA FRAMEWORK                                      ║"
 echo "║              Professional Penetration Testing Suite                           ║"
 echo "║                       Installation Script                                     ║"
 echo "║                                                                               ║"
@@ -945,7 +945,7 @@ fi
 
 if [[ "$OS_TYPE" == "kali" ]]; then
     if [[ -f "$CONFIG_DIR/zshrc" ]]; then
-        if ! grep -q "pwnthebox" "$HOME/.zshrc" 2>/dev/null; then
+        if ! grep -q "astra" "$HOME/.zshrc" 2>/dev/null; then
             cat "$CONFIG_DIR/zshrc" >> "$HOME/.zshrc"
             echo -e "    ${GREEN}✓${NC} Added zshrc aliases"
         else
@@ -973,11 +973,11 @@ echo ""
 UPDATE_SCRIPT="$FRAMEWORK_DIR/update.sh"
 cat > "$UPDATE_SCRIPT" << 'UPDATE_EOF'
 #!/bin/bash
-# pwnthebox Framework Update Script
+# astra Framework Update Script
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "[*] Updating pwnthebox Framework..."
+echo "[*] Updating astra Framework..."
 echo ""
 
 # Update package lists
@@ -1014,15 +1014,15 @@ if [[ "$OS_TYPE" == "kali" ]]; then
     PROFILE_FILE="$HOME/.zshrc"
 fi
 
-if ! grep -q "PWNTHEBOX" "$PROFILE_FILE" 2>/dev/null; then
+if ! grep -q "ASTRA" "$PROFILE_FILE" 2>/dev/null; then
     echo "" >> "$PROFILE_FILE"
-    echo "# pwnthebox Framework" >> "$PROFILE_FILE"
-    echo "export PWNTHEBOX=\"$FRAMEWORK_DIR\"" >> "$PROFILE_FILE"
-    echo "export PATH=\"\$PWNTHEBOX:\$PATH\"" >> "$PROFILE_FILE"
-    echo "alias pwnthebox='cd \"$FRAMEWORK_DIR\" && ./pwnthebox.sh'" >> "$PROFILE_FILE"
-    echo -e "    ${GREEN}✓${NC} Added pwnthebox to PATH in $PROFILE_FILE"
+    echo "# astra Framework" >> "$PROFILE_FILE"
+    echo "export ASTRA=\"$FRAMEWORK_DIR\"" >> "$PROFILE_FILE"
+    echo "export PATH=\"\$ASTRA:\$PATH\"" >> "$PROFILE_FILE"
+    echo "alias astra='cd \"$FRAMEWORK_DIR\" && ./astra.sh'" >> "$PROFILE_FILE"
+    echo -e "    ${GREEN}✓${NC} Added astra to PATH in $PROFILE_FILE"
 else
-    echo -e "    ${YELLOW}⊘${NC} pwnthebox already in PATH"
+    echo -e "    ${YELLOW}⊘${NC} astra already in PATH"
 fi
 
 # Summary
@@ -1039,7 +1039,7 @@ echo ""
 echo -e "${BLUE}[*] Framework location: $FRAMEWORK_DIR${NC}"
 echo ""
 echo -e "${BLUE}[*] Quick Commands:${NC}"
-echo "    ./pwnthebox.sh            - Launch main menu"
+echo "    ./astra.sh            - Launch main menu"
 echo "    ./install.sh --check      - Check tool status"
 echo ""
 echo -e "${BLUE}[*] Phase Directories:${NC}"
@@ -1057,7 +1057,7 @@ echo -e "${BLUE}[*] Next Steps:${NC}"
 echo "    1. Review installed tools"
 echo "    2. Configure API keys for premium tools (Shodan, Censys, Hunter)"
 echo "    3. Read documentation in README.md"
-echo "    4. Run ./pwnthebox.sh to start"
+echo "    4. Run ./astra.sh to start"
 echo ""
 echo -e "${YELLOW}[!] Disclaimer: Use only on systems you have permission to test!${NC}"
 echo ""

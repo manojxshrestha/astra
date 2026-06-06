@@ -1,3 +1,4 @@
+#!/bin/bash
 
 
 END=$(date +%r\ %Z)

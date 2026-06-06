@@ -118,7 +118,7 @@ handle_selection() {
     run_cmd() {
         local cmd="$1"
         echo -e "${GREEN}[>] Running: ${cmd}${NC}"
-        eval "$cmd"
+        bash -c "$cmd"
     }
 
     case "$choice" in

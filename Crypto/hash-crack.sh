@@ -6,7 +6,7 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-WORDLIST_DIR="/home/pwn/pwnthebox/wordlists"
+WORDLIST_DIR="/home/pwn/astra/wordlists"
 
 MODE_TYPE="${1:-menu}"
 
@@ -214,7 +214,7 @@ case "$MODE_TYPE" in
         echo -e "${YELLOW}Example:${NC}"
         echo "  Hash: 5d41402abc4b2a76b9719d911017c592"
         echo "  Mode: 0 (for MD5)"
-        echo "  Wordlist: /home/pwn/pwnthebox/wordlists/rockyou.txt"
+        echo "  Wordlist: /home/pwn/astra/wordlists/rockyou.txt"
         echo ""
         echo -e "${CYAN}Quick Mode Selection:${NC}"
         echo "  0   = MD5              (32 chars)"

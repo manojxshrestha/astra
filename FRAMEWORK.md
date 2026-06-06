@@ -1,137 +1,137 @@
-# pwnthebox Penetration Testing Framework
+# astra Penetration Testing Framework
 
 ## Overview
 
-pwnthebox is a comprehensive penetration testing framework with a creative, clean directory structure. The framework is organized into 9 core phases plus miscellaneous utilities, making it easy to navigate and use.
+astra is a comprehensive penetration testing framework with a creative, clean directory structure. The framework is organized into 9 core phases plus miscellaneous utilities, making it easy to navigate and use.
 
 ## Directory Structure
 
 ```
-pwnthebox/
-├── FRAMEWORK_README.md              # This file
-├── pwnthebox.sh                     # Main menu launcher
-│
-├── Recon/                           # Phase 1: Information Gathering
-│   ├── recon-suite.sh               # Recon menu wrapper
-│   ├── domain.sh                    # Domain information
-│   ├── passive.sh                   # Passive reconnaissance
-│   ├── person.sh                    # Email/people harvesting
-│   ├── generateTargets.sh            # Target generation
-│   ├── ping-sweep.sh                # Network discovery
-│   ├── *.sh                         # Other recon tools
-│   └── README.md
-│
-├── Enum/                            # Phase 2: Scanning & Enumeration
-│   ├── enum-suite.sh                # Enum menu wrapper
-│   ├── nse.sh                       # Nmap script engine
-│   ├── cve.sh                       # CVE scanning
-│   ├── msf-aux.sh                   # Metasploit aux modules
-│   └── README.md
-│
-├── Exploit/                         # Phase 3: Exploitation
-│   ├── compromise-suite.sh          # Exploit menu wrapper
-│   ├── payloads.sh                  # Payload generation
-│   ├── shells.sh                    # Reverse shells
-│   ├── encoder.sh                   # Encoding/obfuscation
-│   ├── nikto.sh                     # Web vulnerability scanner
-│   ├── ssl.sh                       # SSL/TLS analysis
-│   ├── web-exploit.sh               # Web exploitation toolkit
-│   ├── autopwn.sh                   # Automated exploitation
-│   ├── elf/                         # ELF binary exploitation
-│   │   └── elf.sh
-│   ├── fuzz/                        # Fuzzing tools
-│   │   └── fuzzer.sh
-│   ├── encoders/                    # Various encoders
-│   ├── exploitdb/                   # Exploit-DB scripts
-│   ├── payloads/                    # Payload templates
-│   ├── shells/                      # Shell scripts
-│   └── README.md
-│
-├── Foothold/                        # Phase 4: Shell Stabilization
-│   ├── foothold-suite.sh            # Foothold menu wrapper
-│   └── listener.sh                 # Reverse listeners
-│   └── README.md
-│
-├── Privilege-Escalation/           # Phase 5: Privilege Escalation
-│   ├── Linux/
-│   │   ├── privesc.sh               # Linux PE checker (v2.0)
-│   │   ├── utils/                   # Utility functions
-│   │   │   ├── colors.sh           # Color output
-│   │   │   └── helpers.sh          # Helpers
-│   │   ├── checks/                  # Enumeration checks
-│   │   │   ├── system_info.sh      # System info
-│   │   │   ├── suid_sgid.sh        # SUID/SGID binaries
-│   │   │   ├── capabilities.sh     # Capabilities
-│   │   │   ├── cron_jobs.sh        # Cron jobs
-│   │   │   ├── passwords.sh        # Password hunting
-│   │   │   ├── cloud_container.sh  # Cloud/container escapes
-│   │   │   └── network_process.sh  # Network processes
-│   │   └── exploits/                # Exploit suggestions
-│   │       └── exploit_suggestions.sh
-│   └── Windows/
-│       └── privesc.ps1              # Windows PE checker
-│
-├── Persistence/                     # Phase 8: Maintaining Access
-│   ├── persistence-suite.sh        # Persistence menu
-│   └── README.md
-│
-├── Internal/                        # Phase 6: Post-Compromise Recon
-│   ├── internal-recon-suite.sh     # Internal recon menu
-│   ├── credentials/
-│   │   └── creds.sh                 # Credential harvesting
-│   └── README.md
-│
-├── Lateral/                         # Phase 7: Pivoting & Lateral Movement
-│   ├── lateral-suite.sh             # Lateral menu wrapper
-│   └── README.md
-│
-├── Misc/                            # Phase 9: Actions on Objectives
-│   ├── actions-suite.sh             # Actions menu
-│   ├── hashes/                      # Hash extraction/cracking
-│   │   └── hashes.sh
-│   ├── logs/                        # Log analysis
-│   │   └── logs.sh
-│   ├── stego/                       # Steganography
-│   │   └── stego.sh
-│   └── README.md
-│
-├── config/                          # Configuration files
-│   ├── install.sh
-│   ├── zshrc
-│   ├── vimrc
-│   ├── tmux.conf
-│   └── deploy/                      # Deployment configs
-│       ├── terraform/
-│       └── ansible/
-│
-├── utils/                           # Utility scripts
-│   ├── parse.sh                     # Output parsing
-│   ├── parse-nmap.py                 # Nmap parser
-│   ├── parse-nessus.py              # Nessus parser
-│   ├── parse-burp.py                # Burp parser
-│   └── *.py                         # Other utilities
-│
-├── post/                            # Post-exploitation utilities
-│   └── update.sh
-│
-├── resource/                        # Metasploit resource files
-│   ├── *.rc                         # Various RC files
-│   └── msf-auto.sh
-│
-├── wordlists/                       # Wordlists and dictionaries
-│
-├── report/                          # Reporting tools
-│   ├── report.sh
-│   └── multiTabs.sh
-│
-└── reports/                         # Generated reports
+astra/
+|-- FRAMEWORK_README.md              # This file
+|-- astra.sh                     # Main menu launcher
+|
+|-- Recon/                           # Phase 1: Information Gathering
+|   |-- recon-suite.sh               # Recon menu wrapper
+|   |-- domain.sh                    # Domain information
+|   |-- passive.sh                   # Passive reconnaissance
+|   |-- person.sh                    # Email/people harvesting
+|   |-- generateTargets.sh            # Target generation
+|   |-- ping-sweep.sh                # Network discovery
+|   |-- *.sh                         # Other recon tools
+|   `-- README.md
+|
+|-- Enum/                            # Phase 2: Scanning & Enumeration
+|   |-- enum-suite.sh                # Enum menu wrapper
+|   |-- nse.sh                       # Nmap script engine
+|   |-- cve.sh                       # CVE scanning
+|   |-- msf-aux.sh                   # Metasploit aux modules
+|   `-- README.md
+|
+|-- Exploit/                         # Phase 3: Exploitation
+|   |-- compromise-suite.sh          # Exploit menu wrapper
+|   |-- payloads.sh                  # Payload generation
+|   |-- shells.sh                    # Reverse shells
+|   |-- encoder.sh                   # Encoding/obfuscation
+|   |-- nikto.sh                     # Web vulnerability scanner
+|   |-- ssl.sh                       # SSL/TLS analysis
+|   |-- web-exploit.sh               # Web exploitation toolkit
+|   |-- autopwn.sh                   # Automated exploitation
+|   |-- elf/                         # ELF binary exploitation
+|   |   `-- elf.sh
+|   |-- fuzz/                        # Fuzzing tools
+|   |   `-- fuzzer.sh
+|   |-- encoders/                    # Various encoders
+|   |-- exploitdb/                   # Exploit-DB scripts
+|   |-- payloads/                    # Payload templates
+|   |-- shells/                      # Shell scripts
+|   `-- README.md
+|
+|-- Foothold/                        # Phase 4: Shell Stabilization
+|   |-- foothold-suite.sh            # Foothold menu wrapper
+|   `-- listener.sh                 # Reverse listeners
+|   `-- README.md
+|
+|-- Privilege-Escalation/           # Phase 5: Privilege Escalation
+|   |-- Linux/
+|   |   |-- privesc.sh               # Linux PE checker (v2.0)
+|   |   |-- utils/                   # Utility functions
+|   |   |   |-- colors.sh           # Color output
+|   |   |   `-- helpers.sh          # Helpers
+|   |   |-- checks/                  # Enumeration checks
+|   |   |   |-- system_info.sh      # System info
+|   |   |   |-- suid_sgid.sh        # SUID/SGID binaries
+|   |   |   |-- capabilities.sh     # Capabilities
+|   |   |   |-- cron_jobs.sh        # Cron jobs
+|   |   |   |-- passwords.sh        # Password hunting
+|   |   |   |-- cloud_container.sh  # Cloud/container escapes
+|   |   |   `-- network_process.sh  # Network processes
+|   |   `-- exploits/                # Exploit suggestions
+|   |       `-- exploit_suggestions.sh
+|   `-- Windows/
+|       `-- privesc.ps1              # Windows PE checker
+|
+|-- Persistence/                     # Phase 8: Maintaining Access
+|   |-- persistence-suite.sh        # Persistence menu
+|   `-- README.md
+|
+|-- Internal/                        # Phase 6: Post-Compromise Recon
+|   |-- internal-recon-suite.sh     # Internal recon menu
+|   |-- credentials/
+|   |   `-- creds.sh                 # Credential harvesting
+|   `-- README.md
+|
+|-- Lateral/                         # Phase 7: Pivoting & Lateral Movement
+|   |-- lateral-suite.sh             # Lateral menu wrapper
+|   `-- README.md
+|
+|-- Misc/                            # Phase 9: Actions on Objectives
+|   |-- actions-suite.sh             # Actions menu
+|   |-- hashes/                      # Hash extraction/cracking
+|   |   `-- hashes.sh
+|   |-- logs/                        # Log analysis
+|   |   `-- logs.sh
+|   |-- stego/                       # Steganography
+|   |   `-- stego.sh
+|   `-- README.md
+|
+|-- config/                          # Configuration files
+|   |-- install.sh
+|   |-- zshrc
+|   |-- vimrc
+|   |-- tmux.conf
+|   `-- deploy/                      # Deployment configs
+|       |-- terraform/
+|       `-- ansible/
+|
+|-- utils/                           # Utility scripts
+|   |-- parse.sh                     # Output parsing
+|   |-- parse-nmap.py                 # Nmap parser
+|   |-- parse-nessus.py              # Nessus parser
+|   |-- parse-burp.py                # Burp parser
+|   `-- *.py                         # Other utilities
+|
+|-- post/                            # Post-exploitation utilities
+|   `-- update.sh
+|
+|-- resource/                        # Metasploit resource files
+|   |-- *.rc                         # Various RC files
+|   `-- msf-auto.sh
+|
+|-- wordlists/                       # Wordlists and dictionaries
+|
+|-- report/                          # Reporting tools
+|   |-- report.sh
+|   `-- multiTabs.sh
+|
+`-- reports/                         # Generated reports
 ```
 
 ## Quick Start
 
 ```bash
 # Launch main menu
-./pwnthebox.sh
+./astra.sh
 
 # Run a specific phase
 ./Recon/recon-suite.sh --menu
@@ -268,6 +268,6 @@ For educational and authorized testing purposes only. Use responsibly.
 When adding scripts:
 1. Place in appropriate phase directory
 2. Create suite wrapper if adding multiple scripts
-3. Update pwnthebox.sh if needed
+3. Update astra.sh if needed
 4. Add documentation comments
 5. Test before committing

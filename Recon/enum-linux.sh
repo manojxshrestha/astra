@@ -1,3 +1,4 @@
+#!/bin/bash
 
 
 MEDIUM='=================================================================='
@@ -28,7 +29,7 @@ trap 'rm -f tmp tmp2' EXIT
 function add_section(){
     echo "$1" >> tmp
     echo >> tmp
-    eval "$2" >> tmp 2>/dev/null
+    bash -c "$2" >> tmp 2>/dev/null
     echo >> tmp
     echo "$MEDIUM" >> tmp
     echo >> tmp

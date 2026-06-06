@@ -1,3 +1,4 @@
+#!/bin/bash
 
 
 trap 'rm -rf /tmp/resource/ /tmp/master tmpmsf; sudo systemctl stop postgresql.service' EXIT

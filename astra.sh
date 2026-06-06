@@ -1,3 +1,4 @@
+#!/bin/bash
 set -e
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -8,8 +9,10 @@ MAGENTA='\033[0;35m'
 NC='\033[0m'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VERSION="v1.0"
+cleanup() { echo -e "\n[*] Cleaning up..."; stty echo 2>/dev/null; }
+trap cleanup EXIT INT TERM
 AUTHOR="manojxshrestha"
-GITHUB="https://github.com/manojxshrestha/pwnthebox"
+GITHUB="https://github.com/manojxshrestha/astra"
 banner() {
     clear
     echo ""
@@ -23,7 +26,7 @@ banner() {
                    /
 EOF
     echo -e "${NC}"
-    echo -e "${CYAN}─────── ${YELLOW}pwnthebox v1.0${NC} • ${CYAN}Professional VAPT Toolkit${NC} • ${CYAN}by manojxshrestha${NC} ${CYAN}───────${NC}"
+    echo -e "${CYAN}─────── ${YELLOW}astra v1.0${NC} • ${CYAN}Professional VAPT Toolkit${NC} • ${CYAN}by manojxshrestha${NC} ${CYAN}───────${NC}"
 }
 show_menu() {
     echo ""
@@ -131,7 +134,7 @@ check_deps() {
 usage() {
     echo ""
     echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║${NC} ${YELLOW}PWNTHEBOX - Professional Penetration Testing Framework${NC} ${CYAN}║${NC}"
+    echo -e "${CYAN}║${NC} ${YELLOW}ASTRA - Professional Penetration Testing Framework${NC} ${CYAN}║${NC}"
     echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════════════════╝${NC}"
     echo ""
     echo -e "${CYAN}USAGE:${NC} ${YELLOW}$0${NC} ${CYAN}[OPTIONS]${NC}"

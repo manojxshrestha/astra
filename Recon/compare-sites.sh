@@ -1,3 +1,4 @@
+#!/bin/bash
 
 
 DIR=$HOME/compare-sites

@@ -1,3 +1,4 @@
+#!/bin/bash
 
 
 OUTPUT_FILE="$HOME/netblocks.txt"

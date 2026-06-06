@@ -1,3 +1,4 @@
+#!/bin/bash
 
 set -e
 
@@ -144,7 +145,7 @@ identify_hash() {
 
 crack_hashcat() {
     local hash="$1"
-    local wordlist="${2:-/home/pwn/pwnthebox/wordlists/rockyou.txt}"
+    local wordlist="${2:-/home/pwn/astra/wordlists/rockyou.txt}"
     local hash_type="${3:-0}"
     
     if ! command -v hashcat &> /dev/null; then
@@ -168,7 +169,7 @@ crack_hashcat() {
 
 crack_john() {
     local hash="$1"
-    local wordlist="${2:-/home/pwn/pwnthebox/wordlists/rockyou.txt}"
+    local wordlist="${2:-/home/pwn/astra/wordlists/rockyou.txt}"
     local hash_format="${3:-}"
     
     if ! command -v john &> /dev/null; then
@@ -350,7 +351,7 @@ interactive_mode() {
             2)
                 read -p "Enter hash: " hash
                 read -p "Wordlist [rockyou.txt]: " wordlist
-                wordlist=${wordlist:-/home/pwn/pwnthebox/wordlists/rockyou.txt}
+                wordlist=${wordlist:-/home/pwn/astra/wordlists/rockyou.txt}
                 identify_hash "$hash"
                 echo ""
                 read -p "Try to crack? [y/N]: " crack
@@ -392,7 +393,7 @@ main() {
     local operation=""
     local hash=""
     local hash_type=""
-    local wordlist="/home/pwn/pwnthebox/wordlists/rockyou.txt"
+    local wordlist="/home/pwn/astra/wordlists/rockyou.txt"
     local use_hashcat=false
     local use_john=false
     local batch_file=""

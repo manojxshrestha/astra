@@ -1,3 +1,4 @@
+#!/bin/bash
 
 
 trap f_clean EXIT
@@ -637,7 +638,7 @@ if [ $? = 0 ]; then
     fi
 
     echo "Select a wordlist."
-    WORDLIST=$(zenity --file-selection --filename=/home/pwn/pwnthebox/wordlists/rockyou.txt)
+    WORDLIST=$(zenity --file-selection --filename=/home/pwn/astra/wordlists/rockyou.txt)
 
     killall xterm 2>/dev/null
 

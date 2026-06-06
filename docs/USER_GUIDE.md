@@ -1,4 +1,4 @@
-# pwnthebox User Guide
+# astra User Guide
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@
 
 ## Introduction
 
-pwnthebox is a professional penetration testing framework designed for authorized security assessments and red team operations. The framework implements a comprehensive 9-phase methodology for conducting thorough security assessments.
+astra is a professional penetration testing framework designed for authorized security assessments and red team operations. The framework implements a comprehensive 9-phase methodology for conducting thorough security assessments.
 
 ### Key Features
 
@@ -70,25 +70,25 @@ sudo apt-get install -y \
 
 ```bash
 # Clone the repository
-git clone https://github.com/manojxshrestha/pwnthebox.git
-cd pwnthebox
+git clone https://github.com/manojxshrestha/astra.git
+cd astra
 
 # Make scripts executable
-chmod +x pwnthebox.sh install.sh update.sh
+chmod +x astra.sh install.sh update.sh
 chmod +x **/*.sh 2>/dev/null
 
 # Run installation script
 ./install.sh
 
 # Verify installation
-./pwnthebox.sh --deps
+./astra.sh --deps
 ```
 
 ### Tool Verification
 
 ```bash
 # Check all dependencies
-./pwnthebox.sh --deps
+./astra.sh --deps
 
 # Output should show all tools as "installed"
 ```
@@ -100,8 +100,8 @@ chmod +x **/*.sh 2>/dev/null
 ### Architecture
 
 ```
-pwnthebox/
-├── pwnthebox.sh          # Main launcher
+astra/
+├── astra.sh          # Main launcher
 ├── install.sh            # Installation script
 ├── update.sh             # Update script
 ├── README.md             # Main documentation
@@ -127,7 +127,7 @@ pwnthebox/
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        PWNTHEBOX                                │
+│                        ASTRA                                │
 │              Professional Penetration Testing                    │
 └─────────────────────────────────────────────────────────────────┘
                                  │
@@ -156,31 +156,31 @@ pwnthebox/
 
 ```bash
 # Interactive menu
-./pwnthebox.sh
+./astra.sh
 
 # Direct phase access
-./pwnthebox.sh 1      # Recon
-./pwnthebox.sh 2      # Enumeration
-./pwnthebox.sh 3      # Exploitation
-./pwnthebox.sh 4      # Foothold
-./pwnthebox.sh 5      # Privilege Escalation
-./pwnthebox.sh 6      # Internal Recon
-./pwnthebox.sh 7      # Lateral Movement
-./pwnthebox.sh 8      # Persistence
-./pwnthebox.sh 9      # Actions on Objectives
+./astra.sh 1      # Recon
+./astra.sh 2      # Enumeration
+./astra.sh 3      # Exploitation
+./astra.sh 4      # Foothold
+./astra.sh 5      # Privilege Escalation
+./astra.sh 6      # Internal Recon
+./astra.sh 7      # Lateral Movement
+./astra.sh 8      # Persistence
+./astra.sh 9      # Actions on Objectives
 
 # Utility commands
-./pwnthebox.sh --help     # Show help
-./pwnthebox.sh --deps     # Check dependencies
-./pwnthebox.sh --paths    # Show tool paths
-./pwnthebox.sh --update   # Update framework
+./astra.sh --help     # Show help
+./astra.sh --deps     # Check dependencies
+./astra.sh --paths    # Show tool paths
+./astra.sh --update   # Update framework
 ```
 
 ### Basic Workflow
 
 ```bash
 # 1. Start the framework
-./pwnthebox.sh
+./astra.sh
 
 # 2. Select Phase 1 for reconnaissance
 # 3. Gather target information
@@ -583,12 +583,12 @@ Results are saved to: `data/actions/`
 
 | Command | Description |
 |---------|-------------|
-| `./pwnthebox.sh` | Launch interactive menu |
-| `./pwnthebox.sh 1-9` | Direct phase access |
-| `./pwnthebox.sh --help` | Show help message |
-| `./pwnthebox.sh --deps` | Check dependencies |
-| `./pwnthebox.sh --paths` | Show tool paths |
-| `./pwnthebox.sh --update` | Update framework |
+| `./astra.sh` | Launch interactive menu |
+| `./astra.sh 1-9` | Direct phase access |
+| `./astra.sh --help` | Show help message |
+| `./astra.sh --deps` | Check dependencies |
+| `./astra.sh --paths` | Show tool paths |
+| `./astra.sh --update` | Update framework |
 
 ### Suite Commands
 
@@ -633,13 +633,13 @@ nmap --script=<script-name> <target>
 
 ```bash
 # Set output directory
-export PWNTHEBOX_OUTPUT="/home/pwn/pwnthebox/data"
+export ASTRA_OUTPUT="/home/pwn/astra/data"
 
 # Set default wordlist
-export PWNTHEBOX_WORDLISTS="/usr/share/wordlists"
+export ASTRA_WORDLISTS="/usr/share/wordlists"
 
 # Enable verbose output
-export PWNTHEBOX_VERBOSE=1
+export ASTRA_VERBOSE=1
 ```
 
 ### Wordlist Configuration
@@ -651,11 +651,11 @@ Default wordlists are expected at:
 
 ### Custom Configurations
 
-Create a config file at: `config/pwnthebox.conf`
+Create a config file at: `config/astra.conf`
 
 ```bash
-# config/pwnthebox.conf
-OUTPUT_DIR="/home/pwn/pwnthebox/data"
+# config/astra.conf
+OUTPUT_DIR="/home/pwn/astra/data"
 WORDLISTS="/opt/wordlists"
 NMAP_ARGS="-T4 -A"
 GOBUSTER_THREADS=10
@@ -672,7 +672,7 @@ GOBUSTER_THREADS=10
 ```bash
 # Fix: Make scripts executable
 chmod +x **/*.sh 2>/dev/null
-chmod +x pwnthebox.sh
+chmod +x astra.sh
 ```
 
 #### 2. Tool Not Found
@@ -707,7 +707,7 @@ pip install -r requirements.txt
 
 ```bash
 # Framework help
-./pwnthebox.sh --help
+./astra.sh --help
 
 # Check known issues
 cat KNOWN_ISSUES.md
@@ -736,7 +736,7 @@ cat docs/USER_GUIDE.md
    ```bash
    # Use dedicated testing environment
    ./install.sh
-   ./pwnthebox.sh --deps
+   ./astra.sh --deps
    
    # Verify all tools work
    ```
@@ -781,7 +781,7 @@ cat docs/USER_GUIDE.md
 
 ### IMPORTANT - READ BEFORE USE
 
-**By using pwnthebox, you agree to the following:**
+**By using astra, you agree to the following:**
 
 1. **Authorization Required**
    - You MUST have explicit written authorization before testing any system
@@ -794,7 +794,7 @@ cat docs/USER_GUIDE.md
    - Report all findings according to engagement rules
 
 3. **No Warranty**
-   - pwnthebox is provided "as is"
+   - astra is provided "as is"
    - No warranty of any kind
    - Use at your own risk
 
@@ -831,7 +831,7 @@ cat docs/USER_GUIDE.md
 - KNOWN_ISSUES.md - Known issues
 
 ### Reporting Issues
-- GitHub Issues: https://github.com/manojxshrestha/pwnthebox/issues
+- GitHub Issues: https://github.com/manojxshrestha/astra/issues
 
 ### Contributing
 - Fork the repository

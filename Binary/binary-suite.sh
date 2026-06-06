@@ -62,7 +62,7 @@ show_menu() {
 run_cmd() {
     local cmd="$1"
     echo -e "${GREEN}[>] Running: ${cmd}${NC}"
-    eval "$cmd"
+    bash -c "$cmd"
 }
 
 check_tools() {
@@ -176,7 +176,7 @@ handle_selection() {
             echo -n "[*] Enter binary path: "
             read BINARY
             if [[ -n "$BINARY" && -f "$BINARY" ]]; then
-                source ~/pwnthebox/venv/bin/activate
+                source ~/astra/venv/bin/activate
                 run_cmd "pwntools"
                 log_good "Use: pwn> gdb.attach(binary, gdbscript='break main\\ncontinue')"
             else
